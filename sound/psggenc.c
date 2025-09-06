@@ -58,7 +58,7 @@ void psggen_setvol(UINT vol) {
 	UINT	i;
 
 	for (i=1; i<16; i++) {
-		psggencfg.volume[i] = (psggencfg.voltbl[i] * vol) >> 
+		psggencfg.volume[i] = (psggencfg.voltbl[i] * vol) >>
 															(6 + PSGADDEDBIT);
 	}
 }
@@ -171,4 +171,3 @@ void psggen_setpan(PSGGEN psg, UINT ch, REG8 pan) {
 		psg->tone[ch].pan = pan;
 	}
 }
-

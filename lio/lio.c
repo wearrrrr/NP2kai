@@ -285,4 +285,3 @@ void lio_line(const _GLIO *lio, SINT16 x1, SINT16 x2, SINT16 y, REG8 pal) {
 	}
 }
 #endif
-

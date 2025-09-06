@@ -532,4 +532,3 @@ void maketextgrph40(int plane, int text_renewal, int grph_renewal) {
 		*(UINT32 *)(vramupdate + i) &= gbit;
 	}
 }
-

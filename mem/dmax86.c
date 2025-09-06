@@ -43,4 +43,3 @@ void dmax86(void) {
 		} while(bit & 0x0f);
 	}
 }
-

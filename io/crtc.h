@@ -39,4 +39,3 @@ void crtc_biosreset(void);
 #ifdef __cplusplus
 }
 #endif
-

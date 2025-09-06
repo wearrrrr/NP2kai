@@ -813,7 +813,7 @@ static UINT16 boot_fd(REG8 drv, REG8 type) {
 static REG16 boot_hd(REG8 drv) {
 
 	REG8	ret;
-	
+
 	if(pccore.hddif & PCHDD_IDE){
 		ret = sxsi_read((drv & 0xf0)==0x80 ? (0x80 | sxsi_unittbl[drv & 0x3]) : drv, 0, mem + 0x1fc00, 0x400);
 	}else{
@@ -1046,4 +1046,3 @@ UINT bios0x1b_wait(void) {
 	CPU_IP--;
 	return(1);
 }
-

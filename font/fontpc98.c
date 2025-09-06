@@ -139,4 +139,3 @@ fr98_err2:
 fr98_err1:
 	return(loading);
 }
-

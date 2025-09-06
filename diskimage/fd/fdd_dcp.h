@@ -11,4 +11,3 @@ BRESULT	fdd_write_dcp(FDDFILE fdd);
 #ifdef __cplusplus
 }
 #endif
-

@@ -288,4 +288,3 @@ static const UINT32 optbl[0x100] = {
 		OP_T3(OP3_fe),
 		OP_T3(OP3_ff),
 };
-

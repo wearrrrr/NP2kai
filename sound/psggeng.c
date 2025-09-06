@@ -121,4 +121,3 @@ void SOUNDCALL psggen_getpcm(PSGGEN psg, SINT32 *pcm, UINT count) {
 		pcm += 2;
 	} while(--count);
 }
-

@@ -64,4 +64,3 @@ extern const UINT8 acurve[];
 #ifdef __cplusplus
 }
 #endif
-

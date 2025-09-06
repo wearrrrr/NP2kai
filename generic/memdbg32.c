@@ -156,4 +156,3 @@ BOOL memdbg32_paint(CMNVRAM *vram, CMNPALCNV cnv, BOOL redraw) {
 	return(TRUE);
 }
 #endif
-

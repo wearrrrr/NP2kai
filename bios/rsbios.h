@@ -52,4 +52,3 @@ typedef struct {
 	UINT8	PUTP[2];			// +10
 	UINT8	GETP[2];			// +12
 } RSBIOS;
-

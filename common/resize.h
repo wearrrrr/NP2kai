@@ -39,4 +39,3 @@ RSZHDL resize(int xdst, int ydst, int xsrc, int ysrc);
 #ifdef __cplusplus
 }
 #endif
-

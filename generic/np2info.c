@@ -79,9 +79,9 @@ static void info_cpu(OEMCHAR *str, int maxlen, const NP2INFOEX *ex) {
 	family = (CPU_TYPE & CPUTYPE_V30)?1:2;
 #endif
 	milstr_ncpy(str, milstr_list(str_cpu, family), maxlen);
-	
+
 #endif
-	
+
 	(void)ex;
 }
 
@@ -257,19 +257,19 @@ static void info_sound(OEMCHAR *str, int maxlen, const NP2INFOEX *ex)
 		case SOUNDID_PC_9801_118:
 			lpBoard = OEMTEXT("PC-9801-118");
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS:
 			lpBoard = OEMTEXT("PC-9801-86 + Mate-X PCM");
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118:
 			lpBoard = OEMTEXT("PC-9801-86 + PC-9801-118");
 			break;
-			
+
 		case SOUNDID_MATE_X_PCM:
 			lpBoard = OEMTEXT("Mate-X PCM");
 			break;
-			
+
 		case SOUNDID_PC_9801_86_ADPCM:
 			lpBoard = OEMTEXT("PC-9801-86 + Chibi-oto");
 			break;
@@ -301,7 +301,7 @@ static void info_sound(OEMCHAR *str, int maxlen, const NP2INFOEX *ex)
 		case SOUNDID_SOUNDORCHESTRAV:
 			lpBoard = OEMTEXT("SOUND ORCHESTRA-V");
 			break;
-			
+
 		case SOUNDID_LITTLEORCHESTRAL:
 			lpBoard = OEMTEXT("LITTLE ORCHESTRA L");
 			break;
@@ -309,28 +309,28 @@ static void info_sound(OEMCHAR *str, int maxlen, const NP2INFOEX *ex)
 		case SOUNDID_MMORCHESTRA:
 			lpBoard = OEMTEXT("MULTIMEDIA ORCHESTRA");
 			break;
-			
+
 #if defined(SUPPORT_SOUND_SB16)
 		case SOUNDID_SB16:
 			lpBoard = OEMTEXT("Sound Blaster 16");
 			break;
-			
+
 		case SOUNDID_PC_9801_86_SB16:
 			lpBoard = OEMTEXT("PC-9801-86 + Sound Blaster 16");
 			break;
-			
+
 		case SOUNDID_WSS_SB16:
 			lpBoard = OEMTEXT("Mate-X PCM + Sound Blaster 16");
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS_SB16:
 			lpBoard = OEMTEXT("PC-9801-86 + Mate-X PCM + Sound Blaster 16");
 			break;
-			
+
 		case SOUNDID_PC_9801_118_SB16:
 			lpBoard = OEMTEXT("PC-9801-118 + Sound Blaster 16");
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118_SB16:
 			lpBoard = OEMTEXT("PC-9801-86 + PC-9801-118 + Sound Blaster 16");
 			break;
@@ -624,4 +624,3 @@ const INFOPROC	*infterm;
 	}
 	*dst = '\0';
 }
-

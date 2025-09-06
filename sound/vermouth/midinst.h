@@ -68,4 +68,3 @@ UINT VERMOUTHCL inst_gettones(MIDIMOD mod, UINT bank);
 #ifdef __cplusplus
 }
 #endif
-

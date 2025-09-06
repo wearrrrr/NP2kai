@@ -42,7 +42,7 @@
 #define strdup _strdup
 #endif
 
-// XXX: 
+// XXX:
 #ifndef _countof
 #define _countof(a) (sizeof(a) / sizeof((a)[0]))
 #endif
@@ -137,7 +137,7 @@
 
 	LGY98		lgy98 = {0};
 	LGY98CFG	lgy98cfg = {0};
-	
+
     VLANClientState *lgy98vc = NULL;
 
 
@@ -159,7 +159,7 @@ static void ne2000_reset(LGY98 *s)
         s->mem[2 * i + 1] = s->mem[i];
     }
 }
-	
+
 static void ne2000_update_irq(LGY98 *s)
 {
 	static int irqflag = 0;
@@ -181,7 +181,7 @@ static void ne2000_update_irq(LGY98 *s)
 		irqflag = 0;
 	}
 }
-	
+
 static void ne2000_mem_writeb(LGY98 *s, UINT32 addr, UINT32 val)
 {
     if (addr < 32 ||
@@ -256,7 +256,7 @@ static void ne2000_dma_update(LGY98 *s, int len)
         s->rcnt = 0;
         /* signal end of transfer */
         s->isr |= ENISR_RDC;
-		s->cmd |= E8390_NODMA; /* コマンドレジスタにDMA完了ビットを立てる */ 
+		s->cmd |= E8390_NODMA; /* コマンドレジスタにDMA完了ビットを立てる */
         ne2000_update_irq(s);
 		//		TRACEOUT(("LGY-98: DMA_IRQ"));
     } else {
@@ -448,7 +448,7 @@ static void IOOUTCALL lgy98_ob000(UINT addr, REG8 dat) {
     int offset, page, index;
 	UINT32 val = dat;
 	LGY98 *s = &lgy98;
-	
+
 	//TRACEOUT(("LGY-98: out %04X d=%02X", addr, dat));
     addr &= 0xf;
     if (addr == E8390_CMD) {
@@ -562,7 +562,7 @@ static REG8 IOINPCALL lgy98_ib000(UINT addr) {
 	int ret = 0;
     int offset, page;
 	LGY98 *s = &lgy98;
-	
+
 	//pic_resetirq(s->irq);
 	//TRACEOUT(("LGY-98: inp %04X", addr));
     addr = (addr & 0xf);
@@ -642,7 +642,7 @@ static REG8 IOINPCALL lgy98_ib000(UINT addr) {
 void IOOUTCALL lgy98_ob200_8(UINT addr, REG8 dat) {
 	UINT32 val = dat;
 	LGY98 *s = &lgy98;
-	
+
 	//pic_resetirq(s->irq);
     if (s->rcnt == 0)
         return;
@@ -668,7 +668,7 @@ void IOOUTCALL lgy98_ob200_8(UINT addr, REG8 dat) {
 REG8 IOINPCALL lgy98_ib200_8(UINT addr) {
 	int ret = 0;
 	LGY98 *s = &lgy98;
-	
+
 	//pic_resetirq(s->irq);
 	if(s->dcfg & 0x01){
 		ret = ne2000_mem_readw(s, s->rsar);
@@ -688,7 +688,7 @@ REG8 IOINPCALL lgy98_ib200_8(UINT addr) {
 void IOOUTCALL lgy98_ob200_16(UINT addr, REG16 dat) {
 	UINT32 val = dat;
 	LGY98 *s = &lgy98;
-	
+
 	//pic_resetirq(s->irq);
     if (s->rcnt == 0)
         return;
@@ -707,7 +707,7 @@ void IOOUTCALL lgy98_ob200_16(UINT addr, REG16 dat) {
 REG16 IOINPCALL lgy98_ib200_16(UINT addr) {
 	int ret = 0;
 	LGY98 *s = &lgy98;
-	
+
 	//pic_resetirq(s->irq);
 	if(s->dcfg & 0x01){
 		/* 16 bit access */
@@ -844,7 +844,7 @@ int lgy98seq_retpos = 0; // 戻り値リストの読み取り位置
 
 void lgy98_setromdata(){
 	// INT設定
-    memset(lgy98seq_retlist[6], 0, _countof(lgy98seq_retlist[0])); 
+    memset(lgy98seq_retlist[6], 0, _countof(lgy98seq_retlist[0]));
 	lgy98seq_retlist[6][lgy98_IRQ2IDX[lgy98.irq]] = 1;
 }
 void lgy98_setretseq(int index){
@@ -1028,7 +1028,7 @@ static void lgy98_recieve_packet(const UINT8 *buf, int size)
 void lgy98_reset(const NP2CFG *pConfig){
 	UINT base = 0x10D0;
 	REG8 irq = 5;
-	
+
 	lgy98cfg.enabled = np2cfg.uselgy98;
 
 	// 初期化
@@ -1041,7 +1041,7 @@ void lgy98_reset(const NP2CFG *pConfig){
 
 	if(np2cfg.lgy98io) base = np2cfg.lgy98io;
 	if(np2cfg.lgy98irq) irq = np2cfg.lgy98irq;
-	
+
 	lgy98cfg.baseaddr = base;
 	lgy98cfg.irq = irq;
 
@@ -1056,7 +1056,7 @@ void lgy98_bind(void){
 	//NICInfo *nd;
 
 	if(!lgy98cfg.enabled) return;
-	
+
 
     vlan = np2net_find_vlan(0);
 
@@ -1081,12 +1081,12 @@ void lgy98_bind(void){
 		iocore_attachout(base + i, lgy98_ob000);
 		iocore_attachinp(base + i, lgy98_ib000);
 	}
-	
+
 	iocore_attachout(base + 0x200, lgy98_ob200_8);
 	iocore_attachinp(base + 0x200, lgy98_ib200_8);
 	//iocore_attachout(base + 0x200, lgy98_ob200_16); // in iocore.c iocore_out16()
 	//iocore_attachinp(base + 0x200, lgy98_ib200_16); // in iocore.c iocore_inp16()
-	
+
 	for(i=0;i<16;i++){
 		iocore_attachout(base + 0x300 + i, lgy98_ob300_16);
 		iocore_attachinp(base + 0x300 + i, lgy98_ib300_16);
@@ -1094,9 +1094,9 @@ void lgy98_bind(void){
 
 	iocore_attachout(base + 0x018, lgy98_ob018);
 	iocore_attachinp(base + 0x018, lgy98_ib018);
-	
+
 	ne2000_reset(&lgy98);
-	
+
 	if(!lgy98vc){
 		lgy98vc = np2net_new_vlan_client(vlan, "ne2k_isa", "ne2k_isa.1",
                                           ne2000_receive, ne2000_can_receive,
@@ -1104,14 +1104,14 @@ void lgy98_bind(void){
 	}
 
 	np2net.recieve_packet = lgy98_recieve_packet;
-	
+
 	lgy98seq_mbase = 0;
 	lgy98seq_retidx = -1;
 
 	lgy98_setromdata();
 }
 void lgy98_shutdown(void){
-	
+
 	// メモリ解放
 	if(lgy98vc){
 		free(lgy98vc->model);

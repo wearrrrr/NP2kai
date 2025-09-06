@@ -155,4 +155,3 @@ void VERMOUTHCL voice_setmix(VOICE v);
 	do {							\
 		(v)->phase = VOICE_FREE;	\
 	} while(0 /*CONSTCOND*/)
-

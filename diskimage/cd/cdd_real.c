@@ -322,7 +322,7 @@ UINT32 readcapacity_SPTI(FILEH fh) {
 		sptd.info.SenseInfoLength = sizeof(sptd.sense_buffer);
 		sptd.info.SenseInfoOffset = offsetof(struct sptdreadcapacityinfo, sense_buffer);
 		sptd.info.TimeOutValue = 5;
-		
+
 		//memset(buf, 0, 2048 * size);
 		//memset(ucDataBuf, 0, 16384);
 		//SetLastError(0);
@@ -369,14 +369,14 @@ BRESULT openrealcdd(SXSIDEV sxsi, const OEMCHAR *path) {
 
 	ZeroMemory(trk, sizeof(trk));
 	trks = 0;
-	
+
 	//fh = file_open_rb(path);
 	fh = CreateFile(path, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	//fh = file_open(path);
 	if (fh == FILEH_INVALID) {
 		goto openiso_err1;
 	}
-	
+
 	//	セクタサイズが2048byte、2352byte、2448byteのどれかをチェック
 	DeviceIoControl(fh, IOCTL_CDROM_GET_DRIVE_GEOMETRY,
 				NULL, 0, &dgCDROM, sizeof(DISK_GEOMETRY),
@@ -385,7 +385,7 @@ BRESULT openrealcdd(SXSIDEV sxsi, const OEMCHAR *path) {
 	if(dgCDROM.MediaType != 11){ // Removable Media Check
 		goto openiso_err2;
 	}
-	
+
 	sector_size = (UINT16)dgCDROM.BytesPerSector;
 	totals = (FILELEN)dgCDROM.SectorsPerTrack*dgCDROM.TracksPerCylinder*dgCDROM.Cylinders.QuadPart;
 	switch(sector_size){
@@ -405,7 +405,7 @@ BRESULT openrealcdd(SXSIDEV sxsi, const OEMCHAR *path) {
 	default:
 		goto openiso_err2;
 	}
-	
+
 	//	トラック情報を拾う
 	DeviceIoControl(fh, IOCTL_CDROM_READ_TOC,
 				NULL, 0, &tocCDROM, sizeof(tocCDROM),
@@ -439,11 +439,11 @@ BRESULT openrealcdd(SXSIDEV sxsi, const OEMCHAR *path) {
 
 		trk[i].pregap_sectors	= 0;
 		trk[i].track_sectors	= trk[i].end_sector - trk[i].start_sector + 1;
-		
+
 		trk[i].str_sec		= trk[i].start_sector;
 		trk[i].end_sec		= trk[i].end_sector;
 		trk[i].sectors		= trk[i].track_sectors;
-		
+
 		trk[i].pregap_offset	= (UINT64)trk[i].start_sector * trk[i].sector_size;
 		trk[i].start_offset		= (UINT64)trk[i].start_sector * trk[i].sector_size;
 		trk[i].end_offset		= (UINT64)trk[i].end_sector * trk[i].sector_size;
@@ -505,7 +505,7 @@ openiso_err1:
 //
 //	ZeroMemory(trk, sizeof(trk));
 //	trks = 0;
-//	
+//
 //	//fh = CreateFile(path, GENERIC_READ, FILE_SHARE_READ|FILE_SHARE_WRITE, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 //	fh = file_open_rb(path);
 //	if (fh == FILEH_INVALID) {
@@ -535,7 +535,7 @@ openiso_err1:
 //	default:
 //		goto openiso_err2;
 //	}
-//	
+//
 //	//	トラック情報を拾う
 //	DeviceIoControl(fh, IOCTL_CDROM_READ_TOC_EX,
 //				&TOCEx, sizeof(TOCEx), &tocCDROMtmp, sizeof(tocCDROMtmp),
@@ -543,7 +543,7 @@ openiso_err1:
 //	trks = (LOADMOTOROLAWORD(tocCDROMtmp.Length) - sizeof(UCHAR)*2) / sizeof(CDROM_TOC_FULL_TOC_DATA_BLOCK);
 //	lentmp = sizeof(CDROM_TOC_FULL_TOC_DATA) + trks * sizeof(CDROM_TOC_FULL_TOC_DATA_BLOCK);
 //	lptocCDROM = (CDROM_TOC_FULL_TOC_DATA*)calloc(lentmp, 1);
-//	
+//
 //	DeviceIoControl(fh, IOCTL_CDROM_READ_TOC_EX,
 //				&TOCEx, sizeof(TOCEx), lptocCDROM, lentmp,
 //				&dwNotUsed, NULL);
@@ -575,11 +575,11 @@ openiso_err1:
 //
 //		trk[i].pregap_sectors	= 0;
 //		trk[i].track_sectors	= trk[i].end_sector - trk[i].start_sector + 1;
-//		
+//
 //		trk[i].str_sec		= trk[i].start_sector;
 //		trk[i].end_sec		= trk[i].end_sector;
 //		trk[i].sectors		= trk[i].track_sectors;
-//		
+//
 //		trk[i].pregap_offset	= trk[i].start_sector * trk[i].sector_size;
 //		trk[i].start_offset		= trk[i].start_sector * trk[i].sector_size;
 //		trk[i].end_offset		= trk[i].end_sector * trk[i].sector_size;

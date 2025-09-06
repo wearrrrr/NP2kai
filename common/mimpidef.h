@@ -22,4 +22,3 @@ BRESULT mimpidef_load(MIMPIDEF *def, const OEMCHAR *filename);
 #ifdef __cplusplus
 }
 #endif
-

@@ -85,4 +85,3 @@ void rs232c_vfast_setrs232cspeed(UINT8 value);
 #endif
 
 #endif  // _SERIAL_H_
-

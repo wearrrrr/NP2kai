@@ -104,9 +104,9 @@ typedef struct {
 	UINT8	reg_trc; // TURBO-RESET CONTROL REGISTER
 	UINT8	reg_fwd; // FORWARD REGISTER
 	UINT8	reg_cms; // Configuration Mechanism Select
-	
+
 	UINT32	reg32_caddr; // CONFIGURATION ADDRESS REGISTER
-	
+
 	_PCIDEVICE	devices[PCI_DEVICES_MAX]; // PCIデバイス
 
 	UINT8	membankd0;
@@ -115,13 +115,13 @@ typedef struct {
 	UINT8	biosrom[0x8000];
 	UINT8	biosromtmp[0x8000];
 	OEMCHAR	biosname[16];
-	
+
     UINT8 usebios32;
 	UINT32	bios32svcdir;
 	UINT32	bios32entrypoint;
 	_PCIPNP_IRQTBL	biosdata;
 	UINT16	allirqbitmap;
-	
+
     UINT8 unkreg[4][256];
     UINT8 unkreg_bank1;
     UINT8 unkreg_bank2;
@@ -172,4 +172,3 @@ void pcidev_bind(void);
 #endif
 
 #endif
-

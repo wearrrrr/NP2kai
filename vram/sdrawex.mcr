@@ -299,4 +299,3 @@ static const SDRAWFN SDSYM(nex)[] = {
 #endif
 
 #endif
-

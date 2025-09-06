@@ -34,4 +34,3 @@ void fddmtrsnd_deinitialize(void);
 #ifdef __cplusplus
 }
 #endif
-

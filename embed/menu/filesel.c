@@ -408,10 +408,10 @@ static int dlgcmd(int msg, MENUID id, long param) {
 }
 
 #if defined(__LIBRETRO__) || defined(EMSCRIPTEN)
-static BOOL selectfile(const FSELPRM *prm, OEMCHAR *path, int size, 
+static BOOL selectfile(const FSELPRM *prm, OEMCHAR *path, int size,
 														const OEMCHAR *def,int drv) {
 #else
-static BOOL selectfile(const FSELPRM *prm, OEMCHAR *path, int size, 
+static BOOL selectfile(const FSELPRM *prm, OEMCHAR *path, int size,
 														const OEMCHAR *def) {
 #endif
 
@@ -534,4 +534,3 @@ const FSELPRM	*prm;
 		diskdrv_setsxsi(drv, path);
 	}
 }
-

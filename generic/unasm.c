@@ -588,4 +588,3 @@ opeana_ed:
 	p[0] = '\0';
 	return((UINT)(ptr - org));
 }
-

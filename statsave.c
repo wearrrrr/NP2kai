@@ -136,7 +136,7 @@ enum
 #endif
 	STATFLAG_SXSI,
 	STATFLAG_MASK				= 0x3fff,
-	
+
 	STATFLAG_BWD_COMPATIBLE			= 0x4000, // このフラグが立っているとき、古いバージョンのステートセーブと互換性がある（足りないデータは0で埋められるので注意する）いまのところSTATFLAG_BINのみサポート
 	STATFLAG_FWD_COMPATIBLE			= 0x8000, // このフラグが立っているとき、新しいバージョンのステートセーブと互換性がある（足りないデータは無かったことになるので注意する）いまのところSTATFLAG_BINのみサポート
 };
@@ -861,22 +861,22 @@ static UINT GetSoundFlags(SOUNDID nSoundID)
 
 		case SOUNDID_PC_9801_118:
 			return FLAG_OPNA1 | FLAG_OPL3 | FLAG_CS4231;
-			
+
 		case SOUNDID_PC_9801_86_WSS:
 			return FLAG_OPNA1 | FLAG_PCM86 | FLAG_CS4231;
-			
+
 		case SOUNDID_PC_9801_86_118:
 			return FLAG_OPNA1 | FLAG_OPNA2 | FLAG_OPL3 | FLAG_PCM86 | FLAG_CS4231;
-			
+
 		case SOUNDID_MATE_X_PCM:
 			return FLAG_OPNA1 | FLAG_CS4231;
-			
+
 		case SOUNDID_PC_9801_86_ADPCM:
 			return FLAG_OPNA1 | FLAG_PCM86;
-			
+
 		case SOUNDID_WAVESTAR:
 			return FLAG_OPNA1 | FLAG_PCM86 | FLAG_CS4231;
-			
+
 		case SOUNDID_SPEAKBOARD:
 			return FLAG_OPNA1;
 
@@ -894,22 +894,22 @@ static UINT GetSoundFlags(SOUNDID nSoundID)
 #if defined(SUPPORT_SOUND_SB16)
 		case SOUNDID_SB16:
 			return FLAG_OPL3 | FLAG_SB16;
-			
+
 		case SOUNDID_PC_9801_86_SB16:
 			return FLAG_OPNA1 | FLAG_PCM86 | FLAG_OPL3 | FLAG_SB16;
-			
+
 		case SOUNDID_WSS_SB16:
 			return FLAG_CS4231 | FLAG_OPL3 | FLAG_SB16;
-			
+
 		case SOUNDID_PC_9801_86_WSS_SB16:
 			return FLAG_OPNA1 | FLAG_PCM86 | FLAG_CS4231 | FLAG_OPL3 | FLAG_SB16;
-			
+
 		case SOUNDID_PC_9801_118_SB16:
 			return FLAG_OPNA1 | FLAG_OPNA2 | FLAG_OPL3 | FLAG_PCM86 | FLAG_CS4231 | FLAG_SB16;
 
 		case SOUNDID_PC_9801_86_118_SB16:
 			return FLAG_OPNA1 | FLAG_OPNA2 | FLAG_PCM86 | FLAG_CS4231 | FLAG_OPL3 | FLAG_SB16;
-			
+
 #endif
 #if defined(SUPPORT_PX)
 		case SOUNDID_PX1:
@@ -931,7 +931,7 @@ static int flagsave_fm(STFLAGH sfh, const SFENTRY *tbl)
 	UINT i;
 	SOUNDID invalidSoundID = SOUNDID_INVALID;
 	UINT32 datalen;
-	
+
 	ret = statflag_write(sfh, &invalidSoundID, sizeof(invalidSoundID));
 	ret = statflag_write(sfh, &g_nSoundID, sizeof(g_nSoundID));
 
@@ -1352,7 +1352,7 @@ static int flagload_sxsi(STFLAGH sfh, const SFENTRY *tbl) {
 	UINT		i;
 	REG8		drv;
 	STATPATH	sp;
-	
+
 	ret = statflag_read(sfh, &sds, sizeof(sds));
 	if (ret != STATFLAG_SUCCESS) {
 		return(ret);
@@ -1396,12 +1396,12 @@ static int flagsave_com(STFLAGH sfh, const SFENTRY *tbl) {
 		case 1:
 			cm = cm_rs232c;
 			break;
-			
+
 #if defined(SUPPORT_SMPU98)
 		case 2:
 			cm = cm_smpu98[0];
 			break;
-			
+
 		case 3:
 			cm = cm_smpu98[1];
 			break;
@@ -1460,7 +1460,7 @@ static int flagload_com(STFLAGH sfh, const SFENTRY *tbl) {
 			cm = commng_create(COMCREATE_SERIAL, FALSE);
 			cm_rs232c = cm;
 			break;
-			
+
 #if defined(SUPPORT_SMPU98)
 		case 2:
 			commng_destroy(cm_smpu98[0]);
@@ -1524,8 +1524,8 @@ static int flagload_bms(STFLAGH sfh, const SFENTRY *tbl) {
 
 static int flagcheck_versize(STFLAGH sfh, const SFENTRY *tbl) {
 
-	if ((sfh->hdr.ver == tbl->ver) && ((sfh->hdr.size == tbl->arg2) || 
-		((tbl->type & STATFLAG_BWD_COMPATIBLE) && sfh->hdr.size < tbl->arg2) || 
+	if ((sfh->hdr.ver == tbl->ver) && ((sfh->hdr.size == tbl->arg2) ||
+		((tbl->type & STATFLAG_BWD_COMPATIBLE) && sfh->hdr.size < tbl->arg2) ||
 		((tbl->type & STATFLAG_FWD_COMPATIBLE) && sfh->hdr.size > tbl->arg2))) {
 		return(STATFLAG_SUCCESS);
 	}
@@ -1569,11 +1569,11 @@ const SFENTRY	*tblterm;
 	if (sffh == NULL) {
 		return(STATFLAG_FAILURE);
 	}
-	
+
 #if defined(SUPPORT_CL_GD5430)
 	pc98_cirrus_vga_save();
 #endif
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	memcpy(vramex_base, vramex, sizeof(vramex_base));
 	i386haxfunc_vcpu_getMSRs(&np2haxstat.msrstate);
@@ -1881,7 +1881,7 @@ const SFENTRY	*tblterm;
 
 	// ステートセーブ互換性維持用
 	if(pccore.maxmultiple == 0) pccore.maxmultiple = pccore.multiple;
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	memcpy(vramex, vramex_base, sizeof(vramex_base));
 	i386haxfunc_vcpu_setREGs(&np2haxstat.state);
@@ -1905,7 +1905,7 @@ const SFENTRY	*tblterm;
 	iocore_bind();
 	cbuscore_bind();
 	fmboard_bind();
-	
+
 	// DA/UAと要素番号の対応関係を初期化
 	for(i=0;i<4;i++){
 		sxsi_unittbl[i] = i;
@@ -1951,7 +1951,7 @@ const SFENTRY	*tblterm;
 	pc98_cirrus_vga_bind();
 	pc98_cirrus_vga_load();
 #endif
-	
+
 	// OPNAボリューム再設定
 	if(g_nSoundID == SOUNDID_WAVESTAR){
 		opngen_setvol(np2cfg.vol_fm * cs4231.devvolume[0xff] / 15 * np2cfg.vol_master / 100);
@@ -2010,12 +2010,12 @@ const SFENTRY	*tblterm;
 		np2cfg.wabasw = wabaswtmp;
 	}
 #endif
-	
+
 	pit_setrs232cspeed((pit.ch + 2)->value);
 #if defined(SUPPORT_RS232C_FIFO)
 	rs232c_vfast_setrs232cspeed(rs232cfifo.vfast);
 #endif
-	
+
 	return(ret);
 }
 
@@ -2048,4 +2048,3 @@ int statsave_load_hdd(const OEMCHAR *ext)
 		return (STATFLAG_FAILURE);
 	}
 }
-

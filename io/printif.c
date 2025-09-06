@@ -80,4 +80,3 @@ void printif_finalize(void) {
 	commng_destroy(cm_prt);
 	cm_prt = NULL;
 }
-

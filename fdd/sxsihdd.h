@@ -77,5 +77,3 @@ BRESULT sxsihdd_open(SXSIDEV sxsi, const OEMCHAR *fname);
 #ifdef __cplusplus
 }
 #endif
-
-

@@ -1959,4 +1959,3 @@ jisutf16pair_t jisutf16pairs[] = {
 };
 
 uint16_t jisutf16pair_count = sizeof(jisutf16pairs) / sizeof(jisutf16pair_t);
-

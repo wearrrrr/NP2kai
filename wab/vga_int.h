@@ -239,7 +239,7 @@ static const uint32_t_ mask16[16] = {
 };
 
 uint32_t_ vga_mem_readb(void *opaque, target_phys_addr_t addr){
-	
+
     VGAState *s = (VGAState *)opaque;
     int memory_map_mode, plane;
     uint32_t_ ret;
@@ -439,35 +439,35 @@ void vga_invalidate_scanlines(VGAState *s, int y1, int y2){
 int ppm_save(const char *filename, struct DisplaySurface *ds){return 0;}
 
 static void vga_draw_cursor_line(uint8_t *d1,
- 
-                                 const uint8_t *src1,
- 
-                                 int poffset, int w,
- 
-                                 unsigned int color0,
- 
-                                 unsigned int color1,
- 
-                                 unsigned int color_xor)
- 
-{
- 
-    const uint8_t *plane0, *plane1;
- 
-    int x, b0, b1;
- 
-    uint8_t *d;
- 
 
- 
+                                 const uint8_t *src1,
+
+                                 int poffset, int w,
+
+                                 unsigned int color0,
+
+                                 unsigned int color1,
+
+                                 unsigned int color_xor)
+
+{
+
+    const uint8_t *plane0, *plane1;
+
+    int x, b0, b1;
+
+    uint8_t *d;
+
+
+
     d = d1;
- 
+
     plane0 = src1;
- 
+
     plane1 = src1 + poffset;
- 
+
     for (x = 0; x < w; x++) {
- 
+
         b0 = (plane0[x >> 3] >> (7 - (x & 7))) & 1;
 
         b1 = (plane1[x >> 3] >> (7 - (x & 7))) & 1;

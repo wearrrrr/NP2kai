@@ -265,7 +265,7 @@ static void bios_reinitbyswitch(void) {
 #if defined(SUPPORT_PC9821)
 	mem[MEMB_CRT_BIOS] |= 0x04;		// 05/02/03
 	mem[0x45c] = 0x40;
-	
+
 	// DA/UAと要素番号の対応関係を初期化
 	for(i=0;i<4;i++){
 		sxsi_unittbl[i] = i;
@@ -287,7 +287,7 @@ static void bios_reinitbyswitch(void) {
 		for(;idx<4;idx++){
 			sxsi_unittbl[idx] = ncidx; // XXX: 余ったDA/UAはとりあえず未接続の番号に設定
 		}
-		
+
 		mem[0xF8E80+0x0010] = (sxsi_getdevtype(3)!=SXSIDEV_NC ? 0x8 : 0x0)|(sxsi_getdevtype(2)!=SXSIDEV_NC ? 0x4 : 0x0)|
 								(sxsi_getdevtype(1)!=SXSIDEV_NC ? 0x2 : 0x0)|(sxsi_getdevtype(0)!=SXSIDEV_NC ? 0x1 : 0x0);
 
@@ -315,12 +315,12 @@ static void bios_reinitbyswitch(void) {
 #endif
 	mem[0xF8E80+0x0011] = mem[0xF8E80+0x0011] & ~0x20; // 0x20のビットがONだとWin2000でマウスがカクカクする？
 	if(np2cfg.modelnum) mem[0xF8E80+0x003F] = np2cfg.modelnum; // PC-9821 Model Number
-	
+
 #endif
 	mem[0x45B] |= 0x80; // XXX: TEST OUT 5Fh,AL wait
 
 	mem[0xF8E80+0x0011] &= ~0x80; // for 17KB version NECCDD.SYS
-	
+
 #if defined(SUPPORT_PCI)
 	mem[0xF8E80+0x0004] |= 0x2c;
 	//mem[0x5B7] = (0x277 >> 2); // READ_DATA port address
@@ -332,7 +332,7 @@ static void bios_reinitbyswitch(void) {
 #else
 	mem[0xF8E80+0x0011] &= ~0x10; // clear 115200bps support flag
 #endif
-	
+
 #if defined(SUPPORT_HRTIMER)
 	{
 		_SYSTIME hrtimertime;
@@ -408,7 +408,7 @@ void bios_initialize(void) {
 	UINT	i, j;
 	UINT32	tmp;
 	UINT	pos;
-	
+
 #if defined(USE_CUSTOM_HOOKINST)
 #if defined(SUPPORT_IA32_HAXM)
 	if (np2hax.enable) {
@@ -508,7 +508,7 @@ void bios_initialize(void) {
 	STOREINTELDWORD(mem + 0xffff1, 0xfd800000);
 
 	CopyMemory(mem + 0x0fd800 + 0x0e00, keytable[0], 0x60 * 8);
-	
+
 	//fh = file_create_c(_T("emuitf.rom"));
 	//if (fh != FILEH_INVALID) {
 	//	file_write(fh, itfrom, sizeof(itfrom));
@@ -576,7 +576,7 @@ void bios_initialize(void) {
 
 	CopyMemory(mem + 0x1c0000, mem + ITF_ADRS, 0x08000);
 	CopyMemory(mem + 0x1e8000, mem + 0x0e8000, 0x10000);
-	
+
 #if defined(SUPPORT_PCI)
 	// PCI BIOS32 Service Directoryを探す
 	for (i=0; i<0x10000; i+=0x4) {
@@ -598,7 +598,7 @@ void bios_initialize(void) {
 	if(i==0x10000){
 		int emptyflag = 0;
 		TRACEOUT(("BIOS32 Service Directory not found."));
-		
+
 		// PCI BIOS32 Service Directoryを割り当てる
 		// XXX: 多分この辺なら空いてるだろーということで･･･
 		pcidev.bios32svcdir = 0xffa00;
@@ -625,7 +625,7 @@ void bios_initialize(void) {
 		}
 	}
 #endif
-	
+
 // np21w ver0.86 rev46-69 BIOS I/O emulation
 #if defined(BIOS_IO_EMULATION)
 	// エミュレーション用に書き換え。とりあえずINT 18HとINT 1BHとINT 1CHのみ対応
@@ -641,7 +641,7 @@ void bios_initialize(void) {
 		mem[BIOS_BASE + BIOSOFST_1c + 3] = 0xcf; // 0xcf(IRET)
 	}
 #endif
-	
+
 // np21w ver0.86 rev70 VGA BIOS for MODE X
 #if defined(SUPPORT_VGA_MODEX)
 	if(np2cfg.usemodex){
@@ -652,7 +652,7 @@ void bios_initialize(void) {
 		mem[BIOS_BASE + BIOS_TABLE + 0x21] = 0x00;
 	}
 #endif
-	
+
 #ifdef USE_CUSTOM_HOOKINST
 	bios_updatehookinst(mem + 0xf8000, 0x100000 - 0xf8000);
 #endif
@@ -690,7 +690,7 @@ static void bios_itfcall(void) {
 #if defined(BIOS_IO_EMULATION)
 // LIFO（若干高速だが逆順のため注意）
 void biosioemu_push8(UINT16 port, UINT8 data) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -701,7 +701,7 @@ void biosioemu_push8(UINT16 port, UINT8 data) {
 	}
 }
 void biosioemu_push16(UINT16 port, UINT32 data) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -712,7 +712,7 @@ void biosioemu_push16(UINT16 port, UINT32 data) {
 	}
 }
 void biosioemu_push8_read(UINT16 port) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -723,7 +723,7 @@ void biosioemu_push8_read(UINT16 port) {
 	}
 }
 void biosioemu_push16_read(UINT16 port) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -735,7 +735,7 @@ void biosioemu_push16_read(UINT16 port) {
 }
 // FIFO
 void biosioemu_enq8(UINT16 port, UINT8 data) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -752,7 +752,7 @@ void biosioemu_enq8(UINT16 port, UINT8 data) {
 	}
 }
 void biosioemu_enq16(UINT16 port, UINT32 data) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -769,7 +769,7 @@ void biosioemu_enq16(UINT16 port, UINT32 data) {
 	}
 }
 void biosioemu_enq8_read(UINT16 port) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -786,7 +786,7 @@ void biosioemu_enq8_read(UINT16 port) {
 	}
 }
 void biosioemu_enq16_read(UINT16 port) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count < BIOSIOEMU_DATA_MAX){
@@ -803,7 +803,7 @@ void biosioemu_enq16_read(UINT16 port) {
 	}
 }
 void biosioemu_begin(void) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count==0){
@@ -850,7 +850,7 @@ void biosioemu_begin(void) {
 	}
 }
 void biosioemu_proc(void) {
-	
+
 	if(!biosioemu.enable) return;
 
 	if(biosioemu.count==0){
@@ -901,12 +901,12 @@ void biosioemu_proc(void) {
 UINT MEMCALL biosfunc(UINT32 adrs) {
 
 	UINT16	bootseg;
-	
+
 // np21w ver0.86 rev46 BIOS I/O emulation
 #if defined(BIOS_IO_EMULATION)
 	UINT32	oldEIP;
 #endif
-	
+
 #if defined(SUPPORT_FAST_MEMORYCHECK)
 	// 高速メモリチェック
 	if (CPU_ITFBANK && adrs == 0xf9724) {
@@ -993,7 +993,7 @@ UINT MEMCALL biosfunc(UINT32 adrs) {
 			CPU_REMCLOCK -= 500;
 			bios0x0c();
 			return(1);
-			
+
 // np21w ver0.86 rev70 VGA BIOS for MODE X
 #if defined(SUPPORT_VGA_MODEX)
 		case BIOS_BASE + BIOSOFST_10:
@@ -1047,19 +1047,19 @@ UINT MEMCALL biosfunc(UINT32 adrs) {
 			CPU_REMCLOCK -= 200;
 #if defined(BIOS_IO_EMULATION)
 			oldEIP = CPU_EIP;
-			biosioemu.count = 0; 
+			biosioemu.count = 0;
 #endif
 			bios0x18();
 #if defined(BIOS_IO_EMULATION)
 			// np21w ver0.86 rev46 BIOS I/O emulation
 			if(oldEIP == CPU_EIP){
-				biosioemu_begin(); 
+				biosioemu_begin();
 			}else{
-				biosioemu.count = 0; 
+				biosioemu.count = 0;
 			}
 #endif
 			return(1);
-			
+
 #if defined(BIOS_IO_EMULATION)
 		case BIOS_BASE + BIOSOFST_18 + 2: // np21w ver0.86 rev46 BIOS I/O emulation
 			biosioemu_proc();
@@ -1101,13 +1101,13 @@ UINT MEMCALL biosfunc(UINT32 adrs) {
 #if defined(BIOS_IO_EMULATION)
 			// np21w ver0.86 rev69 BIOS I/O emulation
 			if(oldEIP == CPU_EIP){
-				biosioemu_begin(); 
+				biosioemu_begin();
 			}else{
-				biosioemu.count = 0; 
+				biosioemu.count = 0;
 			}
 #endif
 			return(1);
-			
+
 #if defined(BIOS_IO_EMULATION)
 		case BIOS_BASE + BIOSOFST_1b + 2: // np21w ver0.86 rev69 BIOS I/O emulation
 			biosioemu_proc();
@@ -1118,19 +1118,19 @@ UINT MEMCALL biosfunc(UINT32 adrs) {
 			CPU_REMCLOCK -= 200;
 #if defined(BIOS_IO_EMULATION)
 			oldEIP = CPU_EIP;
-			biosioemu.count = 0; 
+			biosioemu.count = 0;
 #endif
 			bios0x1c();
 #if defined(BIOS_IO_EMULATION)
 			// np21w ver0.86 rev47 BIOS I/O emulation
 			if(oldEIP == CPU_EIP){
-				biosioemu_begin(); 
+				biosioemu_begin();
 			}else{
-				biosioemu.count = 0; 
+				biosioemu.count = 0;
 			}
 #endif
 			return(1);
-			
+
 #if defined(BIOS_IO_EMULATION)
 		case BIOS_BASE + BIOSOFST_1c + 2: // np21w ver0.86 rev47 BIOS I/O emulation
 			biosioemu_proc();
@@ -1175,13 +1175,13 @@ UINT MEMCALL biosfunc(UINT32 adrs) {
 			return(1);
 		}
 	}
-	
+
 	return(0);
 }
 
 #ifdef SUPPORT_PCI
 UINT MEMCALL bios32func(UINT32 adrs) {
-	
+
 	// アドレスがBIOS32 Entry Pointなら処理
 	if (pcidev.bios32entrypoint && adrs == pcidev.bios32entrypoint) {
 		CPU_REMCLOCK -= 200;

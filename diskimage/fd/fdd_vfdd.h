@@ -12,4 +12,3 @@ BRESULT fdd_readid_vfdd(FDDFILE fdd);
 #ifdef __cplusplus
 }
 #endif
-

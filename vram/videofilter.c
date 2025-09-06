@@ -1703,4 +1703,3 @@ void VideoFilter_ExportDest(h_VideoFilterMng hMng, void* pOutputBuf, const uint8
 }
 
 #endif  // SUPPORT_VIDEOFILTER
-

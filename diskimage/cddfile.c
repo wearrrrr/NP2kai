@@ -412,7 +412,7 @@ UINT32 calcCRC(UINT8 *buf, int len)
 
 //	イメージファイル内全トラックセクタ長2352byte用(ECCチェック有効)
 REG8 sec2352_read_with_ecc(SXSIDEV sxsi, FILEPOS pos, UINT8 *buf, UINT size) {
-	
+
 	CDINFO	cdinfo;
 	FILEH	fh;
 	FILEPOS	fpos;

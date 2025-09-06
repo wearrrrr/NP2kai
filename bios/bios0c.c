@@ -96,4 +96,3 @@ void bios0x0c(void) {
 	MEMR_WRITE8(dseg, doff + R_FLAG, flag);
 	iocore_out8(0x00, 0x20);
 }
-

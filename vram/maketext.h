@@ -41,4 +41,3 @@ void maketext40(int text_renewal);
 #ifdef __cplusplus
 }
 #endif
-

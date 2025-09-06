@@ -70,4 +70,3 @@ int hostdrv_sfload(STFLAGH sfh, const SFENTRY *tbl);
 #endif
 
 #endif
-

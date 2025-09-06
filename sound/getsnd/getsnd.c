@@ -99,4 +99,3 @@ UINT getsnd_getpcmbyleng(GETSND snd, void *pcm, UINT leng) {
 gsgpl_err:
 	return(0);
 }
-

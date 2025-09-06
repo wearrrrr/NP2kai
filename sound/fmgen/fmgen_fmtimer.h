@@ -31,7 +31,7 @@ namespace FM
 
 		void    DataSave(struct TimerData* data);
 		void    DataLoad(struct TimerData* data);
-	
+
 	protected:
 		virtual void SetStatus(uint bit) = 0;
 		virtual void ResetStatus(uint bit) = 0;
@@ -40,14 +40,14 @@ namespace FM
 		void	SetTimerA(uint addr, uint data);
 		void	SetTimerB(uint data);
 		void	SetTimerControl(uint data);
-		
+
 		uint8	status;
 		uint8	regtc;
-	
+
 	private:
 		virtual void TimerA() {}
 		uint8	regta[2];
-		
+
 		int32	timera, timera_count;
 		int32	timerb, timerb_count;
 		int32	timer_step;

@@ -1,6 +1,6 @@
-// 
+//
 // μPD8253C タイマLSI
-// 
+//
 
 #include	<compiler.h>
 #include	<cpucore.h>
@@ -542,4 +542,3 @@ void itimer_bind(void) {
 	iocore_attachinp(0x3fdb, pit_i71);
 	iocore_attachinp(0x3fdd, pit_i71);
 }
-

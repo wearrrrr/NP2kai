@@ -21,4 +21,3 @@ int menumbox(const OEMCHAR *string, const OEMCHAR *title, UINT type);
 #ifdef __cplusplus
 }
 #endif
-

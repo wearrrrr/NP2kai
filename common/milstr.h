@@ -153,4 +153,3 @@ OEMCHAR * STRCALL milstr_list(const OEMCHAR *lststr, UINT pos);
 #endif
 
 #endif  // _MILSTR_H_
-

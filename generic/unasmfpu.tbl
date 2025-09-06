@@ -604,4 +604,3 @@ static const UINT opefpu2[8][0x40] = {
 		OP_ER,
 		OP_ER,
 		OP_ER}};
-

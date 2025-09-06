@@ -149,7 +149,7 @@ const SDRAWFN	*sdrawfn;
 	UINT8		bit;
 	int			i;
 	int			height;
-	
+
 	if (redraw || redrawpending) {
 		updateallline(0x80808080);
 		redrawpending = 0;
@@ -161,7 +161,7 @@ const SDRAWFN	*sdrawfn;
 	ret = 0;
 #ifdef SUPPORT_WAB
 	if(np2wab.relay & 0x3){
-		np2wab_drawframe(); 
+		np2wab_drawframe();
 		if(!np2wabwnd.multiwindow){
 			// XXX: ウィンドウアクセラレータ動作中は内蔵グラフィックを描画しない
 			ret = 1;
@@ -183,7 +183,7 @@ const SDRAWFN	*sdrawfn;
 	if (sdrawfn == NULL) {
 		goto sddr_exit2;
 	}
-	
+
 	bit = 0x00;
 	if (gdc.mode1 & 0x80) {						// ver0.28
 		if (gdcs.grphdisp & GDCSCRN_ENABLE) {
@@ -302,4 +302,3 @@ void scrndraw_redraw(void) {
 	pcstat.screenupdate = 1;
 	//scrndraw_draw(1);
 }
-

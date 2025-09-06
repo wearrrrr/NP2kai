@@ -26,9 +26,9 @@
 #ifndef	NP2_X_COMPILER_H__
 #define	NP2_X_COMPILER_H__
 
-#include "compiler_base.h"
+#include "../compiler_base.h"
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

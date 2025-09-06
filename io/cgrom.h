@@ -22,4 +22,3 @@ void cgrom_bind(void);
 #ifdef __cplusplus
 }
 #endif
-

@@ -129,4 +129,3 @@ void	OPM_SetChannelMask(void* OPM, uint mask) { ((FM::OPM*)OPM)->SetChannelMask(
 
 void	OPM_DataSave(void* OPM, void* opmdata) { ((FM::OPM*)OPM)->DataSave((FM::OPMData*)opmdata); }
 void	OPM_DataLoad(void* OPM, void* opmdata) { ((FM::OPM*)OPM)->DataLoad((FM::OPMData*)opmdata); }
-

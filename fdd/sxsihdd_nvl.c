@@ -248,7 +248,7 @@ static REG8 hdd_write(SXSIDEV sxsi, FILEPOS pos, const UINT8 *buf, UINT size)
 	if(p == NULL){
 		return (0x60);
 	}
-	
+
 	pos = pos * sxsi->size;
 
 	while (size)

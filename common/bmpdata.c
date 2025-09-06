@@ -184,4 +184,3 @@ UINT8 *bmpdata_solvedata(const UINT8 *dat) {
 	dstsize = dat[0] + (dat[1] << 8) + (dat[2] << 16);
 	return(bmpdata_lzx(dat[3], dstsize, dat + 4));
 }
-

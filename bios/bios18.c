@@ -342,7 +342,7 @@ const CRTDATA	*p;
 //				slave = 1;
 //				biosioemu_enq8(0x6a, 0x69);
 //			}else
-//#endif	
+//#endif
 			{
 				gdc_analogext(TRUE);
 				mem[MEMB_PRXDUPD] |= 0x80;
@@ -385,7 +385,7 @@ const CRTDATA	*p;
 //			if (CPU_STAT_PM && CPU_STAT_VM86 && biosioemu.enable) {
 //				biosioemu_enq8(0x6a, 0x20); // ����͑ʖ�
 //			}else
-//#endif	
+//#endif
 			{
 				gdc_analogext(FALSE);
 			}
@@ -396,14 +396,14 @@ const CRTDATA	*p;
 		if (CPU_STAT_PM && CPU_STAT_VM86 && biosioemu.enable) {
 			biosioemu_enq8(0x6a, 0x68);
 		}else
-#endif	
+#endif
 		{
 			gdc.analog &= ~(1 << (GDCANALOG_256E));
 		}
 #endif
 	}
 	crt += (scrn & 3);
-	
+
 //#if defined(BIOS_IO_EMULATION) && defined(CPUCORE_IA32)
 //	// XXX: Windows3.1 DOS�v�����v�g�p �������
 //	if (CPU_STAT_PM && CPU_STAT_VM86) {
@@ -414,7 +414,7 @@ const CRTDATA	*p;
 //			biosioemu_push8(0x09a8, 0x00);
 //		}
 //	}else
-//#endif	
+//#endif
 	{
 		if (rate & 4) {
 			gdc.display |= (1 << GDCDISP_31);
@@ -448,7 +448,7 @@ const CRTDATA	*p;
 			biosioemu_enq8(0xa2, CMD_PITCH);
 			biosioemu_enq8(0xa0, 80);
 		}else
-#endif	
+#endif
 		{
 			gdc.s.para[GDC_PITCH] = 80;
 		}
@@ -463,7 +463,7 @@ const CRTDATA	*p;
 			biosioemu_enq8(0xa2, CMD_PITCH);
 			biosioemu_enq8(0xa0, 40);
 		}else
-#endif	
+#endif
 		{
 			gdc.s.para[GDC_PITCH] = 40;
 		}
@@ -490,7 +490,7 @@ const CRTDATA	*p;
 		biosioemu_enq8(0x6a, 0x82 | (gdc.clock & 1)); // gdcs.grphdisp |= GDCSCRN_EXT;
 		biosioemu_enq8(0x62, CMD_STOP); // gdcs.textdisp &= ~GDCSCRN_ENABLE; pcstat.screenupdate |= 2;
 	}else
-#endif	
+#endif
 	{
 		gdcs.textdisp &= ~GDCSCRN_ENABLE;
 		gdcs.textdisp |= GDCSCRN_EXT;
@@ -1008,7 +1008,7 @@ void bios0x18(void) {
 							MEMR_READ16(CPU_SS, CPU_SP+2),
 							MEMR_READ16(CPU_SS, CPU_SP)));
 #endif
-	
+
 	switch(CPU_AH) {
 		case 0x00:						// �L�[�E�f�[�^�̓ǂ݂���
 			if (mem[MEMB_KB_COUNT]) {
@@ -1237,7 +1237,7 @@ void bios0x18(void) {
 				if (!(gdcs.grphdisp & GDCSCRN_ENABLE)) {
 					pcstat.screenupdate |= 2;
 				}
-				biosioemu_push8(0xa2, CMD_START); 
+				biosioemu_push8(0xa2, CMD_START);
 				mem[MEMB_PRXCRT] |= 0x80;
 			} else
 #endif
@@ -1315,5 +1315,3 @@ void bios0x18(void) {
 #endif
 	}
 }
-
-

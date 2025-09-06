@@ -48,4 +48,3 @@ static const TERMTBL termtbl[] = {
 				{plus_term,		sizeof(plus_term)},
 				{minus_term,	sizeof(minus_term)},
 				{ext08_term,	sizeof(ext08_term)}};
-

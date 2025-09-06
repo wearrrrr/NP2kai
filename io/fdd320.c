@@ -36,4 +36,3 @@ void fdd320_bind(void) {
 
 	iocore_attachcmninpex(0x0051, 0x00f9, fdd320i51, 4);
 }
-

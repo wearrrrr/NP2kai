@@ -67,9 +67,9 @@ typedef struct {
 	UINT8	irqflag;
 
 	UINT8	buffer[PCM86_BUFSIZE];
-	
+
 	UINT	rateval;
-	
+
 	UINT64	lastclock;
 	UINT64	stepclock;
 } _PCM86, *PCM86;

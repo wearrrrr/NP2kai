@@ -86,4 +86,3 @@ void fontdata_patchjis(void) {
 	patch29(0x0b, fontdata_2b);
 	patch2c();
 }
-

@@ -276,4 +276,3 @@ void scsicmd_bios(void) {
 	MEMR_WRITE8(CPU_SS, CPU_SP + 4, flag);
 }
 #endif
-

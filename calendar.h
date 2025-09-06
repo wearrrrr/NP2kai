@@ -23,4 +23,3 @@ void calendar_getvir(UINT8 *bcd);
 #ifdef __cplusplus
 }
 #endif
-

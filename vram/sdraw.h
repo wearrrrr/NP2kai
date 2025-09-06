@@ -35,4 +35,3 @@ const SDRAWFN *sdraw_getproctblex(const SCRNSURF *surf);
 #ifdef __cplusplus
 }
 #endif
-

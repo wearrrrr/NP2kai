@@ -318,4 +318,3 @@ void VRAMCALL makegrphex(int page, int alldraw) {
 	}
 }
 #endif
-

@@ -203,4 +203,3 @@ static const SFENTRY np2tbl[] = {
 	{"BIOSHOOK",	0,	STATFLAG_BIN,	&bioshookinfo,		sizeof(bioshookinfo)},
 #endif
 	{"TERMINATE",	0,	STATFLAG_TERM,	NULL,			0}};
-

@@ -1537,4 +1537,3 @@ http://eagle0wl.hatenadiary.jp/entry/2016/10/07/213830
 https://sites.google.com/site/np21win/home
 - Neko Project 2 (PC98 emulator) port for libretro/RetroArch
 https://github.com/meepingsnesroms/libretro-meowPC98
-

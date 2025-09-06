@@ -302,4 +302,3 @@ const FULLKEY	*fk;
 }
 
 #define	ledpaint(v)
-

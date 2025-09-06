@@ -142,4 +142,3 @@ static const char *scsictr[0x40] = {
 		scsictr_nec,				// 3f
 };
 #endif
-

@@ -203,7 +203,7 @@ glue(glue(glue(cirrus_colorexpand_pattern_transp_, ROP_NAME), _),DEPTH)
         col = s->cirrus_blt_fgcol;
     }
     pattern_y = s->cirrus_blt_srcaddr & 7;
-	
+
 	for(y = 0; y < bltheight; y++) {
 		bits = src[pattern_y] ^ bits_xor;
 		bitpos = 7 - srcskipleft;

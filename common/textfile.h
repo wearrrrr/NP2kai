@@ -14,4 +14,3 @@ void textfile_close(TEXTFILEH fh);
 #ifdef __cplusplus
 }
 #endif
-

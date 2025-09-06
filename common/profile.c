@@ -521,7 +521,7 @@ static PFILEH registnew(void)
 #if defined(OSLANG_UTF8)
 		lpHeader = str_utf8;
 		cbHeader = sizeof(str_utf8);
-#elif defined(OSLANG_UCS2) 
+#elif defined(OSLANG_UCS2)
 		lpHeader = (UINT8 *)str_ucs2;
 		cbHeader = sizeof(str_ucs2);
 #else
@@ -547,7 +547,7 @@ PFILEH profile_open(const OEMCHAR *lpFileName, UINT nFlags)
 {
 	PFILEH ret;
 	FILEH fh;
-	
+
 	ret = NULL;
 	if (lpFileName != NULL)
 	{

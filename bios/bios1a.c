@@ -104,7 +104,7 @@ void bios0x1a_pci_part(int is32bit) {
 	int idx;
 	int devnum;
 	int funcnum;
-	
+
 	switch(CPU_AL & 0x7f) {
 		case 0x01: // INSTALLATION CHECK
 			CPU_AH = 0x00;
@@ -165,14 +165,14 @@ void bios0x1a_pci_part(int is32bit) {
 				CPU_FLAGL |= C_FLAG;
 			}
 			break;
-			
+
 		case 0x06: // PCI BUS-SPECIFIC OPERATIONS
 			//CPU_AH = PCIBIOS_STATUS_SUCCESSFUL;
 			//CPU_FLAGL &= ~C_FLAG;
 			CPU_AH = PCIBIOS_STATUS_UNSUPPORTED_FUNCTION;
 			CPU_FLAGL |= C_FLAG;
 			break;
-			
+
 		case 0x08: // READ CONFIGURATION BYTE
 			devnum = CPU_BL >> 3;
 			funcnum = CPU_BL & 0x7;
@@ -236,7 +236,7 @@ void bios0x1a_pci_part(int is32bit) {
 				CPU_ECX = 0xffffffff;
 			}
 			break;
-			
+
 		case 0x0B: // WRITE CONFIGURATION BYTE
 			devnum = CPU_BL >> 3;
 			funcnum = CPU_BL & 0x7;
@@ -288,7 +288,7 @@ void bios0x1a_pci_part(int is32bit) {
 				CPU_FLAGL |= C_FLAG;
 			}
 			break;
-			
+
 		case 0x0E: // GET IRQ ROUTING INFORMATION
 			if(CPU_BX == 0x0000){
 				UINT16 dataSize = 0;
@@ -332,7 +332,7 @@ void bios0x1a_pci_part(int is32bit) {
 				CPU_FLAGL |= C_FLAG;
 			}
 			break;
-			
+
 		case 0x0F: // SET PCI IRQ
 			devnum = CPU_BL >> 3;
 			funcnum = CPU_BL & 0x7;
@@ -366,7 +366,7 @@ void bios0x1a_pci(void) {
 
 	UINT32 oldDX;
 	oldDX = CPU_DX;
-	
+
 	if(pcidev.enable){
 #if !defined(SUPPORT_IA32_HAXM)
 		// XXX: np2 BIOSがDXレジスタをPUSH/POPしてしまうので、DXレジスタの内容をスタックから強引に拾ってくる
@@ -375,11 +375,11 @@ void bios0x1a_pci(void) {
 
 		// 16bit PCI BIOS処理
 		bios0x1a_pci_part(0);
-		
+
 #if !defined(SUPPORT_IA32_HAXM)
 		// XXX: np2 BIOSがDXレジスタをPUSH/POPしてしまうので、DXレジスタの内容をスタックに強引に書き込む
 		cpu_vmemorywrite_w(CPU_SS_INDEX, CPU_SP + 2, (UINT16)CPU_DX);
-	
+
 		// DXレジスタの値を元に戻す
 		CPU_DX = oldDX;
 #endif
@@ -389,13 +389,13 @@ void bios0x1a_pcipnp(void) {
 
 	UINT32 oldDX;
 	oldDX = CPU_DX;
-	
+
 	if(pcidev.enable){
 #if !defined(SUPPORT_IA32_HAXM)
 		// XXX: np2 BIOSがDXレジスタをPUSH/POPしてしまうので、DXレジスタの内容をスタックから強引に拾ってくる
 		CPU_DX = cpu_vmemoryread_w(CPU_SS_INDEX, CPU_SP + 2);
 #endif
-		
+
 		switch(CPU_AL & 0x7f) {
 			case 0x00: // Intel Plug-and-Play AUTO-CONFIGURATION - INSTALLATION CHECK
 				CPU_AX = 0x0000;
@@ -458,11 +458,11 @@ void bios0x1a_pcipnp(void) {
 				CPU_FLAGL |= C_FLAG;
 				break;
 		}
-		
+
 #if !defined(SUPPORT_IA32_HAXM)
 		// XXX: np2 BIOSがDXレジスタをPUSH/POPしてしまうので、DXレジスタの内容をスタックに強引に書き込む
 		cpu_vmemorywrite_w(CPU_SS_INDEX, CPU_SP + 2, (UINT16)CPU_DX);
-	
+
 		// DXレジスタの値を元に戻す
 		CPU_DX = oldDX;
 #endif

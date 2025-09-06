@@ -147,7 +147,7 @@ static void checkcmd(void) {
 			sasiio.phase = SASIPHASE_SENSE;
 			sasiio.senspos = 0;
 			sasiio.sens[0] = sasiio.error;
-			sasiio.sens[1] = (UINT8)((sasiio.unit << 5) + 
+			sasiio.sens[1] = (UINT8)((sasiio.unit << 5) +
 									((sasiio.sector >> 16) & 0x1f));
 			sasiio.sens[2] = (UINT8)(sasiio.sector >> 8);
 			sasiio.sens[3] = (UINT8)sasiio.sector;
@@ -480,4 +480,3 @@ void sasiio_bind(void) {
 	}
 }
 #endif
-

@@ -88,4 +88,3 @@ BRESULT vram_cliprectex(RECT_T *clip, const VRAMHDL vram, const RECT_T *rct);
 #define	VRAM_RELEASE(a) { VRAMHDL v; v = (a); (a) = NULL; vram_destroy(v); }
 
 #endif	/* NP2_VRAMHDL_H */
-

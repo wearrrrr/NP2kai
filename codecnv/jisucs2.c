@@ -1277,4 +1277,3 @@ static UINT jistoucs2(UINT* puType, UINT16 *lpOutput, UINT cchOutput, const char
 
 	return (UINT)(cchOutput - nRemain);
 }
-

@@ -36,7 +36,7 @@
 #ifdef USE_MAME
 	void *g_mame_opl3[OPL3_MAX] = {0};
 #endif
-	
+
 #if defined(SUPPORT_SOUND_SB16)
 	SB16		g_sb16;
 #endif	// defined(SUPPORT_SOUND_SB16)
@@ -120,7 +120,7 @@ void fmboard_updatevolume(){
 
 	pcm86gen_setvol(np2cfg.vol_pcm * np2cfg.vol_master / 100);
 	pcm86gen_update();
-	
+
 	rhythm_setvol(np2cfg.vol_rhythm * volex / 15 * np2cfg.vol_master / 100);
 #if defined(SUPPORT_FMGEN)
 	opna_fmgen_setallvolumeRhythmTotal_linear(np2cfg.vol_rhythm * volex / 15 * np2cfg.vol_master / 100);
@@ -220,7 +220,7 @@ void fmboard_reset(const NP2CFG *pConfig, SOUNDID nSoundID)
 
 	board14_reset(pConfig, (nSoundID == SOUNDID_PC_9801_14) ? TRUE : FALSE);
 	amd98_reset(pConfig);
-	
+
 	g_nSoundID = nSoundID; // XXX: 先に設定
 	switch (nSoundID)
 	{
@@ -242,21 +242,21 @@ void fmboard_reset(const NP2CFG *pConfig, SOUNDID nSoundID)
 		case SOUNDID_PC_9801_118:
 			board118_reset(pConfig);
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS:
 			board118_reset(pConfig);
 			board86_reset(pConfig, TRUE);
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118:
 			board118_reset(pConfig);
 			board86_reset(pConfig, TRUE);
 			break;
-			
+
 		case SOUNDID_MATE_X_PCM:
 			board118_reset(pConfig);
 			break;
-			
+
 		case SOUNDID_PC_9801_86_ADPCM:
 			board86_reset(pConfig, TRUE);
 			break;
@@ -293,7 +293,7 @@ void fmboard_reset(const NP2CFG *pConfig, SOUNDID nSoundID)
 		case SOUNDID_SOUNDORCHESTRAV:
 			boardso_reset(pConfig, TRUE);
 			break;
-			
+
 		case SOUNDID_LITTLEORCHESTRAL:
 			boardlol_reset(pConfig);
 			break;
@@ -301,34 +301,34 @@ void fmboard_reset(const NP2CFG *pConfig, SOUNDID nSoundID)
 		case SOUNDID_MMORCHESTRA:
 			boardmo_reset(pConfig);
 			break;
-			
+
 #if defined(SUPPORT_SOUND_SB16)
 		case SOUNDID_SB16:
 			boardsb16_reset(pConfig);
 			break;
-			
+
 		case SOUNDID_PC_9801_86_SB16:
 			boardsb16_reset(pConfig);
 			board86_reset(pConfig, TRUE);
 			break;
-			
+
 		case SOUNDID_WSS_SB16:
 			boardsb16_reset(pConfig);
 			board118_reset(pConfig);
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS_SB16:
 			boardsb16_reset(pConfig);
 			board118_reset(pConfig);
 			board86_reset(pConfig, TRUE);
 			break;
 			break;
-			
+
 		case SOUNDID_PC_9801_118_SB16:
 			boardsb16_reset(pConfig);
 			board118_reset(pConfig);
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118_SB16:
 			boardsb16_reset(pConfig);
 			board118_reset(pConfig);
@@ -378,21 +378,21 @@ void fmboard_bind(void) {
 		case SOUNDID_PC_9801_118:
 			board118_bind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS:
 			board118_bind();
 			board86_bind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118:
 			board118_bind();
 			board86_bind();
 			break;
-			
+
 		case SOUNDID_MATE_X_PCM:
 			board118_bind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_ADPCM:
 			board86_bind();
 			break;
@@ -401,11 +401,11 @@ void fmboard_bind(void) {
 			board118_bind();
 			board86_bind();
 			break;
-			
+
 		case SOUNDID_SPEAKBOARD:
 			boardspb_bind();
 			break;
-			
+
 		case SOUNDID_86_SPEAKBOARD:
 			boardspb_bind();
 			board86_bind();
@@ -423,7 +423,7 @@ void fmboard_bind(void) {
 		case SOUNDID_SOUNDORCHESTRAV:
 			boardso_bind();
 			break;
-			
+
 		case SOUNDID_LITTLEORCHESTRAL:
 			boardlol_bind();
 			break;
@@ -436,28 +436,28 @@ void fmboard_bind(void) {
 		case SOUNDID_SB16:
 			boardsb16_bind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_SB16:
 			boardsb16_bind();
 			board86_bind();
 			break;
-			
+
 		case SOUNDID_WSS_SB16:
 			boardsb16_bind();
 			board118_bind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS_SB16:
 			boardsb16_bind();
 			board118_bind();
 			board86_bind();
 			break;
-			
+
 		case SOUNDID_PC_9801_118_SB16:
 			boardsb16_bind();
 			board118_bind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118_SB16:
 			boardsb16_bind();
 			board118_bind();
@@ -505,21 +505,21 @@ void fmboard_unbind(void) {
 		case SOUNDID_PC_9801_118:
 			board118_unbind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS:
 			board118_unbind();
 			board86_unbind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118:
 			board118_unbind();
 			board86_unbind();
 			break;
-			
+
 		case SOUNDID_MATE_X_PCM:
 			board118_unbind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_ADPCM:
 			board86_unbind();
 			break;
@@ -528,11 +528,11 @@ void fmboard_unbind(void) {
 			board118_unbind();
 			board86_unbind();
 			break;
-			
+
 		case SOUNDID_SPEAKBOARD:
 			boardspb_unbind();
 			break;
-			
+
 		case SOUNDID_86_SPEAKBOARD:
 			board86_unbind();
 			boardspb_unbind();
@@ -550,7 +550,7 @@ void fmboard_unbind(void) {
 		case SOUNDID_SOUNDORCHESTRAV:
 			boardso_unbind();
 			break;
-			
+
 		case SOUNDID_LITTLEORCHESTRAL:
 			boardlol_unbind();
 			break;
@@ -563,28 +563,28 @@ void fmboard_unbind(void) {
 		case SOUNDID_SB16:
 			boardsb16_unbind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_SB16:
 			boardsb16_unbind();
 			board86_unbind();
 			break;
-			
+
 		case SOUNDID_WSS_SB16:
 			boardsb16_unbind();
 			board118_unbind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_WSS_SB16:
 			boardsb16_unbind();
 			board118_unbind();
 			board86_unbind();
 			break;
-			
+
 		case SOUNDID_PC_9801_118_SB16:
 			boardsb16_unbind();
 			board118_unbind();
 			break;
-			
+
 		case SOUNDID_PC_9801_86_118_SB16:
 			boardsb16_unbind();
 			board118_unbind();

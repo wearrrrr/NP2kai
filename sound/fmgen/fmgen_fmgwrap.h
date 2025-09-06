@@ -143,4 +143,3 @@ void	OPM_DataLoad(void* OPM, void* opmdata);
 #endif
 
 #endif	/* FMGEN_FMGWRAP_H */
-

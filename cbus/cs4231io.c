@@ -163,7 +163,7 @@ static REG8 IOINPCALL srnf_i5bef(UINT port) {
 	(void)port;
 	return (0x0e);
 }
-	
+
 static REG8 IOINPCALL ifab(UINT port) {
 	TRACEOUT(("read %x",port));
 	(void)port;
@@ -173,13 +173,13 @@ static REG8 IOINPCALL ifab(UINT port) {
 // ----
 
 void cs4231io_reset(void) {
-	
+
 	UINT8 sndirq, snddma;
 
 	cs4231.enable = 1;
 
 /* [cs4231.adrsの書き方]
-		bit	
+		bit
 		7	未使用
 	R/W	6	不明
 	R/W	5-3	PCM音源割り込みアドレス
@@ -195,7 +195,7 @@ void cs4231io_reset(void) {
 			011b= DMA #3
 			100b〜101b= 未定義
 			111b= DMAを使用しない
-*/		
+*/
 	if(g_nSoundID==SOUNDID_PC_9801_86_WSS || g_nSoundID==SOUNDID_MATE_X_PCM || g_nSoundID==SOUNDID_WSS_SB16 || g_nSoundID==SOUNDID_PC_9801_86_WSS_SB16){
 		sndirq = np2cfg.sndwssirq;
 		snddma = np2cfg.sndwssdma;
@@ -219,7 +219,7 @@ void cs4231io_reset(void) {
 		//UINT8 nIrq86 = (np2cfg.snd86opt & 0x10) | ((np2cfg.snd86opt & 0x4) << 5) | ((np2cfg.snd86opt & 0x8) << 3);
 		//UINT8 irq86 = irq86table[nIrq86 >> 6];
 		sndirq = 12;// IRQ12固定　irq86;
-		snddma = 3;// DMA#3固定 np2cfg.snd118dma; 
+		snddma = 3;// DMA#3固定 np2cfg.snd118dma;
 	}else{
 		sndirq = np2cfg.snd118irqp;
 		snddma = np2cfg.snd118dma;
@@ -271,7 +271,7 @@ void cs4231io_reset(void) {
 	cs4231.port[9] = 0x1488; // OPL3
 	cs4231.port[10] = 0x148c; // MIDI
 	cs4231.port[11] = 0x0480; //9801-118 control?
-	cs4231.port[14] = 0x148e; //9801-118 config 
+	cs4231.port[14] = 0x148e; //9801-118 config
 	cs4231.port[15] = 0xa460; //空いてるのでこっちを利用
 
 	TRACEOUT(("CS4231 - IRQ = %d", cs4231.dmairq));
@@ -397,7 +397,7 @@ void IOOUTCALL cs4231io0_w8(UINT port, REG8 value) {
 #endif
 			}
 			break;
-			
+
 		case 0x04: // Index Address Register (R0) INIT MCE TRD IA4 IA3 IA2 IA1 IA0
 			if ( !(cs4231.index & MCE) && (value & MCE) && (cs4231.reg.iface & (CAL0|CAL1) ) ) acicounter = 1;
 			if (!(cs4231.index & MCE)) cs4231.intflag |= (PRDY|CRDY);
@@ -447,9 +447,9 @@ REG8 IOINPCALL cs4231io0_r8(UINT port) {
 						}else{
 							cs4231.reg.errorstatus &= ~ACI;
 						}
-						break;	
+						break;
 					case 0x0d: // Loopback Control (I13) LBA5 LBA4 LBA3 LBA2 LBA1 LBA0 res LBE
-						return 0;					
+						return 0;
 					default:
 						break;
 				}

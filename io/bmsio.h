@@ -43,4 +43,3 @@ void bmsio_bind(void);
 #ifdef __cplusplus
 }
 #endif
-

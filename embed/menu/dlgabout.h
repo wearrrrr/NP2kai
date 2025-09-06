@@ -21,4 +21,3 @@ int dlgabout_cmd(int msg, MENUID id, long param);
 #ifdef __cplusplus
 }
 #endif
-

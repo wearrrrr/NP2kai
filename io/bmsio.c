@@ -86,4 +86,3 @@ void bmsio_bind(void) {
 		iocore_attachinp(bmsio.cfg.port, bmsio_i00ec);
 	}
 }
-

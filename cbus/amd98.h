@@ -48,4 +48,3 @@ int amd98_sfload(STFLAGH sfh, const SFENTRY *tbl);
 #ifdef __cplusplus
 }
 #endif
-

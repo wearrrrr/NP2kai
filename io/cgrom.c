@@ -224,4 +224,3 @@ void cgrom_bind(void) {
 	iocore_attachsysoutex(0x00a1, 0x0cf1, cgromoa1, 8);
 	iocore_attachsysinpex(0x00a1, 0x0cf1, cgromia1, 8);
 }
-

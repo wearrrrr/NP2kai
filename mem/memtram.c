@@ -71,7 +71,7 @@ UINT32 MEMCALL memtram_rd32(UINT32 address){
 }
 
 void MEMCALL memtram_wr8(UINT32 address, REG8 value) {
-	
+
 
 	CPU_REMCLOCK -= MEMWAIT_TRAM;
 	if (address < 0xa2000) {
@@ -177,4 +177,3 @@ void MEMCALL memtram_wr32(UINT32 address, UINT32 value){
 	memtram_wr16(address, (REG16)value);
 	memtram_wr16(address+2, (REG16)(value >> 16));
 }
-

@@ -25,4 +25,3 @@ void newdisk_vpcvhd(const OEMCHAR *fname, UINT hddsize);
 #ifdef __cplusplus
 }
 #endif
-

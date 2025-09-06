@@ -17,7 +17,7 @@ static UINT8 keyrepeat_buf[KEYREPEAT_BUF_MAX];
 static int keyrepeat_index = 0;
 static BOOL keyrepeat_delay_flag = FALSE;
 static UINT32 keyrepeat_delay = 0;
-static UINT32 keyrepeat_interval = 0; 
+static UINT32 keyrepeat_interval = 0;
 
 static void keystat_send(REG8 data);
 #define KEYBOARD_SEND(d)	np2cfg.keyrepeat_enable ? keystat_send(d):keyboard_send(d)

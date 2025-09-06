@@ -74,4 +74,3 @@ void emsio_bind(void) {
 		iocore_attachinp(0x08e9, emsio_i08e9);
 	}
 }
-

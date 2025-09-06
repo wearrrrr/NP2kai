@@ -77,4 +77,3 @@ extern	UINT32	grph_table0[16];
 #ifdef __cplusplus
 }
 #endif
-

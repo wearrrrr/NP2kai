@@ -13,4 +13,3 @@ extern const MENURES np2icon;
 #ifdef __cplusplus
 }
 #endif
-

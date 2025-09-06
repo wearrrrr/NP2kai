@@ -37,7 +37,7 @@ void pcidev_98graphbridge_reset(const NP2CFG *pConfig) {
 }
 
 void pcidev_98graphbridge_bind(void) {
-	
+
 	int devid = pcidev_98graphbridge_deviceid;
 
 	// 98グラフィックバスブリッジ
@@ -59,7 +59,7 @@ void pcidev_98graphbridge_bind(void) {
 	pcidev.devices[devid].header.BIST = 0x00;
 	pcidev.devices[devid].header.interruptline = 0x00;
 	pcidev.devices[devid].header.interruptpin = 0x00;
-	
+
 	// ROM領域設定
 	pcidev.devices[devid].headerrom.vendorID = 0xffff;
 	pcidev.devices[devid].headerrom.deviceID = 0xffff;
@@ -80,4 +80,3 @@ void pcidev_98graphbridge_bind(void) {
 
 #endif
 #endif
-

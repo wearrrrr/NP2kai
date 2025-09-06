@@ -138,4 +138,3 @@ void calendar_get(UINT8 *bcd) {
 		date2bcd(bcd, &cal.realc);
 	}
 }
-

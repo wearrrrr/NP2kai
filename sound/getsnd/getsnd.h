@@ -54,4 +54,3 @@ UINT getsnd_getpcmbyleng(GETSND hdl, void *pcm, UINT leng);
 #ifdef __cplusplus
 }
 #endif
-

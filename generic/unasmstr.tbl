@@ -222,7 +222,7 @@ static const REGSTR rstr = {
 
 		"wait",			"wbinvd",		"wrmsr",		"wrshr",
 
-		"xadd",			"xbts",			"xchg",			"xlat",	
+		"xadd",			"xbts",			"xchg",			"xlat",
 		"xor",			"xstore",
 
 		"rol",		"ror",		"rcl",		"rcr",
@@ -309,4 +309,3 @@ enum {
 	OM_PUNPCKLDQ,	OM_PUNPCKLWD,
 	OM_PXOR
 };
-

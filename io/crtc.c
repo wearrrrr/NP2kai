@@ -102,4 +102,3 @@ void crtc_bind(void) {
 	iocore_attachsysoutex(0x0070, 0x0cf1, crtco70, 8);
 	iocore_attachsysinpex(0x0070, 0x0cf1, crtci70, 8);
 }
-

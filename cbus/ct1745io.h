@@ -1,7 +1,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 enum {
 	MIXER_RESET = 0x00,
 	MIXER_VOL_START = 0x30,

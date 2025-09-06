@@ -148,4 +148,3 @@ void *listarray_enum(LISTARRAY laHandle,
 laenum_end:
 	return(NULL);
 }
-

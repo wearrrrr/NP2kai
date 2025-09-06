@@ -16,4 +16,3 @@ font[]
    ANK 8x16 - 0x80000 + (ank << 4)
    KNJ 8x16 - 0x00000 + ((jish - 0x20) << 4) + (jisl << 12) (left)
               0x00800 + ((jish - 0x20) << 4) + (jisl << 12) (right)
-

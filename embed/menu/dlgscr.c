@@ -423,4 +423,3 @@ int dlgscr_cmd(int msg, MENUID id, long param) {
 	(void)param;
 	return(0);
 }
-

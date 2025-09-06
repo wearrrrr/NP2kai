@@ -21,7 +21,7 @@
 
 typedef struct {
 	UINT8 enable; // PEGCプレーンモード使用可能
-	
+
 	UINT8 lastdata[64]; // PEGCプレーンモード 最後にVRAMから読み取ったデータ
 	SINT32 lastdatalen; // PEGCプレーンモード 読み取り済みデータ長さ
 	UINT32 remain; // PEGCプレーンモード 転送データ残り？
@@ -31,7 +31,7 @@ typedef struct {
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 REG16 MEMCALL pegc_memvgaplane_rd16(UINT32 address);
 void MEMCALL pegc_memvgaplane_wr16(UINT32 address, REG16 value);
 UINT32 MEMCALL pegc_memvgaplane_rd32(UINT32 address);

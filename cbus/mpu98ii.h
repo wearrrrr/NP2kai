@@ -108,4 +108,3 @@ REG8 IOINPCALL mpu98ii_i2(UINT port);
 #ifdef __cplusplus
 }
 #endif
-

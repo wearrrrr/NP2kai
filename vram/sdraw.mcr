@@ -1051,4 +1051,3 @@ static const SDRAWFN SDSYM(n)[] = {
 #endif
 	};
 #endif
-

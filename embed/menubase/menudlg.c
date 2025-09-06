@@ -2420,4 +2420,3 @@ void menudlg_disppagehidden(MENUID page, BOOL hidden) {
 	drawctrls(dlg, NULL);
 	drawlock(FALSE);
 }
-

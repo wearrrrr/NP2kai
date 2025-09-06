@@ -869,7 +869,7 @@ void keydisp_bindpsg(const UINT8 *pcRegister, UINT nBaseClock)
 	{
 		k = &s_keydisp.psgctl[s_keydisp.psgmax];
 		k->cChannelNum = s_keydisp.keymax;
-		k->pcRegister = pcRegister;	
+		k->pcRegister = pcRegister;
 		for (i = 0; i < NELEMENTS(k->wTone); i++)
 		{
 			k->wTone[i] = (UINT16)((double)nBaseClock / 32.0 / (440.0 * pow(2.0, ((double)i - 9.5) / 12.0)));

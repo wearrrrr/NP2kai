@@ -147,4 +147,3 @@ void cbuscore_detachsndex(UINT port) {
 		port += 2;
 	}
 }
-

@@ -18,7 +18,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 typedef struct {
 	int		posx;
 	int		posy;
@@ -40,7 +40,7 @@ typedef struct {
 	int fps; // リフレッシュレート（大体合わせてくれるかもしれない･･･けど現時点で何もしていない）
 	int lastWidth; // 前回のウィンドウアクセラレータの横解像度（デバイス再作成判定用）
 	int lastHeight; // 前回のウィンドウアクセラレータの横解像度（デバイス再作成判定用）
-	
+
 	int	relaystateint;
 	int	relaystateext;
 
@@ -94,4 +94,3 @@ extern NP2WABWND	np2wabwnd;
 #ifdef __cplusplus
 }
 #endif
-

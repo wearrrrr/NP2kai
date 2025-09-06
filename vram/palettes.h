@@ -75,4 +75,3 @@ void pal_makeanalog_lcd(RGB32 *pal, UINT16 bit);
 #ifdef __cplusplus
 }
 #endif
-

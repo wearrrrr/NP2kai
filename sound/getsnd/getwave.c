@@ -148,7 +148,7 @@ typedef struct {
 
 static const int MSADPCMTable[16] = {
 	230, 230, 230, 230, 307, 409, 512, 614,
-	768, 614, 512, 409, 307, 230, 230, 230 
+	768, 614, 512, 409, 307, 230, 230, 230
 };
 
 static UINT msa_dec(GETSND snd, SINT16 *dst) {
@@ -573,4 +573,3 @@ BRESULT getwave_open(GETSND snd, UINT8 *ptr, UINT size) {
 gwopn_err:
 	return(FAILURE);
 }
-

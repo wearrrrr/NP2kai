@@ -1023,7 +1023,7 @@ TRACEOUT(("mpu98ii out %.4x %.2x", port, dat));
 }
 
 REG8 IOINPCALL mpu98ii_i0(UINT port) {
-	
+
 	if (cm_mpu98 == NULL) {
 		cm_mpu98 = commng_create(COMCREATE_MPU98II, FALSE);
 	}
@@ -1063,7 +1063,7 @@ TRACEOUT(("mpu98ii inp %.4x %.2x", port, mpu98.data));
 REG8 IOINPCALL mpu98ii_i2(UINT port) {
 
 	REG8	ret;
-	
+
 	if (cm_mpu98 == NULL) {
 		cm_mpu98 = commng_create(COMCREATE_MPU98II, FALSE);
 	}
@@ -1106,7 +1106,7 @@ void mpu98ii_reset(const NP2CFG *pConfig) {
 	mpu98.irqnum = mpuirqnum[pConfig->mpuopt & 3];
 	setdefaultcondition();
 //	pic_registext(mpu98.irqnum);
-	
+
 	if (cm_mpu98 == NULL) {
 		cm_mpu98 = commng_create(COMCREATE_MPU98II, TRUE);
 	}
@@ -1117,7 +1117,7 @@ void mpu98ii_reset(const NP2CFG *pConfig) {
 void mpu98ii_bind(void) {
 
 	UINT	port;
-	
+
 	if(mpu98.enable){
 		mpu98ii_changeclock();
 
@@ -1131,7 +1131,7 @@ void mpu98ii_bind(void) {
 		port |= 2;
 		iocore_attachout(port, mpu98ii_o2);
 		iocore_attachinp(port, mpu98ii_i2);
-	
+
 		// PC/AT MPU-401
 		if(np2cfg.mpu_at){
 			iocore_attachout(0x330, mpu98ii_o0);
@@ -1193,11 +1193,9 @@ void mpu98ii_midipanic(void) {
 }
 
 void mpu98ii_changeclock(void) {
-	
+
 	if(mpu98.enable){
 		mpu98.xferclock = pccore.realclock / 3125;
 		makeintclock();
 	}
 }
-
-

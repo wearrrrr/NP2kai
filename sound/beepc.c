@@ -173,4 +173,3 @@ void beep_oneventset(void) {
 		beep_eventset();
 	}
 }
-

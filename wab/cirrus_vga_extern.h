@@ -192,7 +192,7 @@ typedef struct {
 	REG8	mmioenable;
 	UINT32	gd54xxtype;
 	UINT32	defgd54xxtype;
-	
+
 #if defined(SUPPORT_VGA_MODEX)
 	UINT8	modex;
 #endif
@@ -206,7 +206,7 @@ extern UINT8		cirrusvga_statsavebuf[CIRRUS_VRAM_SIZE + 1024 * 1024];
 extern void			*cirrusvga_opaque;
 extern NP2CLVGA		np2clvga;
 //extern NP2CLVGA2	np2clvga;
-	
+
 int cirrusvga_drawGraphic(void);
 
 // 無理矢理外から呼べるように
@@ -236,4 +236,3 @@ void pc98_cirrus_vga_setVRAMWindowAddr3(UINT32 addr);
 #ifdef __cplusplus
 }
 #endif
-

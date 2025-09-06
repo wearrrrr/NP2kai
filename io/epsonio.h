@@ -15,4 +15,3 @@ void epsonio_bind(void);
 #ifdef __cplusplus
 }
 #endif
-

@@ -15,7 +15,7 @@
 #include	<cbus/sasiio.h>
 
 void DMACCALL dma_dummyout(REG8 data) {
-	
+
 	TRACEOUT(("dma_dummyout"));
 	(void)data;
 }
@@ -313,7 +313,7 @@ static void IOOUTCALL dmac_oe05(UINT port, REG8 dat) {
 	bank2 = dat;
 	dmach->startaddr = ((bank2 &0x7f) << 24) | dmach->adrs.d;
 	dmach->lastaddr = ((bank2 &0x7f) << 24) | (dmach->lastaddr);
-	TRACEOUT(("32bit DMA ch %x bank %x\n",channel, dmach->adrs.b[3]));	
+	TRACEOUT(("32bit DMA ch %x bank %x\n",channel, dmach->adrs.b[3]));
 }
 static void IOOUTCALL dmac_o2b(UINT port, REG8 dat) {
 	(void)port;
@@ -383,7 +383,7 @@ static void dmacset(REG8 channel) {
 	if (dmadev >= NELEMENTS(dmaproc)) {
 		dmadev = 0;
 	}
-	
+
 	switch(dmadev){
 		case 0:TRACEOUT(("dmac set %d - dummy", channel));break;
 		case 1:TRACEOUT(("dmac set %d - 2HD", channel));break;

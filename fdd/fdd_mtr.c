@@ -192,4 +192,3 @@ void fddmtr_reset(void) {
 	fddmtr.busy = 0;
 	nevent_reset(NEVENT_FDBIOSBUSY);
 }
-

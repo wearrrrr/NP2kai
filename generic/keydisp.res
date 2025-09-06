@@ -75,4 +75,3 @@ static const NOTEPATTERN s_notepattern[12] =
 	{20, 0, keybrd_s2}, {22, 1, keybrd_s4},
 	{24, 0, keybrd_s3}
 };
-

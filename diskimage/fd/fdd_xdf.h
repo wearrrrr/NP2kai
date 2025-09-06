@@ -4,7 +4,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 #if 1	//	関数名変更＆引数追加(k9)
 BRESULT	fdd_set_xdf(FDDFILE fdd, FDDFUNC fdd_fn, const OEMCHAR *fname, int ro);
 BRESULT	fdd_set_fdi(FDDFILE fdd, FDDFUNC fdd_fn, const OEMCHAR *fname, int ro);
@@ -37,7 +37,7 @@ BRESULT fddxdf_readid(FDDFILE fdd);
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 BRESULT fddxdf_set(FDDFILE fdd, const OEMCHAR *fname, int ro);
 BRESULT fddxdf_setfdi(FDDFILE fdd, const OEMCHAR *fname, int ro);
 BRESULT fddxdf_eject(FDDFILE fdd);
@@ -53,5 +53,3 @@ BRESULT fddxdf_readid(FDDFILE fdd);
 }
 #endif
 #endif
-
-

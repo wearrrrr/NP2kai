@@ -147,7 +147,7 @@ void pic_irq(void) {												// ver0.78
 		return;
 	}
 	p = &pic;
-	
+
 	pic_enter_criticalsection();
 	sir = p->pi[1].irr & (~p->pi[1].imr);
 	slave = 1 << (p->pi[1].icw[2] & 7);
@@ -217,7 +217,7 @@ void pic_irq(void) {												// ver0.78
 void picmask(NEVENTITEM item) {
 
 	PICITEM		pi;
-	
+
 	pic_enter_criticalsection();
 	if (item->flag & NEVENT_SETEVENT) {
 		pi = &pic.pi[0];
@@ -230,7 +230,7 @@ void pic_setirq(REG8 irq) {
 
 	PICITEM	pi;
 	REG8	bit;
-	
+
 	pic_enter_criticalsection();
 	pi = pic.pi;
 	bit = 1 << (irq & 7);
@@ -267,7 +267,7 @@ void pic_setirq(REG8 irq) {
 void pic_resetirq(REG8 irq) {
 
 	PICITEM		pi;
-	
+
 	pic_enter_criticalsection();
 	pi = pic.pi + ((irq >> 3) & 1);
 	pi->irr &= ~(1 << (irq & 7));
@@ -342,7 +342,7 @@ static void IOOUTCALL pic_o00(UINT port, REG8 dat) {
 static void IOOUTCALL pic_o02(UINT port, REG8 dat) {
 
 	PICITEM		picp;
-	
+
 	pic_enter_criticalsection();
 //	TRACEOUT(("pic %x %x", port, dat));
 	picp = &pic.pi[(port >> 3) & 1];
@@ -449,4 +449,3 @@ void pic_bind(void) {
 	iocore_attachsysinpex(0x0000, 0x0cf1, pici00, 4);
 #endif
 }
-

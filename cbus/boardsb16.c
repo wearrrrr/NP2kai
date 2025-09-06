@@ -41,7 +41,7 @@ static void trace_fmt_ex(const char *fmt, ...)
  * Creative Sound Blaster 16(98)
  * YMF262-M(OPL3) + CT1741(PCM) + CT1745(MIXER) + YM2203(OPN - option)
  *
- * デフォルト仕様 IO:D2 DMA:3 INT:5 
+ * デフォルト仕様 IO:D2 DMA:3 INT:5
  */
 
 #define G_OPL3_INDEX	1
@@ -424,13 +424,13 @@ void boardsb16_reset(const NP2CFG *pConfig) {
 	olddsp = g_sb16.dsp_info; // dsp_infoだけ初期化しない
 	ZeroMemory(&g_sb16, sizeof(g_sb16));
 	g_sb16.dsp_info = olddsp;
-	// ボードデフォルト IO:D2 DMA:3 IRQ:5(INT1) 
+	// ボードデフォルト IO:D2 DMA:3 IRQ:5(INT1)
 	g_sb16.base = np2cfg.sndsb16io; //0xd2;
 	g_sb16.dmach = np2cfg.sndsb16dma; //0x3;
 	g_sb16.dmairq = np2cfg.sndsb16irq; //0x5;
 	ct1745io_reset();
 	ct1741io_reset();
-	
+
 	forceopl3mode = 0;
 	seqpos = 0;
 }
@@ -451,7 +451,7 @@ void boardsb16_bind(void) {
 	iocore_attachinp(0x2000 + g_sb16.base, sb16_i2000);	/* FM Music Status Port */
 	iocore_attachinp(0x2200 + g_sb16.base, sb16_i2200);	/* Advanced FM Music Status Port */
 	iocore_attachinp(0x2800 + g_sb16.base, sb16_i2800);	/* FM Music Status Port */
-	
+
 #if defined(SUPPORT_GAMEPORT)
 	iocore_attachout(0x0400 + g_sb16.base, gameport_o4d2);	/* GAME Port */
 	iocore_attachout(0x0500 + g_sb16.base, gameport_o4d2);	/* GAME Port */
@@ -471,21 +471,21 @@ void boardsb16_bind(void) {
 	iocore_attachinp(0x0600 + g_sb16.base, sb16_i0400);	/* GAME Port */
 	iocore_attachinp(0x0700 + g_sb16.base, sb16_i0400);	/* GAME Port */
 #endif
-	
+
 	iocore_attachout(0x8000 + g_sb16.base, sb16_o8000);	/* MIDI Port */
 	//iocore_attachout(0x8001 + g_sb16.base, sb16_o8100);	/* MIDI Port 暫定 */
 	iocore_attachout(0x8100 + g_sb16.base, sb16_o8100);	/* MIDI Port */
 	iocore_attachinp(0x8000 + g_sb16.base, sb16_i8000);	/* MIDI Port */
 	//iocore_attachinp(0x8001 + g_sb16.base, sb16_i8100);	/* MIDI Port 暫定 */
 	iocore_attachinp(0x8100 + g_sb16.base, sb16_i8100);	/* MIDI Port */
-	
+
 	iocore_attachout(0xC800 + g_sb16.base, sb16_o2000);	/* FM Music Register Address Port */
 	iocore_attachinp(0xC800 + g_sb16.base, sb16_i2000);	/* FM Music Status Port */
 	iocore_attachout(0xC900 + g_sb16.base, sb16_o2100);	/* FM Music Data Port */
 	iocore_attachout(0xCA00 + g_sb16.base, sb16_o2200);	/* Advanced FM Music Register Address Port */
 	iocore_attachinp(0xCA00 + g_sb16.base, sb16_i2200);	/* Advanced FM Music Status Port */
 	iocore_attachout(0xCB00 + g_sb16.base, sb16_o2300);	/* Advanced FM Music Data Port */
-	
+
 	// PC/AT互換機テスト
 	if(np2cfg.sndsb16at){
 		iocore_attachout(0x388, sb16_o2000);	/* FM Music Register Address Port */
@@ -543,21 +543,21 @@ void boardsb16_unbind(void) {
 	iocore_detachinp(0x0500 + g_sb16.base);	/* GAME Port */
 	iocore_detachinp(0x0600 + g_sb16.base);	/* GAME Port */
 	iocore_detachinp(0x0700 + g_sb16.base);	/* GAME Port */
-	
+
 	iocore_detachout(0x8000 + g_sb16.base);	/* MIDI Port */
 	//iocore_detachout(0x8001 + g_sb16.base);	/* MIDI Port 暫定 */
 	iocore_detachout(0x8100 + g_sb16.base);	/* MIDI Port */
 	iocore_detachinp(0x8000 + g_sb16.base);	/* MIDI Port */
 	//iocore_detachinp(0x8001 + g_sb16.base);	/* MIDI Port 暫定 */
 	iocore_detachinp(0x8100 + g_sb16.base);	/* MIDI Port */
-	
+
 	iocore_detachout(0xC800 + g_sb16.base);	/* FM Music Register Address Port */
 	iocore_detachinp(0xC800 + g_sb16.base);	/* FM Music Status Port */
 	iocore_detachout(0xC900 + g_sb16.base);	/* FM Music Data Port */
 	iocore_detachout(0xCA00 + g_sb16.base);	/* Advanced FM Music Register Address Port */
 	iocore_detachinp(0xCA00 + g_sb16.base);	/* Advanced FM Music Status Port */
 	iocore_detachout(0xCB00 + g_sb16.base);	/* Advanced FM Music Data Port */
-	
+
 	// PC/AT互換機テスト
 	if(np2cfg.sndsb16at){
 		iocore_detachout(0x388);	/* FM Music Register Address Port */

@@ -88,4 +88,3 @@ void textout_close(void *hdl) {
 		_MFREE(to);
 	}
 }
-

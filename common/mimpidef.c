@@ -133,4 +133,3 @@ BRESULT mimpidef_load(MIMPIDEF *def, const OEMCHAR *filename) {
 mdld_err:
 	return(FAILURE);
 }
-

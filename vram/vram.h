@@ -70,4 +70,3 @@ void vram_initialize(void);
 #ifdef __cplusplus
 }
 #endif
-

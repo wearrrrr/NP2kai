@@ -155,4 +155,3 @@ extern BOOL QueryPerformanceFrequency(LARGE_INTEGER* freq);
 #endif  // SUPPORT_NP2_THREAD
 
 #endif  /* _NP2_THREAD_H_ */
-

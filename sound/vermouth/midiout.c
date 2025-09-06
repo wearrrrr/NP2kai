@@ -1247,4 +1247,3 @@ VEXTERN void VEXPORT midiout_setportb(MIDIHDL hdl, MIDIHDL portb) {
 	}
 #endif	// defined(ENABLE_PORTB)
 }
-

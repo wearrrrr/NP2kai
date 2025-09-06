@@ -154,7 +154,7 @@ void gdc_paletteinit(void) {
 
 #if defined(SUPPORT_PC9821)
 void gdc_analogext(BOOL extend) {
-	
+
 #if defined(SUPPORT_CRT31KHZ)
 	if (extend) {
 		gdc.analog |= (1 << GDCANALOG_256);
@@ -238,7 +238,7 @@ const GDCVECT	*vect;
 	textw = gdc.s.para[GDC_TEXTW + 7];
 	textw = (textw << 8) + textw;
 	ope = gdc.s.para[GDC_WRITE];
-	
+
 	if (!(vect->ope & 0x78)) {
 		gdcsub_vectp(csrw, vect, textw, ope); // Single Dot Writing?
     }
@@ -463,7 +463,7 @@ static void IOOUTCALL gdc_o60(UINT port, REG8 dat) {
 }
 
 static void IOOUTCALL gdc_o62(UINT port, REG8 dat) {
-	
+
 	if (gdc.m.cnt < GDCCMD_MAX) {
 		gdc.m.fifo[gdc.m.cnt++] = 0x100 | dat;
 	}
@@ -481,7 +481,7 @@ static void IOOUTCALL gdc_o64(UINT port, REG8 dat) {
 static void IOOUTCALL gdc_o68(UINT port, REG8 dat) {
 
 	REG8	bit;
-	
+
 	if (!(dat & 0xf0)) {
 		bit = 1 << ((dat >> 1) & 7);
 		if (dat & 1) {
@@ -719,7 +719,7 @@ static void IOOUTCALL gdc_oa0(UINT port, REG8 dat) {
 }
 
 static void IOOUTCALL gdc_oa2(UINT port, REG8 dat) {
-	
+
 	if (gdc.s.cnt < GDCCMD_MAX) {
 		gdc.s.fifo[gdc.s.cnt++] = 0x100 | dat;
 	}
@@ -1190,4 +1190,3 @@ void gdc_bind(void) {
 	iocore_attachsysoutex(0x00a0, 0x0cf1, gdcoa0, 8);
 	iocore_attachsysinpex(0x00a0, 0x0cf1, gdcia0, 8);
 }
-

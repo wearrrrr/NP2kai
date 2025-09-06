@@ -20,4 +20,3 @@ void textcnv_swapendian32(void *buf, UINT leng) {
 		leng--;
 	}
 }
-

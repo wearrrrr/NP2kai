@@ -101,4 +101,3 @@ enum {
 #define	OP_Fb(o, a)			_OPCTL(0x20, o, a, 0, 0)
 #define	OP_Fe(o, a)			_OPCTL(0x10, o, a, 0, 0)
 #define	OP_ER				0
-

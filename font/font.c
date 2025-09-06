@@ -387,14 +387,14 @@ unsigned short font_Jis2Sjis( unsigned short jis )
     unsigned short     ubyte, lbyte;
     UINT16 SJis;
     UINT8 th[3];
-    
+
     ubyte = jis >> 8;
     lbyte = jis & 0x00ff;
-    
+
     lbyte += 0x1f;
     if ( lbyte >= 0x7f ) lbyte++;
     if ( lbyte <= 0x3f ) return 0;
-    
+
     if ( (ubyte & 0x0001) == 0 )
     {
         lbyte = jis & 0x00ff;
@@ -402,19 +402,19 @@ unsigned short font_Jis2Sjis( unsigned short jis )
         ubyte--;
         if ( lbyte > 0xfd ) return 0;
     }
-    
+
     ubyte -= 0x1f;
     ubyte = ubyte >> 1;
     ubyte += 0x80;
     if ( ubyte >= 0xa0 ) ubyte += 0x40;
-    
+
     if ( lbyte < 0x40 || lbyte > 0xFC ) return 0;
-    
+
     if ( ((ubyte >= 0x81) && (ubyte <= 0x9f)) ||
             ((ubyte >= 0xe0) && (ubyte <= 0xef)) )
     {
         SJis =(ubyte << 8) + lbyte;
-			
+
 		if (SJis > 0xEA9E && SJis < 0xED40) return 0;
 		if (SJis > 0x8197 && SJis < 0x824F) return 0;
 		if (SJis > 0x8258 && SJis < 0x8260) return 0;
@@ -429,15 +429,15 @@ unsigned short font_Jis2Sjis( unsigned short jis )
 		if (SJis > 0x84BE && SJis < 0x8740) return 0;
 		if (SJis > 0x8775 && SJis < 0x877E) return 0;
 		if (SJis > 0x879C && SJis < 0x889F) return 0;
-									
+
 		th[0] = ubyte; th[1] = lbyte; th[2] = '¥0';
 		lstrlenA((char*)th);
 		return SJis;
-			
+
     } else {
         return 0;
     }
-    
+
 }
 
 unsigned short font_Jis2Sjis2( unsigned short jis )
@@ -445,14 +445,14 @@ unsigned short font_Jis2Sjis2( unsigned short jis )
     unsigned short     ubyte, lbyte;
     UINT16 SJis;
     UINT8 th[3];
-    
+
     ubyte = jis >> 8;
     lbyte = jis & 0x00ff;
-    
+
     lbyte += 0x1f;
     if ( lbyte >= 0x7f ) lbyte++;
     if ( lbyte <= 0x3f ) return 0;
-    
+
     if ( (ubyte & 0x0001) == 0 )
     {
         lbyte = jis & 0x00ff;
@@ -460,19 +460,19 @@ unsigned short font_Jis2Sjis2( unsigned short jis )
         ubyte--;
         if ( lbyte > 0xfd ) return 0;
     }
-    
+
     ubyte -= 0x1f;
     ubyte = ubyte >> 1;
     ubyte += 0x80;
     if ( ubyte >= 0xa0 ) ubyte += 0x40;
-    
+
     if ( lbyte < 0x40 || lbyte > 0xFC ) return 0;
-    
+
     if ( ((ubyte >= 0x81) && (ubyte <= 0x9f)) ||
             ((ubyte >= 0xe0) && (ubyte <= 0xef)) )
     {
         SJis =(ubyte << 8) + lbyte;
-			
+
 		if (SJis > 0xEA9E && SJis < 0xED40) return 0;
 		if (SJis > 0x8197 && SJis < 0x824F) return 0;
 		if (SJis > 0x8258 && SJis < 0x8260) return 0;
@@ -487,11 +487,11 @@ unsigned short font_Jis2Sjis2( unsigned short jis )
 		if (SJis > 0x84BE && SJis < 0x8740) return 0;
 		if (SJis > 0x8775 && SJis < 0x877E) return 0;
 		if (SJis > 0x879C && SJis < 0x889F) return 0;
-										
+
 		th[0] = ubyte; th[1] = lbyte; th[2] = '¥0';
 		CharNextA((char*)th);
 		return SJis;
-			
+
     } else {
         return 0;
     }

@@ -191,4 +191,3 @@ UINT8 fontpc88_read(const OEMCHAR *filename, UINT8 loading) {
 fr88_err1:
 	return(loading);
 }
-

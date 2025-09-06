@@ -54,4 +54,3 @@ int debugsnapshot_load(const UINT uNo);
 #endif
 
 #endif  // _DEBUGSNAPSHOT_H_
-

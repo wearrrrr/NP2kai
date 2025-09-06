@@ -126,4 +126,3 @@ void epsonio_bind(void) {
 		iocore_attachinp(0x0c14, epsonio_ic13);
 	}
 }
-

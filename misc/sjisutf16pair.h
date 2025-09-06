@@ -24,4 +24,3 @@ extern sjisutf16pair_t sjisutf16pairs[];
 #endif
 
 #endif  // _SJISUTF16PAIR_H_
-

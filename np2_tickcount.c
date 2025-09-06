@@ -96,4 +96,3 @@ BOOL QueryPerformanceFrequency(LARGE_INTEGER* freq) {
 #endif
 
 #endif  // SUPPORT_NP2_TICKCOUNT
-

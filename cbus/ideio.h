@@ -62,7 +62,7 @@ typedef struct {
 	UINT8	dabuf[2352];
 	UINT8	davolume;
 	UINT8	damsfbcd;
-	
+
 #if defined(SUPPORT_IDEIO_48BIT)
 	// 48-bit Address feature set
 	UINT8	lba48mode; // READ/WRITE with 48-bit LBA
@@ -208,4 +208,3 @@ void ideio_setcursec(FILEPOS pos);
 #ifdef __cplusplus
 }
 #endif
-

@@ -306,7 +306,7 @@ void pc9861k_reset(const NP2CFG *pConfig) {
 	pc9861k.ch1 = pc9861def;
 	pc9861k.ch2 = pc9861def;
 	pc9861k.en = pConfig->pc9861enable & 1;
-	
+
 	if(cm_pc9861ch1 == NULL){
 		cm_pc9861ch1 = commng_create(COMCREATE_PC9861K1, TRUE);
 	}
@@ -347,4 +347,3 @@ void pc9861k_midipanic(void) {
 }
 
 #endif
-

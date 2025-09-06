@@ -22,4 +22,3 @@ void cmvermouth_unload(void);
 #ifdef __cplusplus
 }
 #endif
-

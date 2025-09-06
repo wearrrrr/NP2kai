@@ -37,4 +37,3 @@ void nmiio_bind(void) {
 	iocore_attachsysoutex(0x0050, 0x0cf1, nmiioo50, 2);
 //	iocore_attachinp(0x98f0, nmiio_i98f0);
 }
-

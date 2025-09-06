@@ -64,4 +64,3 @@ VEXTERN int VEXPORT midimod_loadallex(MIDIMOD hdl, FNMIDIOUTLAEXCB cb, void *use
 #endif
 
 #endif
-

@@ -182,17 +182,17 @@ static REG8 sasibios_read(UINT type, SXSIDEV sxsi) {
 				posbase /= 255;
 				cy = posbase & 0xffff;
 				// LIFOなので逆順注意
-				biosioemu_push8(0x644, (CPU_BX / 512) & 0xff); 
-				biosioemu_push8(0x646, sn); 
-				biosioemu_push8(0x64a, ((cy >> 8) & 0xff)); 
-				biosioemu_push8(0x648, (cy & 0xff)); 
-				biosioemu_push8_read(0x64e); 
-				biosioemu_push8(0x64c, 0xA0|((sxsi_unittbl[oldAL & 0x3] & 0x1) << 4)|(hd & 0x0f)); 
+				biosioemu_push8(0x644, (CPU_BX / 512) & 0xff);
+				biosioemu_push8(0x646, sn);
+				biosioemu_push8(0x64a, ((cy >> 8) & 0xff));
+				biosioemu_push8(0x648, (cy & 0xff));
+				biosioemu_push8_read(0x64e);
+				biosioemu_push8(0x64c, 0xA0|((sxsi_unittbl[oldAL & 0x3] & 0x1) << 4)|(hd & 0x0f));
 				biosioemu_push8_read(0x432);
 				if ((sxsi_unittbl[oldAL & 0x3] & 0xf) >= 0x2) {
 					biosioemu_push8(0x432, 0x01); // BANK #2
 				}else{
-					biosioemu_push8(0x432, 0x00); // BANK #1 
+					biosioemu_push8(0x432, 0x00); // BANK #1
 				}
 				biosioemu_push8_read(0x430);
 			}else
@@ -208,21 +208,21 @@ static REG8 sasibios_read(UINT type, SXSIDEV sxsi) {
 				posbase /= sxsi->surfaces;
 				cy = posbase & 0xffff;
 				// LIFOなので逆順注意
-				biosioemu_push8(0x644, (CPU_BX / 512) & 0xff); 
-				biosioemu_push8(0x646, sn); 
-				biosioemu_push8(0x64a, ((cy >> 8) & 0xff)); 
-				biosioemu_push8(0x648, (cy & 0xff)); 
-				biosioemu_push8_read(0x64e); 
-				biosioemu_push8(0x64c, 0xA0|((sxsi_unittbl[oldAL & 0x3] & 0x1) << 4)|(hd & 0x0f)); 
+				biosioemu_push8(0x644, (CPU_BX / 512) & 0xff);
+				biosioemu_push8(0x646, sn);
+				biosioemu_push8(0x64a, ((cy >> 8) & 0xff));
+				biosioemu_push8(0x648, (cy & 0xff));
+				biosioemu_push8_read(0x64e);
+				biosioemu_push8(0x64c, 0xA0|((sxsi_unittbl[oldAL & 0x3] & 0x1) << 4)|(hd & 0x0f));
 				biosioemu_push8_read(0x432);
 				if ((sxsi_unittbl[oldAL & 0x3] & 0xf) >= 0x2) {
 					biosioemu_push8(0x432, 0x01); // BANK #2
 				}else{
-					biosioemu_push8(0x432, 0x00); // BANK #1 
+					biosioemu_push8(0x432, 0x00); // BANK #1
 				}
 				biosioemu_push8_read(0x430);
 			}
-			
+
 			// XXX: WORKAROUND for WinNT4.0 正常な接続フラグに書き戻す
 			if(mem[0x05bb]){
 				mem[0x05ba] = mem[0x05bb];
@@ -374,7 +374,7 @@ static REG8 sasibios_init(UINT type, SXSIDEV sxsi) {
 
 	diskequip = GETBIOSMEM16(MEMW_DISK_EQUIP);
 	diskequip &= 0xf0ff;
-	
+
 #if defined(SUPPORT_IDEIO)
 	for (i=0x00, bit=0x0100; i<0x04; i++, bit<<=1) {
 #else
@@ -781,4 +781,3 @@ void np2sysp_scsidev(const void *arg1, long arg2) {
 	(void)arg2;
 }
 #endif
-

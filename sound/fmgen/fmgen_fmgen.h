@@ -33,7 +33,7 @@
 // ---------------------------------------------------------------------------
 
 namespace FM
-{	
+{
 	//	Types ----------------------------------------------------------------
 	typedef FM_SAMPLETYPE	Sample;
 	typedef int32 			ISample;
@@ -74,7 +74,7 @@ namespace FM
 		uint	key_scale_rate_;
 		EGPhase	eg_phase_;
 		uint	ms_;
-		
+
 		uint	tl_;
 		uint	tl_latch_;
 		uint	ar_;
@@ -98,7 +98,7 @@ namespace FM
 		void	SetChip(Chip* chip) { chip_ = chip; }
 
 		static void	MakeTimeTable(uint ratio);
-		
+
 		ISample	Calc(ISample in);
 		ISample	CalcL(ISample in);
 		ISample CalcFB(uint fb);
@@ -128,21 +128,21 @@ namespace FM
 		void	SetAMON(bool on);
 		void	SetMS(uint ms);
 		void	Mute(bool);
-		
+
 //		static void SetAML(uint l);
 //		static void SetPML(uint l);
 
 		int		Out() { return out_; }
 
-		int		dbgGetIn2() { return in2_; } 
+		int		dbgGetIn2() { return in2_; }
 		void	dbgStopPG() { pg_diff_ = 0; pg_diff_lfo_ = 0; }
-		
+
 		void	DataSave(struct OperatorData* data);
 		void	DataLoad(struct OperatorData* data);
-	
+
 	private:
 		typedef uint32 Counter;
-		
+
 		Chip*	chip_;
 		ISample	out_, out2_;
 		ISample in2_;
@@ -169,7 +169,7 @@ namespace FM
 		int		FBCalc(int fb);
 		ISample LogToLin(uint a);
 
-		
+
 		OpType	type_;		// OP の種類 (M, N...)
 		uint	bn_;		// Block/Note
 		int		eg_level_;	// EG の出力値
@@ -191,7 +191,7 @@ namespace FM
 		EGPhase	eg_phase_;
 		uint*	ams_;
 		uint	ms_;
-		
+
 		uint	tl_;			// Total Level	 (0-127)
 		uint	tl_latch_;		// Total Level Latch (for CSM mode)
 		uint	ar_;			// Attack Rate   (0-63)
@@ -206,7 +206,7 @@ namespace FM
 		bool	amon_;		// enable Amplitude Modulation
 		bool	param_changed_;	// パラメータが更新された
 		bool	mute_;
-		
+
 	//	Tables ---------------------------------------------------------------
 		static Counter rate_table[16];
 		static uint32 multable[4][16];
@@ -236,7 +236,7 @@ namespace FM
 		static const int32* dbgGetClTable() { return cltable; }
 		static const uint* dbgGetSineTable() { return sinetable; }
 	};
-	
+
 	//	4-op Channel ---------------------------------------------------------
 	struct Channel4Data {
 		uint	fb;
@@ -251,7 +251,7 @@ namespace FM
 		Channel4();
 		void SetChip(Chip* chip);
 		void SetType(OpType type);
-		
+
 		ISample Calc();
 		ISample CalcL();
 		ISample CalcN(uint noise);
@@ -268,10 +268,10 @@ namespace FM
 		void Refresh();
 
 		void dbgStopPG() { for (int i=0; i<4; i++) op[i].dbgStopPG(); }
-		
+
 		void DataSave(struct Channel4Data* data);
 		void DataLoad(struct Channel4Data* data);
-	
+
 	private:
 		static const uint8 fbtable[8];
 		uint	fb;
@@ -319,7 +319,7 @@ namespace FM
 
 		void	DataSave(struct ChipData* data);
 		void	DataLoad(struct ChipData* data);
-	
+
 	private:
 		void	MakeTable();
 

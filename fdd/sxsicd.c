@@ -26,7 +26,7 @@
 BRESULT sxsicd_open(SXSIDEV sxsi, const OEMCHAR *fname) {
 
 	const OEMCHAR	*ext;
-	
+
 #ifdef SUPPORT_PHYSICAL_CDDRV
 	// XXX: 手抜き判定注意（実CDドライブ）
 	if(_tcsnicmp(fname, OEMTEXT("\\\\.\\"), 4)==0){
@@ -76,7 +76,7 @@ BRESULT sxsicd_readraw(SXSIDEV sxsi, FILEPOS pos, void *buf) {
 	SINT32	i;
 	UINT32	secs;
 //	UINT64	trk_offset;
-	
+
 	int isPhysicalCD = 0;
 
 	//	範囲外は失敗
@@ -85,11 +85,11 @@ BRESULT sxsicd_readraw(SXSIDEV sxsi, FILEPOS pos, void *buf) {
 	}
 
 	cdinfo = (CDINFO)sxsi->hdl;
-	
+
 #ifdef SUPPORT_PHYSICAL_CDDRV
 
 	// XXX: 事前に判定して記録しておくべき･･･
-	isPhysicalCD = (cdinfo->path[0] == '\\' && cdinfo->path[1] == '\\' && cdinfo->path[2] == '.' && cdinfo->path[3] == '\\'); 
+	isPhysicalCD = (cdinfo->path[0] == '\\' && cdinfo->path[1] == '\\' && cdinfo->path[2] == '.' && cdinfo->path[3] == '\\');
 
 #endif
 

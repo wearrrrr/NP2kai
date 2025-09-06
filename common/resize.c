@@ -616,4 +616,3 @@ RSZHDL resize(int xdst, int ydst, int xsrc, int ysrc) {
 rsz_err:
 	return(NULL);
 }
-

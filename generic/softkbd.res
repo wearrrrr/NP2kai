@@ -386,4 +386,3 @@ static void ledpaint(CMNVRAM *vram) {
 	col = (softkbd.led & 8)?9:8;
 	cmndraw_fill(vram, 6, 83, 3, 3, softkbd.pal[col]);
 }
-

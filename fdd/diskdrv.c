@@ -154,7 +154,7 @@ void diskdrv_hddbind(void)
 				{
 					char strbuf[] = "IDE#  file open error";
 					strbuf[4] = '0'+drv;
-					msgbox("HD image file open error", strbuf); 
+					msgbox("HD image file open error", strbuf);
 				}
 			}
 		}
@@ -178,7 +178,7 @@ void diskdrv_hddbind(void)
 			{
 				char strbuf[] = "SASI#  file open error";
 				strbuf[5] = '0'+drv;
-				msgbox("HD image file open error", strbuf); 
+				msgbox("HD image file open error", strbuf);
 			}
 		}
 	}

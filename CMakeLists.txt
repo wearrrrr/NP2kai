@@ -11,6 +11,8 @@ project(
 cmake_policy(SET CMP0076 NEW)
 list(APPEND CMAKE_MODULE_PATH "${NP2kai_SOURCE_DIR}/cmake")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Windows
 if(WIN32 OR MSVC_VERSION OR MINGW OR MSYS OR CYGWIN)
   set(NP2kai_Windows true)

@@ -44,7 +44,7 @@
 NP2WAB		np2wab = {0};
 NP2WABWND	np2wabwnd = {0};
 NP2WABCFG	np2wabcfg;
-	
+
 #if defined(NP2_X) || defined(NP2_SDL) || defined(__LIBRETRO__)
 char	g_Name[100] = "NP2 Window Accelerator";
 #else
@@ -330,7 +330,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam){
 			DestroyMenu(hWabMenu);
 
 			break;
-			
+
 		case WM_SYSCOMMAND:
 			switch(wParam) {
 				case IDM_WABSYSMENU_RESETSIZE:
@@ -366,7 +366,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam){
 
 		case WM_MOVING:
 			break;
-			
+
 		case WM_SIZE:
 			np2wab_forceupdate();
 		case WM_SIZING:
@@ -686,7 +686,7 @@ void np2wab_init(HINSTANCE hInstance, HWND hWndMain)
 
 	//// 専用INIセクション読み取り
 	//wabwin_readini();
-	
+
 #if defined(NP2_SDL) || defined(__LIBRETRO__)
 	np2wabwnd.pBuffer = (unsigned int*)malloc(WAB_MAX_WIDTH * WAB_MAX_HEIGHT * sizeof(unsigned int));
 #elif defined(NP2_X)
@@ -695,7 +695,7 @@ void np2wab_init(HINSTANCE hInstance, HWND hWndMain)
 	// 後々要る物を保存しておく
 	ga_hInstance = hInstance;
 	np2wabwnd.hWndMain = hWndMain;
-	
+
 	// ウィンドウアクセラレータ別窓を作る
 	wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW | (np2wabwnd.multiwindow ? CS_DBLCLKS : 0);
@@ -707,12 +707,12 @@ void np2wab_init(HINSTANCE hInstance, HWND hWndMain)
     wcex.lpszClassName = (TCHAR*)g_Name;
 	if(!RegisterClassEx(&wcex)) return;
 	np2wabwnd.hWndWAB = CreateWindowEx(
-			0, 
-			g_Name, g_Name, 
+			0,
+			g_Name, g_Name,
 			WS_OVERLAPPEDWINDOW,
-			np2wabcfg.posx, np2wabcfg.posy, 
-			640, 480, 
-			np2wabwnd.multiwindow ? NULL : np2wabwnd.hWndMain, 
+			np2wabcfg.posx, np2wabcfg.posy,
+			640, 480,
+			np2wabwnd.multiwindow ? NULL : np2wabwnd.hWndMain,
 			NULL, ga_hInstance, NULL
 		);
 	if(!np2wabwnd.hWndWAB) return;
@@ -766,7 +766,7 @@ void np2wab_reset(const NP2CFG *pConfig)
 	ga_lastwabwidth = 640;
 	ga_lastwabheight = 480;
 	ga_reqChangeWindowSize = 0;
-	
+
 	// パレットを更新させる
 	np2wab.paletteChanged = 1;
 }
@@ -791,26 +791,26 @@ void np2wab_bind(void)
 		ga_exitThread = 0;
 	}
 #endif
-	
+
 	// I/Oポートマッピング（FAChは内蔵リレー切り替え）
 	iocore_attachout(0xfac, np2wab_ofac);
 	iocore_attachinp(0xfac, np2wab_ifac);
-	
+
 	// 設定値更新とか
 	np2wabwnd.multiwindow = np2wabcfg.multiwindow;
 	ga_threadmode = np2wabcfg.multithread;
-	
+
 	//// 画面消去
 	//BitBlt(np2wabwnd.hDCBuf , 0 , 0 , WAB_MAX_WIDTH , WAB_MAX_HEIGHT , NULL , 0 , 0 , BLACKNESS);
 	//scrnmng_blthdc(np2wabwnd.hDCBuf);
-	
+
 #if !defined(NP2_X) && !defined(NP2_SDL) && !defined(__LIBRETRO__)
 	// マルチスレッドモードならスレッド開始
 	if(ga_threadmode){
 		ga_hThread  = (HANDLE)_beginthreadex(NULL , 0 , ga_ThreadFunc  , NULL , 0 , &dwID);
 	}
 #endif
-	
+
 	// パレットを更新させる
 	np2wab.paletteChanged = 1;
 
@@ -850,7 +850,7 @@ void np2wab_shutdown()
 	DestroyWindow(np2wabwnd.hWndWAB);
 	np2wabwnd.hWndWAB = NULL;
 #endif
-	
+
 	// クリティカルセクション破棄
 	wab_delete_criticalsection();
 
@@ -964,7 +964,7 @@ BRESULT np2wab_getbmp(BMPFILE *lpbf, BMPINFO *lpbi, UINT8 **lplppal, UINT8 **lpl
 	align = bmpdata_getalign(&bi);
 	CopyMemory(lpbi, &bi, sizeof(bi));
 	*lplppal = (UINT8*)malloc(0); // freeで解放されても大丈夫なように（大抵NULLが入る）
-	
+
 	// Bitmap File (size)
 	STOREINTELDWORD(bf.bfSize, (sizeof(BMPFILE) + sizeof(BMPINFO) + 0 + bmpdata_getalign(&bi) * bd.height));
 	CopyMemory(lpbf, &bf, sizeof(bf));
@@ -1030,21 +1030,21 @@ BRESULT np2wab_getbmp(BMPFILE *lpbf, BMPINFO *lpbi, UINT8 **lplppal, UINT8 **lpl
  * ウィンドウアクセラレータ画面をBMPで保存
  */
 BRESULT np2wab_writebmp(const OEMCHAR *filename) {
-	
+
 	FILEH		fh;
 	BMPFILE     bf;
 	BMPINFO     bi;
 	UINT8       *lppal;
 	UINT8       *lppixels;
 	int	        pixelssize;
-	
+
 	fh = file_create(filename);
 	if (fh == FILEH_INVALID) {
 		goto sswb_err1;
 	}
-	
+
 	np2wab_getbmp(&bf, &bi, &lppal, &lppixels);
-	
+
 	// Bitmap File
 	if (file_write(fh, &bf, sizeof(bf)) != sizeof(bf)) {
 		goto sswb_err3;
@@ -1054,7 +1054,7 @@ BRESULT np2wab_writebmp(const OEMCHAR *filename) {
 	if (file_write(fh, &bi, sizeof(bi)) != sizeof(bi)) {
 		goto sswb_err3;
 	}
-	
+
 	// Pixels
 	pixelssize = bmpdata_getalign(&bi) * LOADINTELDWORD(bi.biHeight);
 	if (file_write(fh, lppixels, pixelssize) != pixelssize) {
@@ -1067,7 +1067,7 @@ BRESULT np2wab_writebmp(const OEMCHAR *filename) {
 	file_close(fh);
 
 	return(SUCCESS);
-	
+
 sswb_err3:
 	_MFREE(lppal);
 	_MFREE(lppixels);

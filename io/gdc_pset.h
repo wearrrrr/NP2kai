@@ -29,4 +29,3 @@ void MEMCALL gdcpset(GDCPSET pset, REG16 x, REG16 y);
 #ifdef __cplusplus
 }
 #endif
-

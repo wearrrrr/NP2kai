@@ -73,4 +73,3 @@ extern const OEMCHAR str_scsirom[];
 #ifdef __cplusplus
 }
 #endif
-

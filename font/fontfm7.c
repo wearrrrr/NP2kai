@@ -123,4 +123,3 @@ UINT8 fontfm7_read(const OEMCHAR *filename, UINT8 loading) {
 frf7_err1:
 	return(loading);
 }
-

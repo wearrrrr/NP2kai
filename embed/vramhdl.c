@@ -748,4 +748,3 @@ BRESULT vram_cliprectex(RECT_T *clip, const VRAMHDL vram, const RECT_T *rct) {
 	}
 	return(SUCCESS);
 }
-

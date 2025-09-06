@@ -880,4 +880,3 @@ void VERMOUTHCL voice_setmix(VOICE v) {
 	}
 	v->mix = mixproc[proc];
 }
-

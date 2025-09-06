@@ -206,7 +206,7 @@ void boardspr_reset(const NP2CFG *pConfig)
 	opna_reset(&g_opna[0], OPNA_MODE_2608 | OPNA_HAS_TIMER | OPNA_HAS_ADPCM | OPNA_HAS_VR | OPNA_S98);
 	opna_timer(&g_opna[0], (pConfig->spbopt & 0xc0) | 0x10, NEVENT_FMTIMERA, NEVENT_FMTIMERB);
 	opna_reset(&g_opna[1], OPNA_MODE_3438 | OPNA_HAS_VR);
-	
+
 	g_opna[0].s.extend = 1; // はじめからFM6音
 	g_opna[1].s.extend = 1; // はじめからFM6音
 
@@ -231,5 +231,3 @@ void boardspr_unbind(void)
 	cbuscore_detachsndex(0x188 - g_opna[0].s.base);
 	cbuscore_detachsndex(0x588 - g_opna[0].s.base);
 }
-
-

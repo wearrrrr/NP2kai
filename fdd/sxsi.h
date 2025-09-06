@@ -68,7 +68,7 @@ struct _sxsidev {
 	UINT8	mediatype;
 	UINT8	padding;
 	UINT32	headersize;
-	
+
 	UINT8	cdflag_ecc;
 
 	OEMCHAR	fname[MAX_PATH];

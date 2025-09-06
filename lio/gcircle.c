@@ -89,4 +89,3 @@ REG8 lio_gcircle(GLIO lio) {
 	}
 	return(LIO_SUCCESS);
 }
-

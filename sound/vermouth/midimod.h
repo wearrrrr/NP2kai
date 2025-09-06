@@ -40,4 +40,3 @@ void VERMOUTHCL midimod_unlock(MIDIMOD mod);
 #ifdef __cplusplus
 }
 #endif
-

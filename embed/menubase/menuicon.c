@@ -280,4 +280,3 @@ void menuicon_unlock(VRAMHDL vram) {
 		vram_destroy(vram);
 	}
 }
-

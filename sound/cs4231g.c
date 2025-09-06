@@ -156,7 +156,7 @@ const UINT8	*ptr1;
 const UINT8	*ptr2;
 	SINT32	samp1;
 	SINT32	samp2;
-	
+
 	leng = cs->bufdatas >> 2;
 	if (!leng) {
 		return;
@@ -183,7 +183,7 @@ const UINT8	*ptr2;
 		pcm += 2;
 		pos12 += cs->step12;
 	} while(--count);
-	
+
 	leng = MIN(leng, (pos12 >> 12));
 	cs->bufdatas -= (leng << 2);
 	cs->bufpos = (cs->bufpos + (leng << 2)) & CS4231_BUFMASK;
@@ -201,7 +201,7 @@ const UINT8	*ptr1;
 const UINT8	*ptr2;
 	SINT32	samp1;
 	SINT32	samp2;
-	
+
 	leng = cs->bufdatas >> 1;
 	if (!leng) {
 		return;
@@ -225,7 +225,7 @@ const UINT8	*ptr2;
 		pcm += 2;
 		pos12 += cs->step12;
 	} while(--count);
-	
+
 	leng = MIN(leng, (pos12 >> 12));
 	cs->bufdatas -= (leng << 1);
 	cs->bufpos = (cs->bufpos + (leng << 1)) & CS4231_BUFMASK;
@@ -270,7 +270,7 @@ const UINT8	*ptr2;
 		pcm += 2;
 		pos12 += cs->step12;
 	} while(--count);
-	
+
 	leng = MIN(leng, (pos12 >> 12));
 	cs->bufdatas -= (leng << 2);
 	cs->bufpos = (cs->bufpos + (leng << 2)) & CS4231_BUFMASK;
@@ -313,7 +313,7 @@ void SOUNDCALL cs4231_getpcm(CS4231 cs, SINT32 *pcm, UINT count) {
 	static int bufdelaycounter = 0;
 
 	if (((cs->reg.iface & 1) || bufdelaycounter > 0) && (count)) {
-		// CS4231内蔵ボリューム 
+		// CS4231内蔵ボリューム
 		if(cs4231_DACvolumereg_L != cs->reg.dac_l){
 			cs4231_DACvolumereg_L = cs->reg.dac_l;
 			if(cs->reg.dac_l & 0x80){ // DAC L Mute
@@ -330,7 +330,7 @@ void SOUNDCALL cs4231_getpcm(CS4231 cs, SINT32 *pcm, UINT count) {
 				cs4231_DACvolume_R = (int)(pow(10, -1.5 * ((cs4231_DACvolumereg_R) & 0x3f) / 20.0) * 1024); // DAC R Volume (1bit毎に-1.5dB)
 			}
 		}
-		
+
 		// 再生用バッファに送る
 		(*cs4231fn[cs->reg.datafmt >> 4])(cs, pcm, count);
 
@@ -360,4 +360,3 @@ void SOUNDCALL cs4231_getpcm(CS4231 cs, SINT32 *pcm, UINT count) {
 		}
 	}
 }
-

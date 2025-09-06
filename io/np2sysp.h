@@ -25,4 +25,3 @@ void np2sysp_bind(void);
 #ifdef __cplusplus
 }
 #endif
-

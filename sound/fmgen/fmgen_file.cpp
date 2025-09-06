@@ -117,7 +117,7 @@ int32 FileIO::Read(void* dest, int32 size)
 {
 	if (!(GetFlags() & open))
 		return -1;
-	
+
 	DWORD readsize;
 	if (!(readsize = fread(dest, 1, size, pfile)))
 		return -1;
@@ -132,7 +132,7 @@ int32 FileIO::Write(const void* dest, int32 size)
 {
 	if (!(GetFlags() & open) || (GetFlags() & readonly))
 		return -1;
-	
+
 	DWORD writtensize;
 	if (!(writtensize = fwrite(dest, 1, size, pfile)))
 		return -1;
@@ -147,18 +147,18 @@ bool FileIO::Seek(int32 pos, SeekMethod method)
 {
 	if (!(GetFlags() & open))
 		return false;
-	
+
 	int origin;
 	switch (method)
 	{
-	case begin:	
-		origin = SEEK_SET; 
+	case begin:
+		origin = SEEK_SET;
 		break;
-	case current:	
-		origin = SEEK_CUR; 
+	case current:
+		origin = SEEK_CUR;
 		break;
-	case end:		
-		origin = SEEK_END; 
+	case end:
+		origin = SEEK_END;
 		break;
 	default:
 		return false;

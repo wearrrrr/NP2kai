@@ -173,4 +173,3 @@ void menubase_modalproc(void) {
 	while((taskmng_sleep(5)) && (menuvram != NULL)) {
 	}
 }
-

@@ -504,4 +504,3 @@ void boardpx2_unbind(void)
 }
 
 #endif	// defined(SUPPORT_PX)
-

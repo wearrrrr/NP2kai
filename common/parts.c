@@ -102,4 +102,3 @@ void PARTSCALL satuation_s16x(SINT16 *dst, const SINT32 *src, UINT size) {
 		dst += 2;
 	}
 }
-

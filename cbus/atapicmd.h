@@ -59,4 +59,3 @@ void atapi_dataread_asyncwait(int wait);
 #endif
 
 #endif	/* SUPPORT_IDEIO */
-

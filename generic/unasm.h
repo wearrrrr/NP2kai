@@ -14,4 +14,3 @@ UINT unasm(UNASM r, const UINT8 *ptr, UINT leng, BOOL d, UINT32 addr);
 #ifdef __cplusplus
 }
 #endif
-

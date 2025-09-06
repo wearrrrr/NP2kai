@@ -145,4 +145,3 @@ COMMNG cmjasts_create(void) {
 cmjscre_err:
 	return(NULL);
 }
-

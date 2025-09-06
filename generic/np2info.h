@@ -19,4 +19,3 @@ void np2info(OEMCHAR *dst, const OEMCHAR *src, int maxlen,
 #ifdef __cplusplus
 }
 #endif
-

@@ -68,4 +68,3 @@ void bios0x12(void) {
 		mem[MEMB_DISK_INTH] |= drvbit;
 	}
 }
-

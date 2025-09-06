@@ -16,7 +16,7 @@ typedef struct mem_mapping_t
         struct mem_mapping_t *prev, *next;
 
         int enable;
-                
+
         uint32_t base;
         uint32_t size;
 
@@ -26,11 +26,11 @@ typedef struct mem_mapping_t
         void (*write_b)(uint32_t addr, uint8_t  val, void *priv);
         void (*write_w)(uint32_t addr, uint16_t val, void *priv);
         void (*write_l)(uint32_t addr, uint32_t val, void *priv);
-        
+
         uint8_t *exec;
-        
+
         uint32_t flags;
-        
+
         void *p;
 } mem_mapping_t;
 
@@ -62,7 +62,7 @@ typedef struct pc_timer_t
 typedef struct svga_t
 {
         mem_mapping_t mapping;
-        
+
         uint8_t crtcreg;
         uint8_t crtc[128];
         uint8_t gdcreg[64];
@@ -72,7 +72,7 @@ typedef struct svga_t
         int attr_palette_enable;
         uint8_t seqregs[64];
         int seqaddr;
-        
+
         uint8_t miscout;
         int vidclock;
 
@@ -81,26 +81,26 @@ typedef struct svga_t
           1MB-2MB - VRAM mirror
           2MB-4MB - open bus
           4MB-xMB - mirror of above
-          
+
           For the example memory map, decode_mask would be 4MB-1 (4MB address space), vram_max would be 2MB
           (present video memory only responds to first 2MB), vram_mask would be 1MB-1 (video memory wraps at 1MB)
         */
         uint32_t decode_mask;
         uint32_t vram_max;
         uint32_t vram_mask;
-        
+
         uint8_t la, lb, lc, ld;
-        
+
         uint8_t dac_mask, dac_status;
         int dac_read, dac_write, dac_pos;
         int dac_r, dac_g;
-                
+
         uint8_t cgastat;
-        
+
         uint8_t plane_mask;
-        
+
         int fb_only;
-        
+
         int fast;
         uint8_t colourcompare, colournocare;
         int readmode, writemode, readplane;
@@ -109,11 +109,11 @@ typedef struct svga_t
         uint32_t charseta, charsetb;
 
         int set_reset_disabled;
-        
+
         uint8_t egapal[16];
         uint32_t pallook[256];
         PALETTE vgapal;
-        
+
         int ramdac_type;
 
         int vtotal, dispend, vsyncstart, split, vblankstart;
@@ -123,12 +123,12 @@ typedef struct svga_t
         double clock;
         uint32_t ma_latch;
         int bpp;
-        
+
         uint64_t dispontime, dispofftime;
         pc_timer_t timer;
-        
+
         uint8_t scrblank;
-        
+
         int dispon;
         int hdisp_on;
 
@@ -139,20 +139,20 @@ typedef struct svga_t
         int con, cursoron, blink;
         int scrollcache;
         int char_width;
-        
+
         int firstline, lastline;
         int firstline_draw, lastline_draw;
         int displine;
-        
+
         uint8_t *vram;
         uint8_t *changedvram;
         uint32_t vram_display_mask;
         uint32_t banked_mask;
 
         uint32_t write_bank, read_bank;
-                
+
         int fullchange;
-        
+
         int video_res_x, video_res_y, video_bpp;
         int frames, fps;
 
@@ -166,13 +166,13 @@ typedef struct svga_t
                 uint32_t pitch;
                 int v_acc, h_acc;
         } hwcursor, hwcursor_latch, overlay, overlay_latch;
-        
+
         int hwcursor_on;
         int overlay_on;
-        
+
         int hwcursor_oddeven;
         int overlay_oddeven;
-        
+
         void (*render)(struct svga_t *svga);
         void (*recalctimings_ex)(struct svga_t *svga);
 
@@ -182,26 +182,26 @@ typedef struct svga_t
         void (*hwcursor_draw)(struct svga_t *svga, int displine);
 
         void (*overlay_draw)(struct svga_t *svga, int displine);
-        
+
         void (*vblank_start)(struct svga_t *svga);
-        
+
         /*Called when VC=R18 and friends. If this returns zero then MA resetting
           is skipped. Matrox Mystique in Power mode reuses this counter for
           vertical line interrupt*/
         int (*line_compare)(struct svga_t *svga);
-        
+
         /*Called at the start of vertical sync*/
         void (*vsync_callback)(struct svga_t *svga);
-        
+
         /*If set then another device is driving the monitor output and the SVGA
           card should not attempt to display anything */
         int override;
         void *p;
 
         uint8_t ksc5601_sbyte_mask;
-        
+
         int vertical_linedbl;
-        
+
         /*Used to implement CRTC[0x17] bit 2 hsync divisor*/
         int hsync_divisor;
 } svga_t;

@@ -157,4 +157,3 @@ upsampterm:
 #undef FUNC_NOR
 #undef FUNC_DOWN
 #undef FUNC_UP
-

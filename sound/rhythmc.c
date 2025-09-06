@@ -156,4 +156,3 @@ void rhythm_setreg(RHYTHM rhy, UINT reg, REG8 value) {
 														rhythmcfg.vol) >> 10;
 	}
 }
-

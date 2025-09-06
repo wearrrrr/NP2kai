@@ -18,7 +18,7 @@ static void IOOUTCALL necio_o043b(UINT port, REG8 dat) {
 	(void)port;
 }
 static REG8 IOOUTCALL necio_i043b(UINT port) {
-	
+
 	return(necio.port043b);
 }
 
@@ -56,4 +56,3 @@ void necio_bind(void) {
 		iocore_attachout(0x043d, necio_o043d);
 	}
 }
-

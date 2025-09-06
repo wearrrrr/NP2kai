@@ -57,7 +57,7 @@ UINT32 getGPIBinfoAddr(){
 
 // ----
 
-// Byte Out 
+// Byte Out
 static void IOOUTCALL gpib_o1(UINT port, REG8 dat) {
 	// TODO: Windows対応の uPD7210互換 GP-IBボードに丸投げ
 	(void)port;
@@ -319,11 +319,11 @@ void gpibio_shutdown(void)
 }
 
 void gpibio_reset(const NP2CFG *pConfig) {
-	
+
 	OEMCHAR	path[MAX_PATH];
 	FILEH	fh;
 	OEMCHAR tmpbiosname[16];
-	
+
 	_tcscpy(tmpbiosname, OEMTEXT("gpib.rom"));
 	getbiospath(path, tmpbiosname, NELEMENTS(path));
 	fh = file_open_rb(path);
@@ -338,7 +338,7 @@ void gpibio_reset(const NP2CFG *pConfig) {
 	gpib.mode = np2cfg.gpibmode;
 	gpib.gpibaddr = np2cfg.gpibaddr;
 	gpib.exiobase = np2cfg.gpibexio;
-	
+
 	if (fh != FILEH_INVALID) {
 		// GP-IB BIOS
 		if (file_read(fh, mem + 0x0d4000, 0x2000) == 0x2000) {
@@ -357,19 +357,19 @@ void gpibio_reset(const NP2CFG *pConfig) {
 		gpib.enable = 0;
 		return;
 	}
-	
+
 	(void)pConfig;
 }
 
 void gpibio_bind(void) {
-	
+
 	int i;
 
 	// GP-IB 有効?
 	if(!gpib.enable){
 		return;
 	}
-	
+
 	// 標準I/Oポート設定
 	for(i=0;i<16;i++){
 		if(gpib_o[i]){
@@ -381,7 +381,7 @@ void gpibio_bind(void) {
 	}
 	iocore_attachinp(0x99, gpib_i99);
 	iocore_attachinp(0x9b, gpib_i9b);
-	
+
 	// カスタムI/Oポートベースアドレス
 	if(gpib.exiobase != 0){
 		for(i=0;i<16;i++){
@@ -406,4 +406,3 @@ void gpibio_bind(void) {
 
 }
 #endif
-

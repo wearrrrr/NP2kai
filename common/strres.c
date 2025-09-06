@@ -60,4 +60,3 @@ const OEMCHAR str_EPSON[] = OEMTEXT("EPSON");
 const OEMCHAR str_biosrom[] = OEMTEXT("bios.rom");
 const OEMCHAR str_sasirom[] = OEMTEXT("sasi.rom");
 const OEMCHAR str_scsirom[] = OEMTEXT("scsi.rom");
-

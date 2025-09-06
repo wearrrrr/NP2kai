@@ -35,8 +35,8 @@ int pcidev_pcmc_deviceid = 0;
 //UINT8 PCI_INTLINE2IRQTBL[] = {
 ////  INTA INTB INTC INTD
 //	0,   1,   2,   3, // slot #0
-//	1,   2,   3,   0, // slot #1 
-//	2,   3,   0,   1, // slot #2 
+//	1,   2,   3,   0, // slot #1
+//	2,   3,   0,   1, // slot #2
 //	3,   2,   1,   0, // slot #3
 //};
 
@@ -67,15 +67,15 @@ static void IOOUTCALL pci_o0cf8(UINT port, REG8 dat) {
 	pcidev.reg_cse = dat & 0xfe;
 }
 static void IOOUTCALL pci_o0cf9(UINT port, REG8 dat) {
-	
+
 	pcidev.reg_trc = dat;
 }
 static void IOOUTCALL pci_o0cfa(UINT port, REG8 dat) {
-	
+
 	pcidev.reg_fwd = dat;
 }
 static void IOOUTCALL pci_o0cfb(UINT port, REG8 dat) {
-	
+
 	pcidev.reg_cms = dat;
 }
 
@@ -84,22 +84,22 @@ static REG8 IOINPCALL pci_i0cf8(UINT port) {
 	return pcidev.reg_cse;
 }
 static REG8 IOINPCALL pci_i0cf9(UINT port) {
-	
+
 	return pcidev.reg_trc;
 }
 static REG8 IOINPCALL pci_i0cfa(UINT port) {
-	
+
 	return pcidev.reg_fwd;
 }
 static REG8 IOINPCALL pci_i0cfb(UINT port) {
-	
+
 	return pcidev.reg_cms;
 }
 
 void IOOUTCALL pcidev_w8_0xcfc(UINT port, UINT8 value) {
-	
+
 	if (pcidev.reg32_caddr & 0x80000000) {
-		//if((pcidev.reg32_caddr & 0x00ff0000) == 0){ 
+		//if((pcidev.reg32_caddr & 0x00ff0000) == 0){
 			// Configuration Mechanism #1 Type0,1
 			UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 			UINT8 idselSelect = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -116,7 +116,7 @@ void IOOUTCALL pcidev_w8_0xcfc(UINT port, UINT8 value) {
 				}
 			}
 			if(idselSelect==0 && cfgregOffset==0x64) setRAM_D000(value);
-		//}else{ 
+		//}else{
 		//	// Configuration Mechanism #1 Type1
 		//	UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 		//	UINT8 devNumber = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -126,9 +126,9 @@ void IOOUTCALL pcidev_w8_0xcfc(UINT port, UINT8 value) {
 	}
 }
 void IOOUTCALL pcidev_w16_0xcfc(UINT port, UINT16 value) {
-	
+
 	if (pcidev.reg32_caddr & 0x80000000) {
-		//if((pcidev.reg32_caddr & 0x00ff0000) == 0){ 
+		//if((pcidev.reg32_caddr & 0x00ff0000) == 0){
 			// Configuration Mechanism #1 Type0,1
 			UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 			UINT8 idselSelect = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -148,7 +148,7 @@ void IOOUTCALL pcidev_w16_0xcfc(UINT port, UINT16 value) {
 				//setRAM_D000((value >> 0) & 0xff);
 				setRAM_D000((value >> 8) & 0xff);
 			}
-		//}else{ 
+		//}else{
 		//	// Configuration Mechanism #1 Type1
 		//	UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 		//	UINT8 devNumber = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -158,12 +158,12 @@ void IOOUTCALL pcidev_w16_0xcfc(UINT port, UINT16 value) {
 	}
 }
 void IOOUTCALL pcidev_w32(UINT port, UINT32 value) {
-	
+
 	if(port==0xcf8){
 		pcidev.reg32_caddr = value;
 	}else{
 		if (pcidev.reg32_caddr & 0x80000000) {
-			//if((pcidev.reg32_caddr & 0x00ff0000) == 0){ 
+			//if((pcidev.reg32_caddr & 0x00ff0000) == 0){
 				// Configuration Mechanism #1 Type0,1
 				UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 				UINT8 idselSelect = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -185,7 +185,7 @@ void IOOUTCALL pcidev_w32(UINT port, UINT32 value) {
 					//setRAM_D000((value >> 16) & 0xff);
 					setRAM_D000((value >> 24) & 0xff);
 				}
-			//}else{ 
+			//}else{
 			//	// Configuration Mechanism #1 Type1
 			//	UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 			//	UINT8 devNumber = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -197,8 +197,8 @@ void IOOUTCALL pcidev_w32(UINT port, UINT32 value) {
 }
 
 UINT8 IOOUTCALL pcidev_r8_0xcfc(UINT port) {
-	
-	//if((pcidev.reg32_caddr & 0x00ff0000) == 0){ 
+
+	//if((pcidev.reg32_caddr & 0x00ff0000) == 0){
 		// Configuration Mechanism #1 Type0,1
 		UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 		UINT8 idselSelect = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -210,7 +210,7 @@ UINT8 IOOUTCALL pcidev_r8_0xcfc(UINT port) {
 				return GETCFGREG_B(pcidev.devices[idselSelect].cfgreg8, cfgregOffset);
 			}
 		}
-	//}else{ 
+	//}else{
 	//	// Configuration Mechanism #1 Type1
 	//	UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 	//	UINT8 devNumber = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -220,8 +220,8 @@ UINT8 IOOUTCALL pcidev_r8_0xcfc(UINT port) {
 	return 0xff;
 }
 UINT16 IOOUTCALL pcidev_r16_0xcfc(UINT port) {
-	
-	//if((pcidev.reg32_caddr & 0x00ff0000) == 0){ 
+
+	//if((pcidev.reg32_caddr & 0x00ff0000) == 0){
 		// Configuration Mechanism #1 Type0,1
 		UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 		UINT8 idselSelect = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -233,7 +233,7 @@ UINT16 IOOUTCALL pcidev_r16_0xcfc(UINT port) {
 				return GETCFGREG_W(pcidev.devices[idselSelect].cfgreg8, cfgregOffset);
 			}
 		}
-	//}else{ 
+	//}else{
 	//	// Configuration Mechanism #1 Type1
 	//	UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 	//	UINT8 devNumber = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -243,11 +243,11 @@ UINT16 IOOUTCALL pcidev_r16_0xcfc(UINT port) {
 	return 0xffff;
 }
 UINT32 IOOUTCALL pcidev_r32(UINT port) {
-	
+
 	if(port==0xcf8){
 		return pcidev.reg32_caddr;
 	}else{
-		//if((pcidev.reg32_caddr & 0x00ff0000) == 0){ 
+		//if((pcidev.reg32_caddr & 0x00ff0000) == 0){
 			// Configuration Mechanism #1 Type0,1
 			UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 			UINT8 idselSelect = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -259,7 +259,7 @@ UINT32 IOOUTCALL pcidev_r32(UINT port) {
 					return GETCFGREG_D(pcidev.devices[idselSelect].cfgreg8, cfgregOffset);
 				}
 			}
-		//}else{ 
+		//}else{
 		//	// Configuration Mechanism #1 Type1
 		//	UINT8 busNumber = (pcidev.reg32_caddr >> 16) & 0xff;
 		//	UINT8 devNumber = (pcidev.reg32_caddr >> 11) & 0x1f;
@@ -311,7 +311,7 @@ static REG8 IOINPCALL pci_i18f0(UINT port) {
 	return pcidev.unkreg_bank1;
 }
 static void IOOUTCALL pci_o18f2(UINT port, REG8 dat) {
-	
+
     pcidev.unkreg[(pcidev.unkreg_bank2++) & 3][pcidev.unkreg_bank1] = dat;
 	(void)port;
 }
@@ -324,11 +324,11 @@ static REG8 IOINPCALL pci_i18f2(UINT port) {
 static UINT8 pnp_addr = 0;
 static UINT8 pnp_data[0x100] = {0};
 static REG8 IOINPCALL pnp_iReg(UINT port) {
-	
+
     return 0xff;
 }
 static void IOOUTCALL pnp_o259(UINT port, REG8 dat) {
-	
+
     pnp_addr = dat;
 	(void)port;
 }
@@ -337,7 +337,7 @@ static REG8 IOINPCALL pnp_i259(UINT port) {
 	return pnp_addr;
 }
 static void IOOUTCALL pnp_oA59(UINT port, REG8 dat) {
-	
+
 	if(pnp_addr==0){
 		iocore_detachinp((pnp_data[pnp_addr] << 2) | 0x3);
 		iocore_attachinp((dat << 2) | 0x3, pnp_iReg);
@@ -347,7 +347,7 @@ static void IOOUTCALL pnp_oA59(UINT port, REG8 dat) {
 	(void)port;
 }
 static REG8 IOINPCALL pnp_iA59(UINT port) {
-	
+
 	if(pnp_addr==0){
 		pnp_data[pnp_addr] = mem[0x5B7];
 	}
@@ -358,7 +358,7 @@ void pcidev_basereset() {
 	OEMCHAR	path[MAX_PATH];
 	FILEH	fh;
 	OEMCHAR tmpbiosname[16];
-	
+
 	// 実機PCI BIOSがあれば配置
 	_tcscpy(pcidev.biosname, OEMTEXT(""));
 	_tcscpy(tmpbiosname, OEMTEXT("pci.rom"));
@@ -381,7 +381,7 @@ void pcidev_basereset() {
 	}else{
 		TRACEOUT(("use simulate pci.rom"));
 	}
-	
+
 	// レジスタ初期化
 	pcidev.reg_cse = 0;
 	pcidev.reg_trc = 0;
@@ -393,16 +393,16 @@ void pcidev_reset(const NP2CFG *pConfig) {
 
 	int i;
 	int devid = pcidev_pcmc_deviceid;
-	
+
 	ZeroMemory(&pcidev, sizeof(pcidev));
 
 	pcidev.enable = np2cfg.usepci;
 	pcidev.usebios32 = np2cfg.pci_bios32;
-	
+
 	pcidev.membankd8 = 0xFE; // IDE bank にしておく
-	
+
 	pcidev_basereset();
-	
+
 	memset(pcidev.devices, 0xff, sizeof(_PCIDEVICE)*PCI_DEVICES_MAX);
 
 	for(i=0;i<PCI_DEVICES_MAX;i++){
@@ -458,7 +458,7 @@ void pcidev_reset(const NP2CFG *pConfig) {
 		pcidev.devices[devid].cfgreg8[0x5d] = 0x00; // プログラム可能属性マップ(PAM)
 		pcidev.devices[devid].cfgreg8[0x5e] = 0x00; // プログラム可能属性マップ(PAM)
 		pcidev.devices[devid].cfgreg8[0x5f] = 0x00; // プログラム可能属性マップ(PAM)
-		pcidev.devices[devid].cfgreg8[0x60] = 0x10; // DRAMロー境界レジスタ(DRB) ROW#0 
+		pcidev.devices[devid].cfgreg8[0x60] = 0x10; // DRAMロー境界レジスタ(DRB) ROW#0
 		pcidev.devices[devid].cfgreg8[0x61] = 0x20; // ROW#0,#1
 		pcidev.devices[devid].cfgreg8[0x62] = 0x20; // ROW#0〜2
 		pcidev.devices[devid].cfgreg8[0x63] = 0x20; // ROW#0〜3
@@ -485,22 +485,22 @@ void pcidev_reset(const NP2CFG *pConfig) {
 		pcidev.devices[devid].headerrom.baseaddrregs[4] = 0xffffffff;
 		pcidev.devices[devid].headerrom.baseaddrregs[5] = 0xffffffff;
 		pcidev.devices[devid].headerrom.expROMbaseaddr = 0xffffffff;
-	
+
 		// PCI PC-9821標準デバイスreset
 		pcidev_cbusbridge_reset(pConfig);
 		pcidev_98graphbridge_reset(pConfig);
-		
+
 		// BIOS32 Entry Pointの位置未確定
 		pcidev.bios32entrypoint = 0;
 
 		TRACEOUT(("PCI: Peripheral Component Interconnect Enabled"));
 	}
-	
+
 	(void)pConfig;
 }
 
 void pcidev_bind(void) {
-	
+
 	UINT	i, j;
 	int	emptyflag;
 
@@ -517,23 +517,23 @@ void pcidev_bind(void) {
 	iocore_attachinp(0xcf9, pci_i0cf9);
 	iocore_attachinp(0xcfa, pci_i0cfa);
 	iocore_attachinp(0xcfb, pci_i0cfb);
-	
+
 	for (i=0; i<4; i++) {
 		iocore_attachout(0xcfc+i, pcidev_w8_0xcfc);
 		iocore_attachinp(0xcfc+i, pcidev_r8_0xcfc);
 	}
-	
+
 	// バンク切り替え
 	//iocore_attachout(0x63c, pci_o063c);
 	//iocore_attachinp(0x63c, pci_i063c);
-	
+
 	//iocore_attachout(0x18f0, pci_o18f0);
 	//iocore_attachout(0x18f2, pci_o18f2);
 	//iocore_attachinp(0x18f0, pci_i18f0);
 	//iocore_attachinp(0x18f2, pci_i18f2);
 	memset(pcidev.unkreg, 0, sizeof(pcidev.unkreg));
     pcidev.unkreg_bank1 = pcidev.unkreg_bank2 = 0;
-	
+
 	//// C-Bus PnP
 	//pnp_data[0] = (0x277 >> 2); // READ_DATA port address 0000 00xx xxxx xx11b
 	//mem[0x5B7] = pnp_data[0]; // READ_DATA port address
@@ -543,7 +543,7 @@ void pcidev_bind(void) {
 	//iocore_attachout(0xA59, pnp_oA59);
 	//iocore_attachinp(0x259, pnp_i259);
 	//iocore_attachinp(0xA59, pnp_iA59);
-	
+
 	if(pcidev.enable){
 		// 関数アドレス入れ直し（ステートセーブ用）
 		pcidev.devices[pcidev_pcmc_deviceid].regwfn = &pcidev_pcmc_cfgreg_w;
@@ -551,7 +551,7 @@ void pcidev_bind(void) {
 		// PCI PC-9821標準デバイスbind
 		pcidev_cbusbridge_bind();
 		pcidev_98graphbridge_bind();
-		
+
 		if(pcidev.usebios32){
 			if(pcidev.bios32entrypoint==0){
 				// BIOS32 Entry Pointが位置未確定ならBIOS32 Entry Pointを置く
@@ -581,7 +581,7 @@ void pcidev_bind(void) {
 void pcidev_updateRoutingTable(){
 	UINT16 i;
 	UINT16 allpciirq = (1<<12)|(1<<6)|(1<<5)|(1<<3);
-	
+
 	ZeroMemory(pcidev.biosdata.data, sizeof(pcidev.biosdata.data));
 
 	// PCI IRQ ルーティングテーブルを生成する
@@ -592,7 +592,7 @@ void pcidev_updateRoutingTable(){
 			pcidev.biosdata.data[pcidev.biosdata.datacount].busnumber = 0; // バス番号
 			pcidev.biosdata.data[pcidev.biosdata.datacount].devicenumber = (i << 3); // デバイス番号
 			pcidev.biosdata.data[pcidev.biosdata.datacount].link4intA = (pcidev.devices[i].header.interruptpin == 1 ? pcidev.devices[i].header.interruptline : 0); // このデバイスのINT#A(PCI仕様上はデバイス毎に独立)の接続先。0=接続無し, 1=PIRQ#0, 2=PIRQ#1, 3=PIRQ#2, 4=PIRQ#3, 5以上:その他接続（同じ番号同士が接続）
-			pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intA = allpciirq; // このデバイスのINT#Aで使用できるIRQ(PIRQではない)のマップ。bit0=IRQ0, bit1=IRQ1, ... , bit15=IRQ15に対応 
+			pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intA = allpciirq; // このデバイスのINT#Aで使用できるIRQ(PIRQではない)のマップ。bit0=IRQ0, bit1=IRQ1, ... , bit15=IRQ15に対応
 			pcidev.biosdata.data[pcidev.biosdata.datacount].link4intB = (pcidev.devices[i].header.interruptpin == 2 ? pcidev.devices[i].header.interruptline : 0); // このデバイスのINT#B(PCI仕様上はデバイス毎に独立)の接続先。
 			pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intB = allpciirq; // このデバイスのINT#Bで使用できるIRQ(PIRQではない)のマップ。
 			pcidev.biosdata.data[pcidev.biosdata.datacount].link4intC = (pcidev.devices[i].header.interruptpin == 3 ? pcidev.devices[i].header.interruptline : 0); // このデバイスのINT#C(PCI仕様上はデバイス毎に独立)の接続先。
@@ -600,11 +600,11 @@ void pcidev_updateRoutingTable(){
 			pcidev.biosdata.data[pcidev.biosdata.datacount].link4intD = (pcidev.devices[i].header.interruptpin == 4 ? pcidev.devices[i].header.interruptline : 0); // このデバイスのINT#D(PCI仕様上はデバイス毎に独立)の接続先。
 			pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intD = allpciirq; // このデバイスのINT#Dで使用できるIRQ(PIRQではない)のマップ。
 			pcidev.biosdata.data[pcidev.biosdata.datacount].slot = pcidev.devices[i].slot; // PCIスロット番号（0はオンボード）
-			pcidev.allirqbitmap |= 
-				pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intA | 
+			pcidev.allirqbitmap |=
+				pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intA |
 				pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intB |
 				pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intC |
-				pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intD; // PCIで使用できる全IRQのマップ？ bit0=IRQ0, bit1=IRQ1, ... , bit15=IRQ15に対応 
+				pcidev.biosdata.data[pcidev.biosdata.datacount].irqmap4intD; // PCIで使用できる全IRQのマップ？ bit0=IRQ0, bit1=IRQ1, ... , bit15=IRQ15に対応
 			pcidev.biosdata.datacount++;
 		}else if(i==12 || i==13 || i==14 || i==15){
 			// 12, 13, 14, 15はPCIスロットとする
@@ -639,16 +639,16 @@ void pcidev_updateBIOS32data(){
 	 ofs=A 1byte BIOS32 Service Directory全体のチェックサム（全バイトの和が0になるようにする）
 	 ofs=B 5byte 予約（0にする）
 	*/
-	
+
 	// BIOS32 Service Directoryをメモリに書き込む
 	if(pcidev.bios32svcdir != 0){
 		if(pcidev.bios32entrypoint!=0 && pcidev.usebios32){
 			// アドレスをセット
 			CopyMemory(pcibios_BIOS32SD + 4, &pcidev.bios32entrypoint, 4);
-	
+
 			// サイズをセット
 			pcibios_BIOS32SD[9] = 1;
-		
+
 			// チェックサムを計算
 			checksum = 0;
 			pcibios_BIOS32SD[10] = 0;
@@ -656,7 +656,7 @@ void pcidev_updateBIOS32data(){
 				checksum += pcibios_BIOS32SD[j];
 			}
 			pcibios_BIOS32SD[10] = (UINT8)(0x100 - checksum);
-		
+
 			// メモリに書き込む
 			CopyMemory(mem + pcidev.bios32svcdir, pcibios_BIOS32SD, sizeof(pcibios_BIOS32SD));
 		}else{
@@ -786,4 +786,3 @@ void pcidev_bind(void) {
 }
 #endif
 #endif
-

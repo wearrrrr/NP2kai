@@ -19,4 +19,3 @@ BRESULT fdd_readid_nfd1(FDDFILE fdd);		//	追加(kaiD)
 #ifdef __cplusplus
 }
 #endif
-

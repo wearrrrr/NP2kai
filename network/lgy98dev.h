@@ -27,12 +27,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 #define NE2000_PMEM_SIZE    (32*1024)
 #define NE2000_PMEM_START   (16*1024)
 #define NE2000_PMEM_END     (NE2000_PMEM_SIZE+NE2000_PMEM_START)
 #define NE2000_MEM_SIZE     NE2000_PMEM_END
-	
+
 typedef void IOReadHandler(void *opaque, const UINT8 *buf, int size);
 typedef int IOCanRWHandler(void *opaque);
 //typedef ssize_t (IOReadvHandler)(void *, const struct iovec *, int);
@@ -70,7 +70,7 @@ typedef struct {
 	UINT16	base;
 	//REG8	macaddr[6];
 	REG8	irq;
-	
+
     REG8 cmd;
     UINT32 start;
     UINT32 stop;
@@ -108,4 +108,3 @@ extern LGY98	lgy98;
 #ifdef __cplusplus
 }
 #endif
-

@@ -96,4 +96,3 @@ REG8 lio_gcopy(GLIO lio);
 #ifdef __cplusplus
 }
 #endif
-

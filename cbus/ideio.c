@@ -124,7 +124,7 @@ static BRESULT setidentify(IDEDRV drv) {
 		tmp[61] = (UINT16)(size >> 16);
 		tmp[63] = 0x0000;		// no support multiword DMA
 		tmp[64] = 0x0003;		// device supports PIO mode 3, 4
-		
+
 		tmp[81] = 0;
 		tmp[82] = 0x4200;		// support NOP, DEVICE RESET and Write Cache
 
@@ -211,13 +211,13 @@ static void setintr(IDEDRV drv) {
 		TRACEOUT(("ideio: setintr()"));
 		ideio.bank[0] = ideio.bank[1] | 0x80;			// ????
 		pic_setirq(IDE_IRQ);
-		//mem[MEMB_DISK_INTH] |= 0x01; 
+		//mem[MEMB_DISK_INTH] |= 0x01;
 	}
 }
 
 // 割り込み後にBSYを解除し、DRQをセットする（コマンド継続中など）
 void ideioint(NEVENTITEM item) {
-	
+
 	IDEDRV	drv;
 	IDEDEV  dev;
 
@@ -246,13 +246,13 @@ void ideioint(NEVENTITEM item) {
 	if(!(dev->drv[0].ctrl & IDECTRL_NIEN) || !(dev->drv[1].ctrl & IDECTRL_NIEN)){
 		TRACEOUT(("ideio: run setdintr()"));
 		pic_setirq(IDE_IRQ);
-		//mem[MEMB_DISK_INTH] |= 0x01; 
+		//mem[MEMB_DISK_INTH] |= 0x01;
 	}
    (void)item;
 }
 // 割り込み後にBSYを解除し、DRQも解除する（コマンド終了時など）
 void ideioint2(NEVENTITEM item) {
-	
+
 	IDEDRV	drv;
 	IDEDEV  dev;
 
@@ -281,7 +281,7 @@ void ideioint2(NEVENTITEM item) {
 	if(!(dev->drv[0].ctrl & IDECTRL_NIEN) || !(dev->drv[1].ctrl & IDECTRL_NIEN)){
 		TRACEOUT(("ideio: run setdintr()"));
 		pic_setirq(IDE_IRQ);
-		//mem[MEMB_DISK_INTH] |= 0x01; 
+		//mem[MEMB_DISK_INTH] |= 0x01;
 	}
    (void)item;
 }
@@ -441,7 +441,7 @@ void ideio_setcursec(FILEPOS pos) {
 static FILEPOS getcursec(const IDEDRV drv) {
 
 	FILEPOS	ret;
-	
+
 #if defined(SUPPORT_IDEIO_48BIT)
 	if(drv->lba48mode){
 		int i;
@@ -542,7 +542,7 @@ static void writesec(IDEDRV drv) {
 	drv->buftc = IDETC_TRANSFEREND;
 	drv->bufpos = 0;
 	drv->bufsize = 512;
-	
+
 	// WRITEはデータ書き込みが完了したら割り込み
 	drv->status = IDESTAT_DRDY | IDESTAT_DSC | IDESTAT_DRQ;
 	drv->error = 0;
@@ -589,7 +589,7 @@ static void IOOUTCALL ideio_o430(UINT port, REG8 dat) {
 		//sprintf(buf, "0x%x¥n", dat);
 		//OutputDebugStringA(buf);
 	}
-	
+
 	// XXX: WORKAROUND for WinNT4.0 正常な接続フラグに書き戻す
 	if(mem[0x05bb]){
 		mem[0x05ba] = mem[0x05bb];
@@ -638,10 +638,10 @@ static void IOOUTCALL ideio_o433(UINT port, REG8 dat) {
 }
 
 static REG8 IOINPCALL ideio_i433(UINT port) {
-	
+
 	UINT	bank;
 	REG8	ret;
-	
+
 	bank = (port >> 1) & 1;
 	ret = (ideio.bank[bank] & 0x1) ? 0x2 : 0x0;
 
@@ -748,7 +748,7 @@ static void IOOUTCALL ideio_o64c(UINT port, REG8 dat) {
 
 	IDEDEV	dev;
 	UINT	drvnum;
-	
+
 #if !defined(NP2_X) && !defined(NP2_SDL) && !defined(__LIBRETRO__)
 	atapi_dataread_asyncwait(INFINITE);
 #endif
@@ -791,7 +791,7 @@ static void IOOUTCALL ideio_o64e(UINT port, REG8 dat) {
 	IDEDRV	drv, d;
 	IDEDEV	dev;
 	int		i;
-	
+
 #if !defined(NP2_X) && !defined(NP2_SDL) && !defined(__LIBRETRO__)
 	atapi_dataread_asyncwait(INFINITE);
 #endif
@@ -946,7 +946,7 @@ static void IOOUTCALL ideio_o64e(UINT port, REG8 dat) {
 				cmdabort(drv);
 			}
 			break;
-			
+
 		case 0xb0:		// SMART
 			cmdabort(drv);
 			break;
@@ -1019,7 +1019,7 @@ static void IOOUTCALL ideio_o64e(UINT port, REG8 dat) {
 				cmdabort(drv);
 			}
 			break;
-			
+
 		case 0xe5:		// Check power mode
 			drv->sc = 0xff;
 			drv->status = drv->status & ~IDESTAT_BSY;
@@ -1091,7 +1091,7 @@ static void IOOUTCALL ideio_o64e(UINT port, REG8 dat) {
 				}
 			}
 			break;
-			
+
 		case 0xda:		// GET MEDIA STATUS
 			TRACEOUT(("ideio: GET MEDIA STATUS dev=%d", drv->device));
 			//if (ideio_mediastatusnotification[drv->sxsidrv]) {
@@ -1149,7 +1149,7 @@ static void IOOUTCALL ideio_o64e(UINT port, REG8 dat) {
 					setintr(drv);
 				}
 			}
-			
+
 #if defined(SUPPORT_IDEIO_48BIT)
 		case 0x24:		// read EXT
 			TRACEOUT(("ideio: read sector EXT"));
@@ -1239,7 +1239,7 @@ static void IOOUTCALL ideio_o64e(UINT port, REG8 dat) {
 			break;
 
 #endif
-			
+
 		default:
 			panic("ideio: unknown command %.2x", dat);
 			break;
@@ -1293,7 +1293,7 @@ static void IOOUTCALL ideio_o74c(UINT port, REG8 dat) {
 }
 
 static void IOOUTCALL ideio_o74e(UINT port, REG8 dat) {
-	
+
 	TRACEOUT(("ideio %.4x,%.2x [%.4x:%.8x]", port, dat, CPU_CS, CPU_EIP));
 	(void)port;
 	(void)dat;
@@ -1419,7 +1419,7 @@ static REG8 IOINPCALL ideio_i64e(UINT port) {
 		if (!(drv->ctrl & IDECTRL_NIEN)) {
 			TRACEOUT(("ideio: resetirq"));
 			pic_resetirq(IDE_IRQ);
-			//mem[MEMB_DISK_INTH] &= ~0x01; 
+			//mem[MEMB_DISK_INTH] &= ~0x01;
 		}
 		return(drv->status);
 	}
@@ -1446,7 +1446,7 @@ static REG8 IOINPCALL ideio_i74c(UINT port) {
 }
 
 static REG8 IOINPCALL ideio_i74e(UINT port) {
-	
+
 	IDEDEV	dev;
 	IDEDRV	drv;
 	REG8 ret;
@@ -1469,7 +1469,7 @@ static REG8 IOINPCALL ideio_i1e8e(UINT port) {
     }
     return(0x80);
 }
- 
+
 static void IOOUTCALL ideio_o1e8e(UINT port, REG8 dat) {
     switch(dat){
         case 0x00:
@@ -1820,7 +1820,7 @@ static void devinit(IDEDRV drv, REG8 sxsidrv) {
 	drv->sxsidrv = sxsidrv;
 	//drv->dr = 0xa0;
 	sxsi = sxsi_getptr(sxsidrv);
-	if ((sxsi != NULL) && (np2cfg.idetype[sxsidrv] == SXSIDEV_HDD) && 
+	if ((sxsi != NULL) && (np2cfg.idetype[sxsidrv] == SXSIDEV_HDD) &&
 			(sxsi->devtype == SXSIDEV_HDD) && (sxsi->flag & SXSIFLAG_READY)) {
 		drv->status = IDESTAT_DRDY | IDESTAT_DSC;
 		drv->error = IDEERR_AMNF;
@@ -1829,7 +1829,7 @@ static void devinit(IDEDRV drv, REG8 sxsidrv) {
 		drv->sectors = sxsi->sectors;
 		drv->mulmode = IDEIO_MULTIPLE_MAX;
 	}
-	else if ((sxsi != NULL) && (np2cfg.idetype[sxsidrv] == SXSIDEV_CDROM) && 
+	else if ((sxsi != NULL) && (np2cfg.idetype[sxsidrv] == SXSIDEV_CDROM) &&
 			(sxsi->devtype == SXSIDEV_CDROM)) {
 		drv->device = IDETYPE_CDROM;
 		drvreset(drv);
@@ -1887,7 +1887,7 @@ void ideio_basereset() {
 }
 void ideio_reset(const NP2CFG *pConfig) {
 	REG8	i;
-	
+
 	OEMCHAR	path[MAX_PATH];
 	FILEH	fh;
 	OEMCHAR tmpbiosname[16];
@@ -1897,7 +1897,7 @@ void ideio_reset(const NP2CFG *pConfig) {
 	ZeroMemory(&ideio, sizeof(ideio));
 
 	ideio_basereset();
-	
+
 	ideio.rwait = np2cfg.iderwait;
 	ideio.wwait = np2cfg.idewwait;
 	ideio.bios = IDETC_NOBIOS;
@@ -1910,7 +1910,7 @@ void ideio_reset(const NP2CFG *pConfig) {
 				SXSIDEV	sxsi;
 				for (i=0; i<4; i++) {
 					sxsi = sxsi_getptr(i);
-					if ((sxsi != NULL) && (np2cfg.idetype[i] == SXSIDEV_HDD) && 
+					if ((sxsi != NULL) && (np2cfg.idetype[i] == SXSIDEV_HDD) &&
 							(sxsi->devtype == SXSIDEV_HDD) && (sxsi->flag & SXSIFLAG_READY)) {
 						if(sxsi->surfaces != 8 || sxsi->sectors != 17){
 							TRACEOUT(("Incompatible CHS parameter detected. IDE BIOS automatically disabled."));
@@ -2001,7 +2001,7 @@ void ideio_bind(void) {
 
 		iocore_attachout(0x1e8e, ideio_o1e8e); // 一部IDE BIOSはこれがないと起動時にフリーズしたりシリンダ数が0になる
 		iocore_attachinp(0x1e8e, ideio_i1e8e); // 一部IDE BIOSはこれがないと起動時にフリーズしたりシリンダ数が0になる
-		
+
 		iocore_attachout(0x0433, ideio_o433);
 		iocore_attachinp(0x0433, ideio_i433);
 		iocore_attachout(0x0435, ideio_o435);
@@ -2047,7 +2047,7 @@ do_notify:
 }
 
 void ideio_mediachange(REG8 sxsidrv) {
-	
+
 	//SXSIDEV sxsi;
 	//IDEDRV	drv;
 	//REG8 i;
@@ -2077,4 +2077,3 @@ void ideio_mediachange(REG8 sxsidrv) {
 }
 
 #endif	/* SUPPORT_IDEIO */
-

@@ -9,7 +9,7 @@
 #include <pccore.h>
 
 	_NEVENT g_nevent;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 static int nevent_cs_initialized = 0;
 static CRITICAL_SECTION nevent_cs;
@@ -26,7 +26,7 @@ static void nevent_leave_criticalsection(void){
 	if(!nevent_cs_initialized) return;
 	LeaveCriticalSection(&nevent_cs);
 }
-	
+
 void nevent_initialize(void)
 {
 	/* クリティカルセクション準備 */
@@ -71,7 +71,7 @@ void nevent_get1stevent(void)
 
 	/* カウンタへセット */
 	CPU_REMCLOCK = CPU_BASECLOCK;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_leave_criticalsection();
 #endif
@@ -83,7 +83,7 @@ static void nevent_execute(void)
 	UINT i;
 	NEVENTID id;
 	NEVENTITEM item;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -123,7 +123,7 @@ void nevent_progress(void)
 	NEVENTID id;
 	NEVENTITEM item;
 	UINT8 fevtchk = 0;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -178,7 +178,7 @@ void nevent_changeclock(UINT32 oldclock, UINT32 newclock)
 	UINT i;
 	NEVENTID id;
 	NEVENTITEM item;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -206,7 +206,7 @@ void nevent_changeclock(UINT32 oldclock, UINT32 newclock)
 void nevent_reset(NEVENTID id)
 {
 	UINT i;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -236,7 +236,7 @@ void nevent_reset(NEVENTID id)
 void nevent_waitreset(NEVENTID id)
 {
 	UINT i;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -269,7 +269,7 @@ void nevent_set(NEVENTID id, SINT32 eventclock, NEVENTCB proc, NEVENTPOSITION ab
 	NEVENTITEM item;
 	UINT eventId;
 	UINT i;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -334,7 +334,7 @@ void nevent_setbyms(NEVENTID id, SINT32 ms, NEVENTCB proc, NEVENTPOSITION absolu
 BOOL nevent_iswork(NEVENTID id)
 {
 	UINT i;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -358,7 +358,7 @@ BOOL nevent_iswork(NEVENTID id)
 void nevent_forceexecute(NEVENTID id)
 {
 	NEVENTITEM item;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif
@@ -377,7 +377,7 @@ void nevent_forceexecute(NEVENTID id)
 SINT32 nevent_getremain(NEVENTID id)
 {
 	UINT i;
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_enter_criticalsection();
 #endif

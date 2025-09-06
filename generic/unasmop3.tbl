@@ -182,4 +182,3 @@ static const UINT32 op3tbl[OP3_MAX][8] = {
 		OP_W_(RSTR_BTR,		OP_EA,	OP_I8,	0),
 		OP_W_(RSTR_BTC,		OP_EA,	OP_I8,	0)},
 };
-

@@ -243,7 +243,7 @@ BRESULT sound_create(UINT rate, UINT ms) {
 #else
 	reserve = 0;
 #endif
-	sndstream.buffer = (SINT32 *)_MALLOC((samples + reserve) * 2 
+	sndstream.buffer = (SINT32 *)_MALLOC((samples + reserve) * 2
 												* sizeof(SINT32), "stream");
 	if (sndstream.buffer == NULL) {
 		goto scre_err2;

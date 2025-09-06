@@ -459,4 +459,3 @@ COMMNG cmvermouth_create(void) {
 }
 
 #endif
-

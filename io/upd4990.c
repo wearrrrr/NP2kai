@@ -110,7 +110,7 @@ void upd4990_hrtimer_proc(NEVENTITEM item) {
 		divcounter32++;
 		if(divcounter32 >= 2){ // 64 -> 32
 			UINT32 hrtimertimeuint;
-			
+
 			hrtimertimeuint = LOADINTELDWORD(mem+0x04F1);
 			hrtimertimeuint++;
 			if((hrtimertimeuint & 0x3fffff) >= 24*60*60*32){
@@ -147,7 +147,7 @@ void upd4990_hrtimer_count(void) {
 	//	if(uPD4990HRT.clockcounter32 > uPD4990HRT.hrtimerclock32*pccore.multiple){
 	//		UINT32 hrtimertimeuint;
 	//		uPD4990HRT.clockcounter32 -= uPD4990HRT.hrtimerclock32*pccore.multiple;
-	//		
+	//
 	//		hrtimertimeuint = LOADINTELDWORD(mem+0x04F1);
 	//		hrtimertimeuint++;
 	//		if((hrtimertimeuint & 0x3fffff) >= 24*60*60*32){
@@ -214,7 +214,7 @@ static const IOOUT updo20[1] = {upd4990_o20};
 void uPD4990_reset(const NP2CFG *pConfig) {
 
 	ZeroMemory(&uPD4990, sizeof(uPD4990));
-	
+
 #if defined(SUPPORT_HRTIMER)
 	upd4990_hrtimer_start();
 #endif
@@ -236,4 +236,3 @@ void uPD4990_bind(void) {
 	upd4990_hrtimer_setinterval(1);
 #endif
 }
-

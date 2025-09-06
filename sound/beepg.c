@@ -8,7 +8,7 @@
 extern	BEEPCFG		beepcfg;
 
 static void oneshot(BEEP bp, SINT32 *pcm, UINT count) {
-	
+
 	SINT32		volM;
 	SINT32		samp;
 	UINT32		firsttime = beep_time[bp->beep_data_curr_loc];
@@ -50,7 +50,7 @@ const BPEVENT	*bev;
 	SINT32		clk;
 	int			event;
 	UINT		r;
-	
+
 	volM = np2cfg.vol_master;
 
 	vol = beepcfg.vol;
@@ -145,4 +145,3 @@ void SOUNDCALL beep_getpcm(BEEP bp, SINT32 *pcm, UINT count) {
 		}
 	}
 }
-

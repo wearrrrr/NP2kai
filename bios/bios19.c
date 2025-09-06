@@ -141,7 +141,7 @@ void bios0x19(void) {
 					MEMR_WRITE16(dseg, doff + R_CNT, cnt);
 
 					// XONを送信？
-					if ((flag & RFLAG_XOFF) && 
+					if ((flag & RFLAG_XOFF) &&
 						(cnt < MEMR_READ16(dseg, doff + R_XOFF))) {
 						iocore_out8(0x30, RSCODE_XON);
 						flag &= ~RFLAG_XOFF;
@@ -190,4 +190,3 @@ void bios0x19(void) {
 		CPU_AH = 0;
 	}
 }
-

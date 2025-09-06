@@ -66,4 +66,3 @@ UINT8 fontx68k_read(const OEMCHAR *filename, UINT8 loading);
 #ifdef __cplusplus
 }
 #endif
-

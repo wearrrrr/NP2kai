@@ -159,7 +159,7 @@ void keyboard_changeclock(void) {
 // ---- RS-232C
 
 	COMMNG	cm_rs232c = NULL;
-	
+
 // RS-232C 受信バッファサイズ
 #define RS232C_BUFFER		(1 << 6)
 #define RS232C_BUFFER_MASK	(RS232C_BUFFER - 1)
@@ -203,10 +203,10 @@ static void rs232c_writeretry() {
 		// FIFOモードの時
 		if(rs232cfifo.port138 & 0x1){
 			int fifowbufused;
-			
+
 			// バッファ読み取り位置を進める
 			rs232c_fifo_writebuf_rpos = (rs232c_fifo_writebuf_rpos+1) & RS232C_FIFO_WRITEBUFFER_MASK;
-			
+
 			fifowbufused = (rs232c_fifo_writebuf_wpos - rs232c_fifo_writebuf_rpos) & RS232C_FIFO_WRITEBUFFER_MASK;
 			if(fifowbufused > RS232C_FIFO_WRITEBUFFER * 3 / 4){
 				rs232c.result &= ~0x1; // バッファフルならTxRDYを下ろす
@@ -294,7 +294,7 @@ void rs232c_callback(void) {
 	BOOL	fifomode = FALSE; // FIFOモードフラグ
 	int		bufused; // 受信リングバッファ使用量
 	BOOL	bufremoved = FALSE;
-	
+
 	// 開いていなければRS-232Cポートオープン
 	rs232c_open();
 
@@ -306,7 +306,7 @@ void rs232c_callback(void) {
 	if(bufused==0){
 		rs232c_removecounter = 0; // バッファが空なら古いデータ削除カウンタをリセット
 	}
-	
+
 	// 受信可（uPD8251 Recieve Enable）をチェック
 	if(!(rs232c.cmd & 0x04) && bufused==0) {
 		// 受信禁止で受信バッファが空ならなら受信処理をしない
@@ -411,7 +411,7 @@ UINT8 rs232c_stat(void) {
 
 // エラー状態取得 (bit0: パリティ, bit1: オーバーラン, bit2: フレーミング, bit3: ブレーク信号)
 UINT8 rs232c_geterror(void) {
-	
+
 	if (cm_rs232c) {
 		UINT8 errorcode = 0;
 		cm_rs232c->msg(cm_rs232c, COMMSG_GETERROR, (INT_PTR)(&errorcode));
@@ -422,7 +422,7 @@ UINT8 rs232c_geterror(void) {
 
 // エラー消去
 void rs232c_clearerror(void) {
-	
+
 	if (cm_rs232c) {
 		cm_rs232c->msg(cm_rs232c, COMMSG_CLRERROR, 0);
 	}
@@ -631,7 +631,7 @@ static REG8 IOINPCALL rs232c_i30(UINT port) {
 		return 0xff;
 	}
 #endif
-	
+
 	rs232c_writeretry();
 
 #if defined(SUPPORT_RS232C_FIFO)
@@ -701,7 +701,7 @@ static REG8 IOINPCALL rs232c_i32(UINT port) {
 	UINT8 ret;
 
 	rs232c_writeretry();
-	
+
 	ret = rs232c.result;
 	ret |= (rs232c_geterror() & 7) << 3;
 	if (!(rs232c_stat() & 0x01)) {
@@ -716,7 +716,7 @@ static REG8 IOINPCALL rs232c_i32(UINT port) {
 /*
  * I/O 132h FIFO ラインステータス
  * bit 3～7について UNDOCUMENTED 9801/9821 Vol.2に記載の内容は誤り
- * 
+ *
  * bit 7: 不明
  * bit 6: ブレイク信号受信
  * bit 5: フレーミングエラー
@@ -730,13 +730,13 @@ static REG8 IOINPCALL rs232c_i132(UINT port) {
 
 	UINT8 ret;
 	UINT8 err; // エラー状態(bit0: パリティ, bit1: オーバーラン, bit2: フレーミング, bit3: ブレーク信号)
-	
+
 	rs232c_writeretry();
-	
+
 	ret = rs232c.result; // bit0: TxRDY, bit1: RxRDY, bit2: TxEMP
 	err = rs232c_geterror();
 	ret = ((ret >> 2) & 0x1) | ((ret << 1) & 0x6) | ((err << 3) & 0x78);
-	
+
 	if (!(rs232c_stat() & 0x01)) {
 		return(ret | 0x80);
 	}
@@ -749,11 +749,11 @@ static REG8 IOINPCALL rs232c_i132(UINT port) {
 // I/O 134h モデムステータスレジスタ
 #if defined(SUPPORT_RS232C_FIFO)
 static REG8 IOINPCALL rs232c_i134(UINT port) {
-	
+
 	REG8	ret = 0;
 	static UINT8	lastret = 0;
 	UINT8	stat = rs232c_stat();
-	
+
 	/* stat
 	 * bit 7: ~CI (RI, RING)
 	 * bit 6: ~CS (CTS)
@@ -782,7 +782,7 @@ static REG8 IOINPCALL rs232c_i134(UINT port) {
 static REG8 IOINPCALL rs232c_i136(UINT port) {
 
 	rs232cfifo.port136 ^= 0x40;
-	
+
 	if(rs232cfifo.irqflag){
 		rs232cfifo.port136 &= ~0xf;
 		if(rs232cfifo.irqflag == 3){
@@ -829,7 +829,7 @@ static void IOOUTCALL rs232c_o138(UINT port, REG8 dat) {
 static REG8 IOINPCALL rs232c_i138(UINT port) {
 
 	UINT8 ret = rs232cfifo.port138;
-	
+
 	return(ret);
 }
 
@@ -909,15 +909,15 @@ void rs232c_reset(const NP2CFG *pConfig) {
 	rs232c.dummyinst = 0;
 	rs232c.mul = 10 * 16;
 	rs232c.rawmode = 0;
-	
+
 #if defined(SUPPORT_RS232C_FIFO)
 	ZeroMemory(&rs232cfifo, sizeof(rs232cfifo));
 #endif
-	
+
 	if (cm_rs232c == NULL) {
 		cm_rs232c = commng_create(COMCREATE_SERIAL, TRUE);
 	}
-	
+
 	(void)pConfig;
 }
 
@@ -925,7 +925,7 @@ void rs232c_bind(void) {
 
 	iocore_attachsysoutex(0x0030, 0x0cf1, rs232co30, 2);
 	iocore_attachsysinpex(0x0030, 0x0cf1, rs232ci30, 2);
-	
+
 #if defined(SUPPORT_RS232C_FIFO)
 	iocore_attachout(0x130, rs232c_o30);
 	iocore_attachinp(0x130, rs232c_i30);
@@ -947,4 +947,3 @@ void rs232c_bind(void) {
 		rs232c.cmdvalid = 1;
 	}
 }
-

@@ -106,7 +106,7 @@ void adpcm_setreg(ADPCM ad, UINT reg, REG8 value) {
 			addr = (LOADINTELWORD(ad->reg.limit) + 1) << 5;
 			ad->limit = addr;
 			break;
-			
+
 		case 0x0e:								// DAC data
 			ad->status |= 0x04;	// EOS
 			break;
@@ -126,4 +126,3 @@ REG8 adpcm_status(ADPCM ad) {
 
 	return(((ad->status | 8) & ad->mask) | ad->play);
 }
-

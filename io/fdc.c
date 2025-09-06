@@ -37,11 +37,11 @@ static const UINT8 FDCCMD_TABLE[32] = {
 
 #define FDC_INT_DELAY		6			/*!< Delay 100ms */
 #define FDC_SEEKSOUND_TIMEOUT		60			/*!< Timeout 1000ms */
-						
+
 static int fdc_seeksndtimeout[4] = {0};
 
 void fdc_intwait(NEVENTITEM item) {
-	
+
 	if (item->flag & NEVENT_SETEVENT) {
 		fdc.intreq = TRUE;
 		if (fdc.chgreg & 1) {
@@ -54,7 +54,7 @@ void fdc_intwait(NEVENTITEM item) {
 }
 
 void fdc_interrupt(void) {
-	
+
 	nevent_set(NEVENT_FDCINT, 512, fdc_intwait, NEVENT_ABSOLUTE);
 }
 
@@ -1092,7 +1092,7 @@ static REG8 IOINPCALL fdc_i94(UINT port) {
 
 
 static void IOOUTCALL fdc_obe(UINT port, REG8 dat) {
-	
+
 	TRACEOUT(("fdc out %.2x %.2x [%.4x:%.4x]", port, dat, CPU_CS, CPU_IP));
 
 	fdc.chgreg = dat;
@@ -1115,7 +1115,7 @@ static REG8 IOINPCALL fdc_ibe(UINT port) {
 }
 
 static void IOOUTCALL fdc_o4be(UINT port, REG8 dat) {
-	
+
 	TRACEOUT(("fdc out %.2x %.2x [%.4x:%.4x]", port, dat, CPU_CS, CPU_IP));
 
 	fdc.reg144 = dat;
@@ -1173,4 +1173,3 @@ void fdc_bind(void) {
 	iocore_attachsysoutex(0x00be, 0x0cff, fdcobe, 1);
 	iocore_attachsysinpex(0x00be, 0x0cff, fdcibe, 1);
 }
-

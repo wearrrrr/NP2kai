@@ -29,7 +29,7 @@ static void writeExtendedRegister(POPNA opna, UINT nAddress, REG8 cData);
 #define LINEAR2DB(a)	(pow(a,0.12)*(20+192) - 192)	// XXX: fmgen音量と猫音源音量を一致させるための実験式･･･
 
 // XXX: 音量調整を出来るようにするためにとりあえず･･･
-POPNA opnalist[OPNA_MAX] = {0}; 
+POPNA opnalist[OPNA_MAX] = {0};
 int opnalistconunt = 0;
 void opnalist_push(POPNA opna)
 {
@@ -171,7 +171,7 @@ void opna_reset(POPNA opna, REG8 cCaps)
 	rhythm_reset(&opna->rhythm);
 	adpcm_reset(&opna->adpcm);
 
-	
+
 	// 音量初期化
 	opngen_setvol(np2cfg.vol_fm);
 	psggen_setvol(np2cfg.vol_ssg);

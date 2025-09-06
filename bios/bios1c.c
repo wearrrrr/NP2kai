@@ -30,7 +30,7 @@ void bios0x1c(void) {
 			SETBIOSMEM16(0x0058a, CPU_CX);
 #if defined(BIOS_IO_EMULATION) && defined(CPUCORE_IA32)
 			if (CPU_STAT_PM && CPU_STAT_VM86 && biosioemu.enable) {
-				biosioemu_enq8(0x77, 0x36); 
+				biosioemu_enq8(0x77, 0x36);
 			} else
 #endif
 			{
@@ -61,7 +61,7 @@ void bios0x1c(void) {
 			}
 			pic.pi[0].imr &= ~(PIC_SYSTEMTIMER);
 			break;
-			
+
 #if defined(SUPPORT_HRTIMER)
 		case 0x80:					// hrtimer read
 			CPU_AL = ((mem[0x04F3] >> 6) - 1) & 0x3; // 経過日数
@@ -80,4 +80,3 @@ void bios0x1c(void) {
 #endif
 	}
 }
-

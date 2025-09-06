@@ -143,7 +143,7 @@ static void stop_daplay(IDEDRV drv)
 		0x2A write(10)
 		0xAA write(12)
 		0x2E write and verify(10)
-		
+
 		"Play operation SHALL NOT stopped" commands (INF-8090)
 		0x46 get configuration
 		0x4A get event/status notification
@@ -307,22 +307,22 @@ void atapicmd_a0(IDEDRV drv) {
 		leng = (drv->buf[7] << 8) + drv->buf[8];
 		atapi_cmd_read(drv, lba, leng);
 		break;
-		
+
 	case 0xbe:		// read cd
 		lba = (drv->buf[2] << 24) + (drv->buf[3] << 16) + (drv->buf[4] << 8) + drv->buf[5];
 		leng = (drv->buf[6] << 16) + (drv->buf[7] << 8) + drv->buf[8];
 		atapi_cmd_read_cd(drv, lba, leng);
 		break;
-		
+
 	case 0xb9:		// read cd msf
 		atapi_cmd_read_cd_msf(drv);
 		break;
-		
+
 	case 0x2b:		// Seek
 		lba = (drv->buf[2] << 24) + (drv->buf[3] << 16) + (drv->buf[4] << 8) + drv->buf[5];
 		atapi_cmd_seek(drv, lba);
 		break;
-		
+
 	case 0x55:		// mode select
 		TRACEOUT(("atapicmd: mode select"));
 		atapi_cmd_mode_select(drv);
@@ -367,12 +367,12 @@ void atapicmd_a0(IDEDRV drv) {
 		TRACEOUT(("atapicmd: pause resume"));
 		atapi_cmd_pauseresume(drv);
 		break;
-		
+
 	case 0xbd:		// mechanism status
 		TRACEOUT(("atapicmd: mechanism status"));
 		atapi_cmd_mechanismstatus(drv);
 		break;
-		
+
 	default:
 		TRACEOUT(("atapicmd: unknown command = %.2x", cmd));
 		sendabort(drv);
@@ -526,7 +526,7 @@ static void atapi_cmd_read_capacity(IDEDRV drv) {
 	b[5] = (UINT8)(blklen >> 16);
 	b[6] = (UINT8)(blklen >> 8);
 	b[7] = (UINT8)(blklen);
-	
+
 	senddata(drv, 8, 8);
 
 	//cmddone(drv);
@@ -551,7 +551,7 @@ void atapi_dataread_threadfunc_part(IDEDRV drv) {
 		atapi_dataread_error = 2;
 		return;
 	}
-	
+
 	atapi_dataread_error = 0;
 }
 void atapi_dataread_asyncwait(int wait) {
@@ -594,7 +594,7 @@ void atapi_dataread_asyncwait(int wait) {
 			drv->buftc = (drv->nsectors)?IDETC_ATAPIREAD:IDETC_TRANSFEREND;
 			drv->bufpos = 0;
 			drv->bufsize = 2048;
-	
+
 			if(np2cfg.usecdecc && (sxsi->cdflag_ecc & CD_ECC_BITMASK)==CD_ECC_RECOVERED){
 				drv->status |= IDESTAT_CORR;
 				ATAPI_SET_SENSE_KEY(drv, ATAPI_SK_RECOVERED_ERROR);
@@ -616,7 +616,7 @@ void atapi_dataread_asyncwait(int wait) {
 }
 unsigned int __stdcall atapi_dataread_threadfunc(void* vdParam) {
 	IDEDRV drv = NULL;
-	
+
 	SetEvent(atapi_thread_event_complete);
 	while(WaitForSingleObject(atapi_thread_event_request, INFINITE) == WAIT_OBJECT_0){
 		if(!atapi_thread_initialized) break;
@@ -630,7 +630,7 @@ unsigned int __stdcall atapi_dataread_threadfunc(void* vdParam) {
 
 }
 void atapi_dataread(IDEDRV drv) {
-	
+
 	if(drv->status & IDESTAT_BSY) {
 		return;
 	}
@@ -642,7 +642,7 @@ void atapi_dataread(IDEDRV drv) {
 	}
 
 	drv->status |= IDESTAT_BSY;
-	
+
 	if(np2cfg.useasynccd){
 		if(atapi_thread){
 			atapi_dataread_asyncwait(INFINITE);
@@ -678,7 +678,7 @@ void atapi_dataread(IDEDRV drv) {
 		sendabort(drv);
 		return;
 	}
-	
+
 	sxsi->cdflag_ecc = (sxsi->cdflag_ecc & ~CD_ECC_BITMASK) | CD_ECC_NOERROR;
 
 	if (sxsi_read(drv->sxsidrv, drv->sector, drv->buf, 2048) != 0) {
@@ -715,7 +715,7 @@ void atapi_dataread(IDEDRV drv) {
 	drv->buftc = (drv->nsectors)?IDETC_ATAPIREAD:IDETC_TRANSFEREND;
 	drv->bufpos = 0;
 	drv->bufsize = 2048;
-	
+
 	if(np2cfg.usecdecc && (sxsi->cdflag_ecc & CD_ECC_BITMASK)==CD_ECC_RECOVERED){
 		drv->status |= IDESTAT_CORR;
 		ATAPI_SET_SENSE_KEY(drv, ATAPI_SK_RECOVERED_ERROR);
@@ -749,7 +749,7 @@ void atapi_dataread_end(IDEDRV drv) {
 	drv->buftc = (drv->nsectors)?IDETC_ATAPIREAD:IDETC_TRANSFEREND;
 	drv->bufpos = 0;
 	drv->bufsize = 2048;
-	
+
 	if(np2cfg.usecdecc && (sxsi->cdflag_ecc & CD_ECC_BITMASK)==CD_ECC_RECOVERED){
 		drv->status |= IDESTAT_CORR;
 		ATAPI_SET_SENSE_KEY(drv, ATAPI_SK_RECOVERED_ERROR);
@@ -770,7 +770,7 @@ void atapi_dataread_end(IDEDRV drv) {
 void atapi_dataread_errorend(IDEDRV drv) {
 	SXSIDEV	sxsi;
 	sxsi = sxsi_getptr(drv->sxsidrv);
-	
+
 	drv->status &= ~(IDESTAT_DRQ);
 
 	ATAPI_SET_SENSE_KEY(drv, ATAPI_SK_ILLEGAL_REQUEST);
@@ -790,7 +790,7 @@ static void atapi_cmd_read(IDEDRV drv, UINT32 lba, UINT32 nsec) {
 	atapi_dataread(drv);
 }
 static void atapi_cmd_read_cd(IDEDRV drv, UINT32 lba, UINT32 nsec) {
-	
+
 	int i;
 	SXSIDEV	sxsi;
 	CDTRK	trk;
@@ -807,7 +807,7 @@ static void atapi_cmd_read_cd(IDEDRV drv, UINT32 lba, UINT32 nsec) {
 	UINT8 hasedcecc;
 
 	UINT16 isCDDA = 1;
-	
+
 #if defined(_WINDOWS)
 	atapi_thread_drv = drv;
 #endif
@@ -821,7 +821,7 @@ static void atapi_cmd_read_cd(IDEDRV drv, UINT32 lba, UINT32 nsec) {
 
 	drv->sector = lba;
 	drv->nsectors = nsec;
-	
+
 	// エラー処理目茶苦茶〜
 	if (drv->nsectors == 0) {
 		cmddone(drv);
@@ -829,7 +829,7 @@ static void atapi_cmd_read_cd(IDEDRV drv, UINT32 lba, UINT32 nsec) {
 	}
 
 	sxsi->cdflag_ecc = (sxsi->cdflag_ecc & ~CD_ECC_BITMASK) | CD_ECC_NOERROR;
-	
+
 	trk = sxsicd_gettrk(sxsi, &tracks);
 	for (i = 0; i < tracks; i++) {
 		if (trk[i].str_sec <= (UINT32)drv->sector && (UINT32)drv->sector <= trk[i].end_sec) {
@@ -837,7 +837,7 @@ static void atapi_cmd_read_cd(IDEDRV drv, UINT32 lba, UINT32 nsec) {
 			break;
 		}
 	}
-	
+
 	if(isCDDA){
 		// Audio
 		if (sxsicd_readraw(sxsi, drv->sector, drv->buf) != SUCCESS) {
@@ -899,7 +899,7 @@ static void atapi_cmd_read_cd(IDEDRV drv, UINT32 lba, UINT32 nsec) {
 
 			////// XA
 			////memcpy(bufptr, rawdata + 12 + 4 + 8 + 2048, 280);
-			
+
 			//bufptr += 280;
 			//bufsize += 280;
 
@@ -908,9 +908,9 @@ static void atapi_cmd_read_cd(IDEDRV drv, UINT32 lba, UINT32 nsec) {
 			bufsize += 288;
 		}
 	}
-	
+
 	atapi_dataread_end(drv);
-	
+
 	drv->bufsize = bufsize;
 	drv->cy = bufsize;
 }
@@ -1000,7 +1000,7 @@ static const UINT8 defval_pagecode_2a[PC_2A_SIZE] = {
 	0x02, 0xc2, 0x00, 0xff, 0x00, 0x80, 0x02, 0xc2,
 	0x00, 0x00, 0x00, 0x00,
 //#endif
-}; 
+};
 
 #if defined(SUPPORT_NECCDD)
 #define	PC_0F_SIZE	16
@@ -1020,7 +1020,7 @@ static const UINT8 defval_pagecode_0f[PC_0F_SIZE] = {
 
 // 0x55: MODE SELECT
 static void atapi_cmd_mode_select(IDEDRV drv) {
-	
+
 	UINT leng;
 
 	leng = (drv->buf[7] << 8) + drv->buf[8];
@@ -1349,7 +1349,7 @@ static void atapi_cmd_readtoc(IDEDRV drv) {
 		return;
 	}
 	trk = sxsicd_gettrk(sxsi, &tracks);
-	
+
 #ifdef SUPPORT_KAI_IMAGES
 
 #if 0	//	修正(kaiD)
@@ -1441,7 +1441,7 @@ static void atapi_cmd_readtoc(IDEDRV drv) {
 		break;
 	}
 }
- 
+
 static void atapi_cmd_playaudio_sub(IDEDRV drv, UINT32 pos, UINT32 leng) {
 
 	ideio.daplaying |= 1 << (drv->sxsidrv & 3);
@@ -1455,7 +1455,7 @@ static void atapi_cmd_playaudio_sub(IDEDRV drv, UINT32 pos, UINT32 leng) {
 static void atapi_cmd_playaudio(IDEDRV drv) {
 	UINT32	pos;
 	UINT32	leng;
-	
+
 	pos = (drv->buf[2] << 24) | (drv->buf[3] << 16) | (drv->buf[4] << 8) | drv->buf[5];
 	leng = (drv->buf[7] << 16) | drv->buf[8];
 	atapi_cmd_playaudio_sub(drv, pos, leng);
@@ -1600,4 +1600,3 @@ void atapi_deinitialize(void) {
 #endif
 }
 #endif	/* SUPPORT_IDEIO */
-

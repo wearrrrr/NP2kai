@@ -44,4 +44,3 @@ void font_outhooktest( wchar_t* thw );
 #ifdef __cplusplus
 }
 #endif
-

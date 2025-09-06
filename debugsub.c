@@ -180,4 +180,3 @@ void debugsub_memorydump(void) {
 		file_close(fh);
 	}
 }
-

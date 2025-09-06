@@ -1175,4 +1175,3 @@ void menusys_setstyle(UINT16 style) {
 
 	menusys.style = style;
 }
-

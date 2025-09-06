@@ -98,4 +98,3 @@ void profile_iniwrite(const OEMCHAR *lpPath, const OEMCHAR *lpApp, const PFTBL *
 #endif
 
 #endif	// defined(NP2_PROFILE_H__)
-

@@ -23,4 +23,3 @@ extern uint16_t jisutf16pair_count;
 #endif
 
 #endif  // _JISUTF16PAIR_H_
-

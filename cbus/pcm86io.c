@@ -66,7 +66,7 @@ static void IOOUTCALL pcm86_oa466(UINT port, REG8 val) {
 static void IOOUTCALL pcm86_oa468(UINT port, REG8 val) {
 
 	REG8	xchgbit;
-	
+
 //	TRACEOUT(("86pcm out %.4x %.2x", port, val));
 	sound_sync();
 	xchgbit = g_pcm86.fifo ^ val;
@@ -103,7 +103,7 @@ static void IOOUTCALL pcm86_oa468(UINT port, REG8 val) {
 }
 
 static void IOOUTCALL pcm86_oa46a(UINT port, REG8 val) {
-	
+
 //	TRACEOUT(("86pcm out %.4x %.2x", port, val));
 	sound_sync();
 	if (g_pcm86.fifo & 0x20) {
@@ -132,7 +132,7 @@ static void IOOUTCALL pcm86_oa46a(UINT port, REG8 val) {
 }
 
 static void IOOUTCALL pcm86_oa46c(UINT port, REG8 val) {
-	
+
 //	TRACEOUT(("86pcm out %.4x %.2x", port, val));
 #if 1
 	if (g_pcm86.virbuf < PCM86_LOGICALBUF) {
@@ -183,7 +183,7 @@ static REG8 IOINPCALL pcm86_ia466(UINT port) {
 	UINT64	cnt;
 	UINT64	stepclock;
 	REG8	ret;
-	
+
 	past = CPU_CLOCK + CPU_BASECLOCK - CPU_REMCLOCK;
 	past <<= 6;
 	past -= g_pcm86.lastclock;
@@ -212,7 +212,7 @@ static REG8 IOINPCALL pcm86_ia466(UINT port) {
 static REG8 IOINPCALL pcm86_ia468(UINT port) {
 
 	REG8	ret;
-	
+
 	ret = g_pcm86.fifo & (~0x10);
 #if 1
 	if (pcm86gen_intrq()) {
@@ -246,7 +246,7 @@ static REG8 IOINPCALL pcm86_ia468(UINT port) {
 }
 
 static REG8 IOINPCALL pcm86_ia46a(UINT port) {
-	
+
 	(void)port;
 //	TRACEOUT(("86pcm in %.4x %.2x", port, g_pcm86.dactrl));
 	return(g_pcm86.dactrl);
@@ -324,7 +324,7 @@ static void pcm86_updateWaveStarPorts(){
 		iocore_attachinp(0xa468, cs4231io0_r8_wavestar);
 		iocore_attachinp(0xa46a, cs4231io0_r8_wavestar);
 		iocore_attachinp(0xa46c, cs4231io0_r8_wavestar);
-		
+
 		// OPNA割り込み無効
 		g_pcm86.irq = 0xff;
 		g_opna[0].s.irq = 0xff;
@@ -345,7 +345,7 @@ static void pcm86_updateWaveStarPorts(){
 		iocore_attachinp(0xa46a, pcm86_ia46a);
 		iocore_attachinp(0xa46c, pcm86_inpdummy);
 		iocore_attachinp(0xa46e, pcm86_inpdummy);
-		
+
 		// OPNA割り込み有効
 		g_pcm86.irq = cs4231.devvolume[0xfd];
 		g_opna[0].s.irq = cs4231.devvolume[0xfc];
@@ -401,13 +401,13 @@ void pcm86io_bind(void) {
 	iocore_attachinp(0xa46a, pcm86_ia46a);
 	iocore_attachinp(0xa46c, pcm86_inpdummy);
 	iocore_attachinp(0xa46e, pcm86_inpdummy);
-	
+
 	if(g_nSoundID == SOUNDID_WAVESTAR){
 		pcm86_updateWaveStarPorts();
 	}
 }
 void pcm86io_unbind(void) {
-	
+
 	iocore_detachout(0xa460);
 	if(g_nSoundID == SOUNDID_WAVESTAR){
 		iocore_detachout(0xa462);
@@ -427,4 +427,3 @@ void pcm86io_unbind(void) {
 	iocore_detachinp(0xa46c);
 	iocore_detachinp(0xa46e);
 }
-

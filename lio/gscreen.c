@@ -308,4 +308,3 @@ REG8 lio_gcolor2(GLIO lio) {
 gcolor2_err5:
 	return(LIO_ILLEGALFUNC);
 }
-

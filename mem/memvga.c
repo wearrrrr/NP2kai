@@ -1,6 +1,6 @@
 #include	<compiler.h>
 
-// PEGC 256 color mode 
+// PEGC 256 color mode
 
 // 詳しくもないのに作ったのでかなりいい加減です。
 // 改良するのであれば全部捨てて作り直した方が良いかもしれません
@@ -64,7 +64,7 @@
 // ---- flat (PEGC 0F00000h-00F80000h Memory Access ?)
 
 REG8 MEMCALL memvgaf_rd8(UINT32 address) {
-	
+
 	if(!(vramop.mio2[PEGC_REG_VRAM_ENABLE] & 0x1)){
 		return 0xff;
 	}
@@ -74,7 +74,7 @@ REG8 MEMCALL memvgaf_rd8(UINT32 address) {
 void MEMCALL memvgaf_wr8(UINT32 address, REG8 value) {
 
 	UINT8	bit;
-	
+
 	if(!(vramop.mio2[PEGC_REG_VRAM_ENABLE] & 0x1)){
 		return;
 	}
@@ -86,7 +86,7 @@ void MEMCALL memvgaf_wr8(UINT32 address, REG8 value) {
 }
 
 REG16 MEMCALL memvgaf_rd16(UINT32 address) {
-	
+
 	if(!(vramop.mio2[PEGC_REG_VRAM_ENABLE] & 0x1)){
 		return 0xffff;
 	}
@@ -97,7 +97,7 @@ REG16 MEMCALL memvgaf_rd16(UINT32 address) {
 void MEMCALL memvgaf_wr16(UINT32 address, REG16 value) {
 
 	UINT8	bit;
-	
+
 	if(!(vramop.mio2[PEGC_REG_VRAM_ENABLE] & 0x1)){
 		return;
 	}
@@ -278,11 +278,11 @@ void MEMCALL memvga1_wr32(UINT32 address, UINT32 value){
 REG8 MEMCALL memvgaio_rd8(UINT32 address) {
 
 	UINT	pos;
-	
+
 	if(address > 0xe0000 + 0x0100){
 		REG8 ret;
 		pos = address - 0xe0000 - 0x0100;
-	
+
 		if(PEGC_REG_PATTERN <= pos){
 			ret = 0;
 			// vramop.mio2[PEGC_REG_PATTERN + ofs] PATTERN DATA (16bit)
@@ -365,10 +365,10 @@ REG8 MEMCALL memvgaio_rd8(UINT32 address) {
 void MEMCALL memvgaio_wr8(UINT32 address, REG8 value) {
 
 	UINT	pos;
-	
+
 	if(address > 0xe0000 + 0x0100){
 		pos = address - 0xe0000 - 0x0100;
-	
+
 		if(PEGC_REG_PATTERN <= pos){
 			if(LOADINTELWORD(vramop.mio2+PEGC_REG_PLANE_ROP) & 0x8000){
 				// 1 palette x 16 pixels
@@ -437,7 +437,7 @@ REG16 MEMCALL memvgaio_rd16(UINT32 address) {
 	if(address > 0xe0000 + 0x0100){
 		UINT	pos;
 		pos = address - 0xe0000 - 0x0100;
-	
+
 		if(PEGC_REG_PATTERN <= pos){
 			ret = 0;
 			// vramop.mio2[PEGC_REG_PATTERN + ofs] PATTERN DATA (16bit)
@@ -511,11 +511,11 @@ REG16 MEMCALL memvgaio_rd16(UINT32 address) {
 }
 
 void MEMCALL memvgaio_wr16(UINT32 address, REG16 value) {
-	
+
 	if(address > 0xe0000 + 0x0100){
 		UINT	pos;
 		pos = address - 0xe0000 - 0x0100;
-	
+
 		if(PEGC_REG_PATTERN <= pos){
 			if(LOADINTELWORD(vramop.mio2+PEGC_REG_PLANE_ROP) & 0x8000){
 				// 1 palette x 16 pixels
@@ -541,16 +541,16 @@ void MEMCALL memvgaio_wr16(UINT32 address, REG16 value) {
 
 	memvgaio_wr8(address + 0, (REG8)value);
 	memvgaio_wr8(address + 1, (REG8)(value >> 8));
-	
+
 }
 
 UINT32 MEMCALL memvgaio_rd32(UINT32 address){
-	
+
 	UINT32	ret;
 	UINT	pos;
 
 	pos = address - 0xe0000 - 0x0100;
-	
+
 	if(address > 0xe0000 + 0x0100 && PEGC_REG_PATTERN <= pos){
 		ret = 0;
 		// vramop.mio2[PEGC_REG_PATTERN + ofs] PATTERN DATA (32bit)
@@ -636,11 +636,11 @@ UINT32 MEMCALL memvgaio_rd32(UINT32 address){
 	return (UINT32)memvgaio_rd16(address)|(memvgaio_rd16(address+2)<<16);
 }
 void MEMCALL memvgaio_wr32(UINT32 address, UINT32 value){
-	
+
 	UINT	pos;
 
 	pos = address - 0xe0000 - 0x0100;
-	
+
 	if(address > 0xe0000 + 0x0100 && PEGC_REG_PATTERN <= pos){
 		if(LOADINTELWORD(vramop.mio2+PEGC_REG_PLANE_ROP) & 0x8000){
 			// 1 palette x 32 pixels
@@ -668,4 +668,3 @@ void MEMCALL memvgaio_wr32(UINT32 address, UINT32 value){
 }
 
 #endif
-

@@ -64,7 +64,7 @@ typedef struct {
 	UINT8		outenable;
 	UINT8		extfunc;
 	UINT8		extindex;
-	
+
 	UINT16		timer; // 廃止
 	SINT32		timercounter; // TI割り込み用のダウンカウンタ（の予定）
 
@@ -95,7 +95,7 @@ typedef struct { // ステートセーブ互換性維持用（変更禁止）
 	UINT8		outenable;
 	UINT8		extfunc;
 	UINT8		extindex;
-	
+
 	UINT16		timer; // 廃止
 	SINT32		timercounter; // TI割り込み用のダウンカウンタ（の予定）
 

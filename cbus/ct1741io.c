@@ -42,7 +42,7 @@ static const UINT8 ct1741_cmd_len[256] = {
   0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0   // 0xf0
 };
 
-static UINT ct1741_np2_rate = 0; 
+static UINT ct1741_np2_rate = 0;
 
 static void SOUNDCALL pcm8mPIO(DMA_INFO *cs, SINT32 *pcm, UINT count);
 static void SOUNDCALL nomake(DMA_INFO *ct, SINT32 *pcm, UINT count);
@@ -319,7 +319,7 @@ static void ct1741_exec_command()
 		break;
 	case 0x75:	/* 075h : Single Cycle 4-bit ADPCM Reference */
 //		sb.adpcm.haveref = true;
-	case 0x74:	/* 074h : Single Cycle 4-bit ADPCM */	
+	case 0x74:	/* 074h : Single Cycle 4-bit ADPCM */
 		ct1741_prepare_dma_old(DSP_DMA_4, FALSE);
 		break;
 	case 0x77:	/* 077h : Single Cycle 3-bit(2.6bit) ADPCM Reference*/
@@ -482,7 +482,7 @@ printf ("write 26d2 %x¥n",dat);
 	}
 
 if(dat == 0xc6){ct1741_flush_data();ct1741_reset();g_sb16.dsp_info.state = 2;}
-	
+
 }
 
 /* DSP Write Command/Data */
@@ -703,7 +703,7 @@ void ct1741_dma(NEVENTITEM item)
 					ct1741_setpicirq(g_sb16.dmairq);
 					g_sb16.dsp_info.write_busy = 0;
 				}
-				
+
 				if ((g_sb16.dsp_info.dma.chan->leng.w) && (g_sb16.dsp_info.freq)) {
 					// 再度イベント設定
 					cnt = pccore.realclock / g_sb16.dsp_info.freq * g_sb16.dsp_info.dma.rate2 / g_sb16.dsp_info.freq * (DMAPLAY_ADJUST_VALUE * g_sb16.dsp_info.freq / 44100);
@@ -855,7 +855,7 @@ const UINT8	*ptr2;
 	if (!leng) {
 		return;
 	}
-	
+
 	for(i=0;i<count;i++){
 		samppos = (i * samplen_src / samplen_dst);
 		if(samppos >= leng){
@@ -906,7 +906,7 @@ const UINT8	*ptr2;
 	if (!leng) {
 		return;
 	}
-	
+
 	for(i=0;i<count;i++){
 		samppos = (i * samplen_src / samplen_dst);
 		if(samppos >= leng){
@@ -929,7 +929,7 @@ const UINT8	*ptr2;
 
 // 8bit ステレオ
 static void SOUNDCALL pcm8s(DMA_INFO *cs, SINT32 *pcm, UINT count) {
-	
+
 	UINT32	leng;
 	UINT32	pos12;
 	SINT32	fract;
@@ -953,7 +953,7 @@ const UINT8	*ptr2;
 	if (!leng) {
 		return;
 	}
-	
+
 	for(i=0;i<count;i++){
 		samppos = 2*(i * samplen_src / samplen_dst);
 		if(samppos >= leng){
@@ -977,7 +977,7 @@ const UINT8	*ptr2;
 
 // 16bit モノラル
 static void SOUNDCALL Spcm16m(DMA_INFO *cs, SINT32 *pcm, UINT count) {
-	
+
 	UINT32	leng;
 	UINT32	pos12;
 	SINT32	fract;
@@ -1001,7 +1001,7 @@ const UINT8	*ptr2;
 	if (!leng) {
 		return;
 	}
-	
+
 	for(i=0;i<count;i++){
 		samppos = 2 * (i * samplen_src / samplen_dst);
 		if(samppos >= leng){
@@ -1024,7 +1024,7 @@ const UINT8	*ptr2;
 
 // 16bit ステレオ(little endian)
 static void SOUNDCALL Spcm16s(DMA_INFO *cs, SINT32 *pcm, UINT count) {
-	
+
 	UINT32	leng;
 	UINT32	pos12;
 	SINT32	fract;
@@ -1048,7 +1048,7 @@ const UINT8	*ptr2;
 	if (!leng) {
 		return;
 	}
-	
+
 	for(i=0;i<count;i++){
 		samppos = 4 * (i * samplen_src / samplen_dst);
 		if(samppos >= leng){
@@ -1132,7 +1132,7 @@ void ct1741io_bind(void)
 	iocore_attachinp(0x2d00 + g_sb16.base, ct1741_read_reset);	/* DSP Reset */
 	iocore_attachinp(0x2e00 + g_sb16.base, ct1741_read_rstatus);	/* DSP Read Buffer Status (Bit 7) */
 	iocore_attachinp(0x2f00 + g_sb16.base, ct1741_read_rstatus16);	/* DSP Read Buffer Status (Bit 7) */
-	
+
 	// Canopus PowerWindow T64S/98 音源部テスト
 	//iocore_attachout(0x6600 + g_sb16.base, ct1741_write_reset);	/* DSP Reset */
 	//iocore_attachout(0x6C00 + g_sb16.base, ct1741_write_data);	/* DSP Write Command/Data */
@@ -1143,7 +1143,7 @@ void ct1741io_bind(void)
 	//iocore_attachinp(0x6d00 + g_sb16.base, ct1741_read_reset);	/* DSP Reset */
 	//iocore_attachinp(0x6e00 + g_sb16.base, ct1741_read_rstatus);	/* DSP Read Buffer Status (Bit 7) */
 	//iocore_attachinp(0x6f00 + g_sb16.base, ct1741_read_rstatus16);	/* DSP Read Buffer Status (Bit 7) */
-	
+
 	// PC/AT互換機テスト
 	if(np2cfg.sndsb16at){
 		iocore_attachout(0x226, ct1741_write_reset);	/* DSP Reset */
@@ -1167,7 +1167,7 @@ void ct1741io_unbind(void)
 	iocore_detachinp(0x2c00 + g_sb16.base);	/* DSP Write Buffer Status (Bit 7) */
 	iocore_detachinp(0x2e00 + g_sb16.base);	/* DSP Read Buffer Status (Bit 7) */
 	iocore_detachinp(0x2f00 + g_sb16.base);	/* DSP Read Buffer Status (Bit 7) */
-	
+
 	// PC/AT互換機テスト
 	if(np2cfg.sndsb16at){
 		iocore_detachout(0x226);	/* DSP Reset */

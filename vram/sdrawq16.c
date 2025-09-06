@@ -98,7 +98,7 @@ const UINT8	*q;
 				work += np2_pal16[p[x+1] + q[x+1] + NP2PAL_GRPH];
 				work += np2_pal16[p[x+0+SURFACE_WIDTH] +
 										q[x+0+SURFACE_WIDTH] + NP2PAL_GRPH];
-				work += np2_pal16[p[x+1+SURFACE_WIDTH] + 
+				work += np2_pal16[p[x+1+SURFACE_WIDTH] +
 										q[x+1+SURFACE_WIDTH] + NP2PAL_GRPH];
 				work &= 0x07e0f81f << 2;
 				*(UINT16 *)r = (UINT16)((work >> 2) + (work >> 18));
@@ -303,4 +303,3 @@ const SDRAWFN *sdraw_getproctbl(const SCRNSURF *surf) {
 }
 
 #endif
-

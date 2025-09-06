@@ -651,4 +651,3 @@ REG8 lio_gput2(GLIO lio) {
 	}
 	return(putsub(lio, &lput));
 }
-

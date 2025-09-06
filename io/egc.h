@@ -54,4 +54,3 @@ void IOOUTCALL egc_w16(UINT port, REG16 value);
 #ifdef __cplusplus
 }
 #endif
-

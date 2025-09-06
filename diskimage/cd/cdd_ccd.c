@@ -97,7 +97,7 @@ BRESULT openccd(SXSIDEV sxsi, const OEMCHAR *fname) {
 	if (index == 0) {
 		goto openccd_err1;
 	}
-	
+
 	sxsi->read = sec2352_read_with_ecc; //sec2352_read;
 	sxsi->totals = -1;
 

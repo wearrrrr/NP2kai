@@ -32,7 +32,7 @@ void mouseif_sync(void) {
 #else
 	mouseif.lastc = CPU_CLOCK + CPU_BASECLOCK + CPU_REMCLOCK;
 #endif
-	
+
 	// XXX: 何故かマウスイベントが消えることがあるので復活させる･･･ np21w ver.0.86 rev.79
 	if (!(mouseif.upd8255.portc & 0x10)) {
 		if (!nevent_iswork(NEVENT_MOUSE)) {
@@ -234,9 +234,9 @@ static REG8 IOINPCALL mouseif_i7fd9(UINT port) {
 			x = y;
 		}
 		if (mouseif_limitcounter > 0) {
-			if(x < -128) 
+			if(x < -128)
 				x = -128;
-			if(x > +127) 
+			if(x > +127)
 				x = +127;
 			mouseif_limitcounter--;
 		}
@@ -304,7 +304,7 @@ void mouseif_reset(const NP2CFG *pConfig) {
 	mouseif_changeclock();
 	mouseif.latch_x = -1;
 	mouseif.latch_y = -1;
-	
+
 	//mouseif.timing = 2;
 	(void)pConfig;
 }
@@ -322,8 +322,7 @@ void mouseif_bind(void) {
 }
 
 void mouseif_changeclock(void) {
-	
+
 	mouseif.intrclock = pccore.realclock / 120;
 	mouseif.moveclock = pccore.realclock / 56400;
 }
-

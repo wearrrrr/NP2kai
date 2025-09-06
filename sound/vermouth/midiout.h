@@ -146,4 +146,3 @@ VEXTERN int VEXPORT midimod_loadallex(MIDIMOD mod, FNMIDIOUTLAEXCB cb,
 #ifdef __cplusplus
 }
 #endif
-

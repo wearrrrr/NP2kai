@@ -5,6 +5,7 @@
 
 #pragma once
 
+#include <stdint.h>
 #include <nevent.h>
 
 enum {
@@ -74,7 +75,7 @@ enum tagSoundId
 	SOUNDID_PX1					= 0x30,
 	SOUNDID_PX2					= 0x50,
 #endif
-	
+
 	SOUNDID_INVALID				= 0xff,		/*!< for new statesave checker */
 };
 typedef enum tagSoundId		SOUNDID;
@@ -91,238 +92,238 @@ enum {
 struct tagNP2Config
 {
 	// エミュレート中によく参照される奴
-	UINT8	uPD72020;
-	UINT8	DISPSYNC;
-	UINT8	RASTER;
-	UINT8	realpal;
-	UINT8	LCD_MODE;
-	UINT8	skipline;
-	UINT16	skiplight;
+	uint8_t  uPD72020;
+	uint8_t	 DISPSYNC;
+	uint8_t	 RASTER;
+	uint8_t	 realpal;
+	uint8_t	 LCD_MODE;
+	uint8_t	 skipline;
+	uint16_t skiplight;
 
-	UINT8	KEY_MODE;
-	UINT8	XSHIFT;
-	UINT8	BTN_RAPID;
-	UINT8	BTN_MODE;
+	uint8_t	KEY_MODE;
+	uint8_t	XSHIFT;
+	uint8_t	BTN_RAPID;
+	uint8_t	BTN_MODE;
 
-	UINT8	dipsw[3];
-	UINT8	MOUSERAPID;
+	uint8_t	dipsw[3];
+	uint8_t	MOUSERAPID;
 
-	UINT8	calendar;
-	UINT8	usefd144;
-	UINT8	wait[6];
-	
-	UINT8	davolume;
-	UINT8	modelnum;
+	uint8_t	calendar;
+	uint8_t	usefd144;
+	uint8_t	wait[6];
 
-	UINT8	timerfix;
-	
+	uint8_t	davolume;
+	uint8_t	modelnum;
+
+	uint8_t timerfix;
+
 #if defined(SUPPORT_ASYNC_CPU)
-	UINT8	asynccpu; // 非同期CPUモード有効
+	uint8_t	asynccpu; // 非同期CPUモード有効
 #endif
-	UINT8	consttsc; // RDTSCをAsyncクロック変更によらず一定間隔にする
+	uint8_t	consttsc; // RDTSCをAsyncクロック変更によらず一定間隔にする
 #if defined(SUPPORT_IDEIO)
-	UINT8	idebaddr; // IDE BIOS アドレス（デフォルト：D8h(D8000h)）
+	uint8_t	idebaddr; // IDE BIOS アドレス（デフォルト：D8h(D8000h)）
 #endif
-	
+
 	// リセット時とかあんまり参照されない奴
-	OEMCHAR	model[8];
-	UINT	baseclock;
-	UINT	multiple;
-	
-	UINT8	usebios;
+	char model[8];
+	uint32_t baseclock;
+	uint32_t multiple;
 
-	UINT8	memsw[8];
+	uint8_t	usebios;
 
-	UINT8	ITF_WORK;
+	uint8_t	memsw[8];
+
+	uint8_t	ITF_WORK;
 #if defined(SUPPORT_LARGE_MEMORY)
-	UINT16	EXTMEM;
+	uint16_t EXTMEM;
 #else
-	UINT8	EXTMEM;
+	uint8_t	 EXTMEM;
 #endif
-	UINT8	grcg;
-	UINT8	color16;
-	UINT32	BG_COLOR;
-	UINT32	FG_COLOR;
+	uint8_t	grcg;
+	uint8_t	color16;
+	uint32_t	BG_COLOR;
+	uint32_t	FG_COLOR;
 
-	UINT32	samplingrate;
-	UINT16	delayms;
-	UINT8	SOUND_SW;
-	UINT8	snd_x;
+	uint32_t	samplingrate;
+	uint16_t	delayms;
+	uint8_t	SOUND_SW;
+	uint8_t	snd_x;
 
-	UINT8	snd14opt[3];
-	UINT8	snd26opt;
-	UINT8	snd86opt;
-	UINT8	spbopt;
-	UINT8	spb_vrc;												// ver0.30
-	UINT8	spb_vrl;												// ver0.30
-	UINT8	spb_x;													// ver0.30
+	uint8_t	snd14opt[3];
+	uint8_t	snd26opt;
+	uint8_t	snd86opt;
+	uint8_t	spbopt;
+	uint8_t	spb_vrc;												// ver0.30
+	uint8_t	spb_vrl;												// ver0.30
+	uint8_t	spb_x;													// ver0.30
 
-	UINT16	snd118io;
-	UINT8	snd118id;
-	UINT8	snd118dma;
-	UINT8	snd118irqf;
-	UINT8	snd118irqp;
-	UINT8	snd118irqm;
-	UINT8	snd118rom;
-	
-	UINT8	sndwssid;
-	UINT8	sndwssdma;
-	UINT8	sndwssirq;
-	
+	uint16_t	snd118io;
+	uint8_t	snd118id;
+	uint8_t	snd118dma;
+	uint8_t	snd118irqf;
+	uint8_t	snd118irqp;
+	uint8_t	snd118irqm;
+	uint8_t	snd118rom;
+
+	uint8_t	sndwssid;
+	uint8_t	sndwssdma;
+	uint8_t	sndwssirq;
+
 #if defined(SUPPORT_SOUND_SB16)
-	UINT8	sndsb16io;
-	UINT8	sndsb16dma;
-	UINT8	sndsb16irq;
-	UINT8	sndsb16at;
+	uint8_t	sndsb16io;
+	uint8_t	sndsb16dma;
+	uint8_t	sndsb16irq;
+	uint8_t	sndsb16at;
 #endif	/* SUPPORT_SOUND_SB16 */
 
-	UINT8	BEEP_VOL;
-	UINT8	vol14[6];
-	UINT8	vol_master;
-	UINT8	vol_fm;
-	UINT8	vol_ssg;
-	UINT8	vol_adpcm;
-	UINT8	vol_pcm;
-	UINT8	vol_rhythm;
-	UINT8	vol_midi;
+	uint8_t	BEEP_VOL;
+	uint8_t	vol14[6];
+	uint8_t	vol_master;
+	uint8_t	vol_fm;
+	uint8_t	vol_ssg;
+	uint8_t	vol_adpcm;
+	uint8_t	vol_pcm;
+	uint8_t	vol_rhythm;
+	uint8_t	vol_midi;
 
-	UINT8	mpuenable;
-	UINT8	mpuopt;
-	UINT8	mpu_at;
-	
+	uint8_t	mpuenable;
+	uint8_t	mpuopt;
+	uint8_t	mpu_at;
+
 #if defined(SUPPORT_SMPU98)
-	UINT8	smpuenable;
-	UINT8	smpuopt;
-	UINT8	smpumuteB;
+	uint8_t	smpuenable;
+	uint8_t	smpuopt;
+	uint8_t	smpumuteB;
 #endif	/* SUPPORT_SMPU98 */
 
-	UINT8	pc9861enable;
-	UINT8	pc9861sw[3];
-	UINT8	pc9861jmp[6];
-	
+	uint8_t	pc9861enable;
+	uint8_t	pc9861sw[3];
+	uint8_t	pc9861jmp[6];
+
 #if defined(SUPPORT_FMGEN)
-	UINT8	usefmgen;
+	uint8_t	usefmgen;
 #endif	/* SUPPORT_FMGEN */
 
-	UINT8	fddequip;
-	UINT8	MOTOR;
-	UINT8	MOTORVOL;
-	UINT8	PROTECTMEM;
-	UINT8	hdrvacc;
-	UINT8	hdrvenable;
-	
-	UINT8	savefddfile;											// ver0.86w rev20
-	OEMCHAR	fddfile[4][MAX_PATH];									// ver0.86w rev20
+	uint8_t	fddequip;
+	uint8_t	MOTOR;
+	uint8_t	MOTORVOL;
+	uint8_t	PROTECTMEM;
+	uint8_t	hdrvacc;
+	uint8_t	hdrvenable;
+
+	uint8_t	savefddfile;											// ver0.86w rev20
+	char fddfile[4][MAX_PATH];									// ver0.86w rev20
 
 #if defined(SUPPORT_IDEIO)
-	OEMCHAR	sasihdd[4][MAX_PATH];									// ver0.86w
-	UINT8	idetype[4];												// ver0.86w
-	OEMCHAR	idecd[4][MAX_PATH];										// ver0.85w
-	UINT8	idebios;												// ver0.86w rev20
-	UINT8	autoidebios;												// ver0.86w rev36
-	UINT32	iderwait; // IDE読み取りの割り込み遅延時間(clock)。  np21w ver0.86 rev19
-	UINT32	idewwait; // IDE書き込みの割り込み遅延時間(clock)。  np21w ver0.86 rev18
-	UINT32	idemwait; // IDE BIOSがある場合の割り込み遅延最小値  np21w ver0.86 rev26 廃止
-	UINT8	savecdfile;	
-	UINT8	useasynccd;
-	UINT8	allowcdtraycmd;	
-	UINT8	useasynchd;
+	char	sasihdd[4][MAX_PATH];									// ver0.86w
+	uint8_t	idetype[4];												// ver0.86w
+	char	idecd[4][MAX_PATH];										// ver0.85w
+	uint8_t	idebios;												// ver0.86w rev20
+	uint8_t	autoidebios;												// ver0.86w rev36
+	uint32_t	iderwait; // IDE読み取りの割り込み遅延時間(clock)。  np21w ver0.86 rev19
+	uint32_t	idewwait; // IDE書き込みの割り込み遅延時間(clock)。  np21w ver0.86 rev18
+	uint32_t	idemwait; // IDE BIOSがある場合の割り込み遅延最小値  np21w ver0.86 rev26 廃止
+	uint8_t	savecdfile;
+	uint8_t	useasynccd;
+	uint8_t	allowcdtraycmd;
+	uint8_t	useasynchd;
 #else
-	OEMCHAR	sasihdd[2][MAX_PATH];									// ver0.74
+	char sasihdd[2][MAX_PATH];									// ver0.74
 #endif
 #if defined(SUPPORT_SCSI)
-	OEMCHAR	scsihdd[4][MAX_PATH];									// ver0.74
+	char scsihdd[4][MAX_PATH];									// ver0.74
 #endif
-	OEMCHAR	fontfile[MAX_PATH];
-	OEMCHAR	biospath[MAX_PATH];
-	OEMCHAR	hdrvroot[MAX_PATH];
-	
+	char fontfile[MAX_PATH];
+	char biospath[MAX_PATH];
+	char hdrvroot[MAX_PATH];
+
 #ifdef SUPPORT_NET
-	OEMCHAR	np2nettap[MAX_PATH];
-	UINT8	np2netpmm;
+	char np2nettap[MAX_PATH];
+	uint8_t	np2netpmm;
 #endif
 #ifdef SUPPORT_LGY98
-	UINT8	uselgy98;
-	UINT16	lgy98io;
-	UINT8	lgy98irq;
-	UINT8	lgy98mac[6];
+	uint8_t	uselgy98;
+	uint16_t lgy98io;
+	uint8_t	lgy98irq;
+	uint8_t lgy98mac[6];
 #endif
 #ifdef SUPPORT_WAB
-	UINT8	wabasw;
+    uint8_t wabasw;
 #endif
 #ifdef SUPPORT_CL_GD5430
-	UINT8	usegd5430;
-	UINT16	gd5430type;
-	UINT8	gd5430fakecur;
-	UINT8	gd5430melofs;
-	UINT8	ga98nb_bigscrn_ex;
+	uint8_t usegd5430;
+	uint16_t gd5430type;
+	uint8_t gd5430fakecur;
+	uint8_t gd5430melofs;
+	uint8_t ga98nb_bigscrn_ex;
 #endif
 #if defined(SUPPORT_VGA_MODEX)
-	UINT8	usemodex;
+	uint8_t	usemodex;
 #endif
 #if defined(SUPPORT_GPIB)
-	UINT8	usegpib; // GPIB使用
-	UINT8	gpibirq; // GPIB IRQ
-	UINT8	gpibmode; // GPIB Master/Slave
-	UINT8	gpibaddr; // GPIB Address
-	UINT8	gpibexio; // GPIB custom I/O port base
+	uint8_t	usegpib; // GPIB使用
+	uint8_t	gpibirq; // GPIB IRQ
+	uint8_t	gpibmode; // GPIB Master/Slave
+	uint8_t	gpibaddr; // GPIB Address
+	uint8_t	gpibexio; // GPIB custom I/O port base
 #endif
 #if defined(SUPPORT_PCI)
-	UINT8	usepci; // PCI Bus使用
-	UINT8	pci_bios32; // BIOS32使用
-	UINT8	pci_pcmc; // PCMC選択
+	uint8_t	usepci; // PCI Bus使用
+	uint8_t	pci_bios32; // BIOS32使用
+	uint8_t	pci_pcmc; // PCMC選択
 #endif
 
 #if defined(SUPPORT_STATSAVE)
-	UINT8	statsave;
+	uint8_t	statsave;
 #endif
-	UINT8	fddrive3;
-	UINT8	fddrive4;
-	
-	UINT8	winntfix;
-	UINT16	sysiomsk;
-	
-	UINT8	memchkmx;
-	UINT8	sbeeplen;
-	UINT8	sbeepadj;
-	
-	UINT8	biosioemu;
+	uint8_t	fddrive3;
+	uint8_t	fddrive4;
 
-	char	cpu_vendor[16]; // ベンダー（12byte）
-	UINT32	cpu_family; // ファミリ
-	UINT32	cpu_model; // モデル
-	UINT32	cpu_stepping; // ステッピング
-	UINT32	cpu_feature; // 機能フラグ
-	UINT32	cpu_feature_ex; // 拡張機能フラグ
-	char	cpu_brandstring[64]; // ブランド名（48byte）
-	OEMCHAR	cpu_vendor_o[16]; // ベンダー（12byte）OEMCHAR
-	OEMCHAR	cpu_brandstring_o[64]; // ブランド名（48byte）OEMCHAR
-	UINT32	cpu_brandid; // ブランドID
-	UINT32  cpu_feature_ecx; // ECX機能フラグ
-	UINT32  cpu_feature_ex_ecx; // ECX拡張機能フラグ
-	UINT32  cpu_eflags_mask; // EFLAGSマスク
-	
-	UINT8	fpu_type; // FPU種類（0=Berkeley SoftFloat, 1=DOSBox FPU, 2=DOSBox FPU+INT64）
-	
+	uint8_t	winntfix;
+	uint16_t	sysiomsk;
+
+	uint8_t	memchkmx;
+	uint8_t	sbeeplen;
+	uint8_t	sbeepadj;
+
+	uint8_t	biosioemu;
+
+	char cpu_vendor[16]; // ベンダー（12byte）
+	uint32_t cpu_family; // ファミリ
+	uint32_t cpu_model; // モデル
+	uint32_t cpu_stepping; // ステッピング
+	uint32_t cpu_feature; // 機能フラグ
+	uint32_t cpu_feature_ex; // 拡張機能フラグ
+	char cpu_brandstring[64]; // ブランド名（48byte）
+	char cpu_vendor_o[16]; // ベンダー（12byte）OEMCHAR
+	char cpu_brandstring_o[64]; // ブランド名（48byte）OEMCHAR
+	uint32_t cpu_brandid; // ブランドID
+	uint32_t cpu_feature_ecx; // ECX機能フラグ
+	uint32_t cpu_feature_ex_ecx; // ECX拡張機能フラグ
+	uint32_t cpu_eflags_mask; // EFLAGSマスク
+
+	uint8_t	fpu_type; // FPU種類（0=Berkeley SoftFloat, 1=DOSBox FPU, 2=DOSBox FPU+INT64）
+
 #if defined(SUPPORT_FAST_MEMORYCHECK)
-	UINT8	memcheckspeed; // メモリチェック速度
+	uint8_t	memcheckspeed; // メモリチェック速度
 #endif
-	
-	UINT8	useram_d; // EPSONでなくてもD0000h-DFFFFhをRAMに（ただしIDE BIOS D8000h-DBFFFhは駄目）
-	UINT8	usepegcplane; // PEGC プレーンモードサポート
-	
-	UINT8	usecdecc; // CD-ROM EDC/ECC エミュレーションサポート
-	UINT8	cddtskip; // CD-ROM オーディオ再生時にデータトラックをスキップ
+
+	uint8_t	useram_d; // EPSONでなくてもD0000h-DFFFFhをRAMに（ただしIDE BIOS D8000h-DBFFFhは駄目）
+	uint8_t	usepegcplane; // PEGC プレーンモードサポート
+
+	uint8_t	usecdecc; // CD-ROM EDC/ECC エミュレーションサポート
+	uint8_t	cddtskip; // CD-ROM オーディオ再生時にデータトラックをスキップ
 
 #if defined(SUPPORT_GAMEPORT)
-	UINT8	gameport; // 118音源のゲームポートを使用する
+	uint8_t	gameport; // 118音源のゲームポートを使用する
 #endif
-	UINT8	allowMOVCS; // mov cs,xx命令の実行を許可する（8086）
-	UINT8	usetexthook; // Text Hookを有効にする（海外向け）
-	UINT8	rascsi92; // 92互換でRaSCSI形式(*.HDN)を読む
+	uint8_t	allowMOVCS; // mov cs,xx命令の実行を許可する（8086）
+	uint8_t	usetexthook; // Text Hookを有効にする（海外向け）
+	uint8_t	rascsi92; // 92互換でRaSCSI形式(*.HDN)を読む
 
 #if defined(SUPPORT_DEBUGSS)
-	UINT8	debugss;
+	uint8_t	debugss;
 #endif
 
 #if defined(SUPPORT_VIDEOFILTER)
@@ -335,33 +336,33 @@ struct tagNP2Config
 #endif
 
 	// Setting Keyrepeat
-	UINT8	keyrepeat_enable;
-	UINT16	keyrepeat_delay;		// Keyrepeat delay time(ms)
-	UINT16	keyrepeat_interval;		// Keyrepeat interval time(ms)
+	uint8_t	keyrepeat_enable;
+	uint16_t keyrepeat_delay;		// Keyrepeat delay time(ms)
+	uint16_t keyrepeat_interval;	// Keyrepeat interval time(ms)
 };
 typedef struct tagNP2Config  NP2CFG;		/*!< The define of config */
 
 typedef struct {
-	UINT32	baseclock;
-	UINT	multiple;
+	uint32_t baseclock;
+	uint32_t multiple;
 
-	UINT8	cpumode;
-	UINT8	model;
-	UINT8	hddif;
+	uint8_t cpumode;
+	uint8_t model;
+	uint8_t hddif;
 #if defined(SUPPORT_LARGE_MEMORY)
-	UINT16	extmem;
+	uint16_t extmem;
 #else
-	UINT8	extmem;
+	uint8_t extmem;
 #endif
-	UINT8	dipsw[3];		// リセット時のDIPSW
-	UINT8	rom;
+	uint8_t dipsw[3];		// リセット時のDIPSW
+	uint8_t rom;
 
 	SOUNDID sound;
-	UINT32	device;
+	uint32_t device;
 
-	UINT32	realclock;
+	uint32_t realclock;
 
-	UINT	maxmultiple;
+	uint32_t maxmultiple;
 } PCCORE;
 
 enum {
@@ -372,10 +373,10 @@ enum {
 
 typedef struct
 {
-	UINT8	screenupdate;
-	UINT8	screendispflag;
-	UINT8	drawframe;
-	UINT8	hardwarereset;
+	uint8_t	screenupdate;
+	uint8_t	screendispflag;
+	uint8_t	drawframe;
+	uint8_t	hardwarereset;
 } PCSTAT;
 
 
@@ -383,18 +384,18 @@ typedef struct
 extern "C" {
 #endif
 
-extern const OEMCHAR np2version[];
+extern const char np2version[];
 
-extern	NP2CFG	np2cfg;
-extern	PCCORE	pccore;
-extern	PCSTAT	pcstat;
-extern	UINT8	soundrenewal;
-extern	UINT	drawcount;
+extern NP2CFG	np2cfg;
+extern PCCORE	pccore;
+extern PCSTAT	pcstat;
+extern uint8_t	soundrenewal;
+extern uint32_t drawcount;
 #if defined(SUPPORT_FMGEN)
 extern	UINT8	enable_fmgen;
 #endif	/* SUPPORT_FMGEN */
 
-void getbiospath(OEMCHAR *path, const OEMCHAR *fname, int maxlen);
+void getbiospath(char *path, const char *fname, int maxlen);
 void screendisp(NEVENTITEM item);
 void screenvsync(NEVENTITEM item);
 
@@ -408,9 +409,9 @@ void pccore_mem_free(void);
 void pccore_init(void);
 void pccore_term(void);
 void pccore_reset(void);
-void pccore_exec(BOOL draw);
+void pccore_exec(bool draw);
 
-void pccore_postevent(UINT32 event);
+void pccore_postevent(uint32_t event);
 
 #ifdef SUPPORT_ASYNC_CPU
 extern int asynccpu_lateflag;
@@ -433,4 +434,3 @@ extern BOOL QueryPerformanceFrequency(LARGE_INTEGER* freq);
 #ifdef __cplusplus
 }
 #endif
-

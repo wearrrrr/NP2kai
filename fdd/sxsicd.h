@@ -175,4 +175,3 @@ UINT sxsicd_readraw_forhash(SXSIDEV sxsi, UINT uSecNo, UINT8 *pu8Buf, UINT* puSi
 #endif
 
 #endif  // _SXSICD_H_
-

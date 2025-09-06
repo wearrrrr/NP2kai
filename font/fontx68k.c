@@ -109,4 +109,3 @@ fr68_err2:
 fr68_err1:
 	return(loading);
 }
-

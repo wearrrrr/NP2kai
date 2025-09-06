@@ -171,4 +171,3 @@ void MEMCALL gdcpset(GDCPSET pset, REG16 x, REG16 y) {
 	}
 	(*pset->func[dot])(pset, (y * 80) + (x >> 3), x & 7);
 }
-

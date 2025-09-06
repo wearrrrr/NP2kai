@@ -52,4 +52,3 @@ void gdcsub_write(void);
 #ifdef __cplusplus
 }
 #endif
-

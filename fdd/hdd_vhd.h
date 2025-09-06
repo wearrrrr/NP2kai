@@ -1,7 +1,7 @@
 /*
     a minimal support for VirtualPC VHD images
     (fixed disk image only, for now...)
-    
+
     author: lpproj
     license: same as xnp2 (under the 2-clause BSD)
 */
@@ -178,4 +178,3 @@ BRESULT sxsihdd_vpcvhd_mount(SXSIDEV sxsi, FILEH fh)
 	}
 	return(FAILURE);
 }
-

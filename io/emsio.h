@@ -17,4 +17,3 @@ void emsio_bind(void);
 #ifdef __cplusplus
 }
 #endif
-

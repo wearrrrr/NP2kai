@@ -10,7 +10,7 @@ enum {
 };
 
 
-static BRESULT cpyrect(MIX_RECT *r, const VRAMHDL dst, const POINT_T *pt, 
+static BRESULT cpyrect(MIX_RECT *r, const VRAMHDL dst, const POINT_T *pt,
 									const VRAMHDL src, const RECT_T *rct) {
 
 	POINT_T	p;
@@ -2676,7 +2676,7 @@ void vramcpy_zoom(VRAMHDL dst, const POINT_T *pt,
 #endif
 }
 
-void vramcpy_mosaic(VRAMHDL dst, const POINT_T *pt, 
+void vramcpy_mosaic(VRAMHDL dst, const POINT_T *pt,
 							const VRAMHDL src, const RECT_T *rct,
 							int dot) {
 
@@ -3838,4 +3838,3 @@ void vrammix_textex(VRAMHDL dst, void *fhdl, const OEMCHAR *str,
 #endif
 	vramsub_text(dst, fhdl, str, color, pt, rct, func);
 }
-

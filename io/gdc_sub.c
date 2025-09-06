@@ -680,4 +680,3 @@ void gdcsub_write(void) {
 			break;
 	}
 }
-

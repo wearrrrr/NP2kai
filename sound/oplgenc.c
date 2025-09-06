@@ -278,7 +278,7 @@ static void set_sl_rr(OPLSLOT *slot, REG8 value)
 }
 
 static void set_wavesel(OPLSLOT *slot, REG8 value)
-{	
+{
 	slot->sintable = oplcfg.sintable[value & 7];
 
 }

@@ -26,7 +26,7 @@ static void IOOUTCALL cpuio_of0(UINT port, REG8 dat) {
 }
 
 static void IOINPCALL cpuio_of1(UINT port, REG8 dat) {
-	
+
 //#ifdef SUPPORT_IDEIO
 //	ide_f0portread = 1;
 //#endif
@@ -137,4 +137,3 @@ void cpuio_bind(void) {
 	iocore_attachsysinpex(0x00f0, 0x0cf1, cpuioif0, 8);
 	//iocore_attachout(0x00f1, cpuio_of1);
 }
-

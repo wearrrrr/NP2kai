@@ -1226,4 +1226,3 @@ void menuvram_closebtn(VRAMHDL vram, const RECT_T *rect, BOOL focus) {
 
 	putbtn(vram, rect, &menures_close, focus);
 }
-

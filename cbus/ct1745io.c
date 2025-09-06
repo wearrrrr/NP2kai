@@ -52,7 +52,7 @@ static void ct1745_mixer_reset() {
 	g_sb16.mixregexp[MIXER_TREBLE_RIGHT] = g_sb16.mixreg[MIXER_TREBLE_RIGHT] =
 	g_sb16.mixregexp[MIXER_BASS_LEFT]    = g_sb16.mixreg[MIXER_BASS_LEFT]    =
 	g_sb16.mixregexp[MIXER_BASS_RIGHT]   = g_sb16.mixreg[MIXER_BASS_RIGHT]   = 8;
-	g_sb16.mixregexp[0x82] = g_sb16.mixreg[0x82] = 2<<5; 
+	g_sb16.mixregexp[0x82] = g_sb16.mixreg[0x82] = 2<<5;
 
 }
 
@@ -96,7 +96,7 @@ static void IOOUTCALL sb16_o2500(UINT port, REG8 dat) {
 		case 0x2e:			// Line volume(old)
 			g_sb16.mixregexp[MIXER_LINE_LEFT] = g_sb16.mixreg[MIXER_LINE_LEFT]  = (dat & 0x0f) << 4;
 			g_sb16.mixregexp[MIXER_LINE_RIGHT] = g_sb16.mixreg[MIXER_LINE_RIGHT] = (dat & 0xff);
-			
+
 		case 0x80:			// Write irq num
 			ct1741_set_dma_irq(dat);
 			TRACEOUT(("CT1745 MIXER SET IRQ ID=0x%02x", dat));
@@ -229,7 +229,7 @@ void ct1745io_bind(void)
 	iocore_attachout(0x2500 + g_sb16.base, sb16_o2500);	/* Mixer Chip Data Port */
 	iocore_attachinp(0x2400 + g_sb16.base, sb16_i2400);	/* Mixer Chip Register Address Port */
 	iocore_attachinp(0x2500 + g_sb16.base, sb16_i2500);	/* Mixer Chip Data Port */
-	
+
 	// PC/AT互換機テスト
 	if(np2cfg.sndsb16at){
 		iocore_attachout(0x224, sb16_o2400);	/* Mixer Chip Register Address Port */

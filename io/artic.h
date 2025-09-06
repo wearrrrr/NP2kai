@@ -18,4 +18,3 @@ REG16 IOINPCALL artic_r16(UINT port);
 #ifdef __cplusplus
 }
 #endif
-

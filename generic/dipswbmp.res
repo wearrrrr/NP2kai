@@ -260,4 +260,3 @@ static const DIP9861 dip9861j[6] = {
 			{PC9861J4_X, PC9861J4_Y, 8},
 			{PC9861J5_X, PC9861J4_Y, 6},
 			{PC9861J6_X, PC9861J4_Y, 6}};
-

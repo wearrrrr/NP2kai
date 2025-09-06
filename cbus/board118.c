@@ -71,7 +71,7 @@ static void IOOUTCALL sb16_o29d2(UINT port, REG8 dat) {
 }
 
 static REG8 IOINPCALL sb16_i20d2(UINT port) {
-	
+
 	REG8 ret;
 	ret = YMF262Read(g_mame_opl3[G_OPL3_INDEX], 0);
 	////if(g_opl.reg[0x4] == 1) return 0x02;
@@ -281,7 +281,7 @@ static void IOOUTCALL wss_o548e(UINT port, REG8 dat)
 }
 static REG8 IOINPCALL wss_i548e(UINT port)
 {
-	return (ymf701); 
+	return (ymf701);
 }
 static REG8 IOINPCALL wss_i548f(UINT port)
 {
@@ -561,7 +561,7 @@ static void SOUNDCALL opl3gen_getpcm2(void* opl3, SINT32 *pcm, UINT count) {
 	buf[3] = &s2r;
 
 	// NP2グローバルFMボリューム(0～127)
-	oplfm_volume = np2cfg.vol_fm * np2cfg.vol_master / 100; 
+	oplfm_volume = np2cfg.vol_fm * np2cfg.vol_master / 100;
 
 	// Canbe/ValueStarミキサー FMボリューム(0～31) bit7:1=mute, bit6-5:reserved, bit4-0:volume(00000b max, 11111b min)
 	if(oplfm_softvolumereg_L != cs4231.devvolume[0x30]){
@@ -611,7 +611,7 @@ void board118_reset(const NP2CFG *pConfig)
 	}else{
 		opna_idx = 0;
 	}
-	
+
 	// OPNAリセット
 	opna_reset(&g_opna[opna_idx], OPNA_MODE_2608 | OPNA_HAS_TIMER | OPNA_S98);
 	if(g_nSoundID==SOUNDID_PC_9801_86_WSS || g_nSoundID==SOUNDID_MATE_X_PCM || g_nSoundID==SOUNDID_WSS_SB16 || g_nSoundID==SOUNDID_PC_9801_86_WSS_SB16){
@@ -658,7 +658,7 @@ void board118_reset(const NP2CFG *pConfig)
 		opl3_reset(&g_opl3[G_OPL3_INDEX], OPL3_HAS_OPL3L|OPL3_HAS_OPL3);
 		opngen_setcfg(&g_opna[opna_idx].opngen, 3, OPN_STEREO | 0x038);
 	}
-	
+
 	// CS4231リセット
 	cs4231io_reset();
 
@@ -669,13 +669,13 @@ void board118_reset(const NP2CFG *pConfig)
 			cs4231.port[4] += 0x100;
 		}
 	}
-	
+
 	// 86音源+118音源の場合、118側をはじめからFM6音にする
 	if(g_nSoundID==SOUNDID_PC_9801_86_118 || g_nSoundID==SOUNDID_PC_9801_86_118_SB16){
 		cs4231.extfunc |= 1;
 		extendchannel(1);
 	}
-	
+
 	// 色々設定
 	if(g_nSoundID==SOUNDID_PC_9801_86_WSS || g_nSoundID==SOUNDID_MATE_X_PCM || g_nSoundID==SOUNDID_WSS_SB16 || g_nSoundID==SOUNDID_PC_9801_86_WSS_SB16){
 	}else{
@@ -695,7 +695,7 @@ void board118_reset(const NP2CFG *pConfig)
 			}
 		}
 		//ZeroMemory(&g_sb16, sizeof(g_sb16));
-		//// ボードデフォルト IO:D2 DMA:3 INT:5 
+		//// ボードデフォルト IO:D2 DMA:3 INT:5
 		//g_sb16.base = 0xd2;
 		//g_sb16.dmach = 0x3;
 		//g_sb16.dmairq = 0x5;
@@ -732,7 +732,7 @@ void board118_bind(void)
 
 	// CS4231バインド（I/Oポート割り当てとか）
 	cs4231io_bind();
-	
+
 	// 86音源と共存させる場合、使用するNP2 OPNA番号を変える
 	if(g_nSoundID==SOUNDID_PC_9801_86_WSS || g_nSoundID==SOUNDID_PC_9801_86_118 || g_nSoundID==SOUNDID_WAVESTAR || g_nSoundID==SOUNDID_PC_9801_86_WSS_SB16 || g_nSoundID==SOUNDID_PC_9801_86_118_SB16){
 		opna_idx = 1;
@@ -773,7 +773,7 @@ void board118_bind(void)
 			}
 		}
 #endif
-		
+
 		// OPL割り当て
 #ifdef USE_MAME
 		iocore_attachout(cs4231.port[9], sb16_o20d2);
@@ -796,7 +796,7 @@ void board118_bind(void)
 		iocore_attachout(cs4231.port[9]+3, ym_o148b);
 #endif
 		opl3_bind(&g_opl3[G_OPL3_INDEX]); // MAME使用の場合Key Display用
-		
+
 		// Sound ID I/O port割り当て
 		iocore_attachout(cs4231.port[1], ymf_oa460);
 		iocore_attachinp(cs4231.port[1], ymf_ia460);
@@ -805,28 +805,28 @@ void board118_bind(void)
 		//iocore_attachout(cs4231.port[15],srnf_oa460);//SRN-Fは必要なときだけ使う
 		//iocore_attachinp(cs4231.port[15],srnf_ia460);
 		//srnf = 0x81;
-		
+
 		// WaveStar I/O port割り当て
 		if(g_nSoundID==SOUNDID_WAVESTAR){
 			iocore_attachout(0x4d2 ,wavestar_o4d2);
 			iocore_attachinp(0x4d2 ,wavestar_i4d2);
 		}
-		
+
 		// PC-9801-118 config I/O port割り当て
 		iocore_attachout(cs4231.port[14],csctrl_o148e);
 		iocore_attachinp(cs4231.port[14],csctrl_i148e);
 		iocore_attachout(cs4231.port[14]+1,csctrl_o148f);
 		iocore_attachinp(cs4231.port[14]+1,csctrl_i148f);
-		
+
 		// YMF-701 I/O port割り当て
 		iocore_attachout(cs4231.port[6], wss_o548e);// YMF-701
 		iocore_attachinp(cs4231.port[6], wss_i548e);// YMF-701
 		iocore_attachinp(cs4231.port[6]+1, wss_i548f);// YMF-701
-		
+
 		// PC-9801-118 control? I/O port割り当て
 		iocore_attachinp(cs4231.port[11]+6,csctrl_i486);
 		iocore_attachinp(0x881e, wss_i881e);
-		
+
 		// MIDI I/O port割り当て mpu98ii.c側で調整
 		//iocore_attachout(cs4231.port[10], mpu98ii_o0);
 		//iocore_attachinp(cs4231.port[10], mpu98ii_i0);
@@ -839,7 +839,7 @@ void board118_bind(void)
 void board118_unbind(void)
 {
 	cs4231io_unbind();
-	
+
 	if(g_nSoundID==SOUNDID_PC_9801_86_WSS || g_nSoundID==SOUNDID_MATE_X_PCM || g_nSoundID==SOUNDID_WAVESTAR || g_nSoundID==SOUNDID_WSS_SB16 || g_nSoundID==SOUNDID_PC_9801_86_WSS_SB16){
 		// Mate-X PCMの場合、CS4231だけ
 		iocore_detachout(cs4231.port[1]);
@@ -852,7 +852,7 @@ void board118_unbind(void)
 		if(cs4231.port[4]){
 			cbuscore_detachsndex(cs4231.port[4]);
 		}
-		
+
 #if defined(SUPPORT_GAMEPORT)
 		// ゲームポート割り当て 1480h～1487hどこでも良いらしい
 		if(np2cfg.gameport){
@@ -863,14 +863,14 @@ void board118_unbind(void)
 			}
 		}
 #endif
-		
+
 		// OPL割り当て
 		iocore_detachout(cs4231.port[9]);
 		iocore_detachinp(cs4231.port[9]);
 		iocore_detachout(cs4231.port[9]+1);
 		iocore_detachout(cs4231.port[9]+2);
 		iocore_detachout(cs4231.port[9]+3);
-		
+
 		// Sound ID I/O port割り当て
 		iocore_detachout(cs4231.port[1]);
 		iocore_detachinp(cs4231.port[1]);
@@ -878,22 +878,22 @@ void board118_unbind(void)
 		// SRN-F寄生 I/O port割り当て
 		//iocore_detachout(cs4231.port[15]);//SRN-Fは必要なときだけ使う
 		//iocore_detachinp(cs4231.port[15]);
-		
+
 		// PC-9801-118 config I/O port割り当て
 		iocore_detachout(cs4231.port[14]);
 		iocore_detachinp(cs4231.port[14]);
 		iocore_detachout(cs4231.port[14]+1);
 		iocore_detachinp(cs4231.port[14]+1);
-		
+
 		// YMF-701 I/O port割り当て
 		iocore_detachout(cs4231.port[6]);// YMF-701
 		iocore_detachinp(cs4231.port[6]);// YMF-701
 		iocore_detachinp(cs4231.port[6]+1);// YMF-701
-		
+
 		// PC-9801-118 control? I/O port割り当て
 		iocore_detachinp(cs4231.port[11]+6);
 		iocore_detachinp(0x881e);
-		
+
 		// MIDI I/O port割り当て mpu98ii.c側で調整
 		//iocore_detachout(cs4231.port[10]);
 		//iocore_detachinp(cs4231.port[10]);

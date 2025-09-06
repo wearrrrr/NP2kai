@@ -385,7 +385,7 @@ const PALNUM	*s;
 	bmpdata_setinfo(&bi, &bd);
 	STOREINTELDWORD(bi.biClrImportant, sd->pals);
 	align = bmpdata_getalign(&bi);
-	
+
 	// Bitmap File (size)
 	STOREINTELDWORD(bf.bfSize, (sizeof(BMPFILE) + sizeof(BMPINFO) + palsize + bmpdata_getalign(&bi) * bd.height));
 
@@ -538,7 +538,7 @@ const PALNUM	*s;
 		CopyMemory(palwork, sd->pal, sd->pals * 4);
 		CopyMemory(*lplppal, palwork, palsize);
 	}
-	
+
 	// Bitmap File (size)
 	STOREINTELDWORD(bf.bfSize, (sizeof(BMPFILE) + sizeof(BMPINFO) + palsize + bmpdata_getalign(&bi) * bd.height));
 	CopyMemory(lpbf, &bf, sizeof(bf));
@@ -548,7 +548,7 @@ const PALNUM	*s;
 		goto sswb_err2;
 	}
 	ZeroMemory(work, align);
-	
+
 	*lplppixels = (UINT8*)malloc(bmpdata_getalign(&bi) * bd.height);
 	dstpix = *lplppixels;
 	s = sd->dat + (SURFACE_WIDTH * bd.height);
@@ -590,11 +590,11 @@ const PALNUM	*s;
 				}
 				break;
 		}
-		
+
 		CopyMemory(dstpix, work, align);
 		dstpix += align;
 	} while(--bd.height);
-	
+
 
 	_MFREE(work);
 	return(SUCCESS);
@@ -857,4 +857,3 @@ sswg_err1:
 	return(FAILURE);
 }
 #endif
-

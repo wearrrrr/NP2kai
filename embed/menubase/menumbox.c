@@ -235,4 +235,3 @@ int menumbox(const OEMCHAR *string, const OEMCHAR *title, UINT type) {
 		return(0);
 	}
 }
-

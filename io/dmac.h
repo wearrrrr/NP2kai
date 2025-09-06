@@ -118,4 +118,3 @@ void dmac_detach(REG8 device);
 #ifdef __cplusplus
 }
 #endif
-

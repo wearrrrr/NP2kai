@@ -24,4 +24,3 @@ void menuicon_unlock(VRAMHDL vram);
 #ifdef __cplusplus
 }
 #endif
-

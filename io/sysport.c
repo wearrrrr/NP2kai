@@ -106,4 +106,3 @@ void systemport_bind(void) {
 	iocore_attachsysoutex(0x0031, 0xcf1, syspo31, 4);
 	iocore_attachsysinpex(0x0031, 0xcf1, syspi31, 4);
 }
-

@@ -19,4 +19,3 @@ BRESULT np2wab_writebmp(const OEMCHAR *filename);
 #ifdef __cplusplus
 }
 #endif
-

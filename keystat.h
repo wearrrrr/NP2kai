@@ -226,4 +226,3 @@ void keystat_forcerelease(REG8 data);
 #endif
 
 #endif	/* _NP2_KEYSTAT_H_ */
-

@@ -281,4 +281,3 @@ void MEMCALL memtdw1_wr32(UINT32 address, UINT32 value){
 	memtdw1_wr16(address, (REG16)value);
 	memtdw1_wr16(address+2, (REG16)(value >> 16));
 }
-

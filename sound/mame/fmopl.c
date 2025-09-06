@@ -2477,4 +2477,3 @@ void Y8950SetKeyboardHandler(void *chip,OPL_PORTHANDLER_W KeyboardHandler_w,OPL_
 }
 
 #endif
-

@@ -75,4 +75,3 @@ void menusys_setstyle(UINT16 style);
 
 #define menusys_settext(id, str)		\
 				menusys_msg(SMSG_SETTEXT, (id), (INTPTR)(str))
-

@@ -1624,7 +1624,7 @@ void hostdrv_intr(const void *arg1, long arg2) {
 	ZeroMemory(&intrst, sizeof(intrst));
 	intrst.is_chardev = (CPU_FLAG & C_FLAG) == 0;
 	CPU_FLAG &= ~(C_FLAG | Z_FLAG);				// not fcb / chain
-	
+
 	if (!np2cfg.hdrvenable) {
 		return;
 	}
@@ -1755,4 +1755,3 @@ int hostdrv_sfload(STFLAGH sfh, const SFENTRY *tbl) {
 	return(ret);
 }
 #endif
-

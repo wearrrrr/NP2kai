@@ -31,4 +31,3 @@ void mouseif_changeclock(void);
 #ifdef __cplusplus
 }
 #endif
-

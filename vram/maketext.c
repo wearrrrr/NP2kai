@@ -266,7 +266,7 @@ void maketext(int text_renewal) {
 							}
 						}
 						else {
-							bitmap[x] = 0x82000 + 
+							bitmap[x] = 0x82000 +
 										(mem[0xa0000 + edi*2] << 4);
 							curx[x] |= multiple;					// ver0.74
 							if ((curx[x] & TXTATR_BG) && (gdc.mode1 & 1)) {
@@ -579,7 +579,7 @@ void maketext40(int text_renewal) {
 							}
 						}
 						else {
-							bitmap[x] = 0x82000 + 
+							bitmap[x] = 0x82000 +
 										(mem[0xa0000 + edi*2] << 4);
 							curx[x] |= multiple;					// ver0.74
 							if ((curx[x] & TXTATR_BG) && (gdc.mode1 & 1)) {
@@ -762,4 +762,3 @@ void maketext40(int text_renewal) {
 	}
 	ZeroMemory(tramupdate, sizeof(tramupdate));
 }
-

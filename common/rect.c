@@ -152,4 +152,3 @@ const RECT_T *unionrect_get(const UNIRECT *unirct) {
 		return(NULL);
 	}
 }
-

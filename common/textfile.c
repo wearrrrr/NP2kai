@@ -488,7 +488,7 @@ const UINT8		*hdr;
 #if defined(OSLANG_UTF8)
 	hdr = str_utf8;
 	hdrsize = sizeof(str_utf8);
-#elif defined(OSLANG_UCS2) 
+#elif defined(OSLANG_UCS2)
 	hdr = (UINT8 *)str_ucs2;
 	hdrsize = sizeof(str_ucs2);
 #else
@@ -586,4 +586,3 @@ void textfile_close(TEXTFILEH tfh) {
 		_MFREE(tf);
 	}
 }
-

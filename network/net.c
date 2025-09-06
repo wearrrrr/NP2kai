@@ -40,10 +40,10 @@
 #pragma comment(lib, "Advapi32.lib")
 
 #define DEVICE_PATH_FMT _T("\\\\.\\Global\\%s.tap")
- 
+
 #define TAP_CONTROL_CODE(request,method) \
   CTL_CODE (FILE_DEVICE_UNKNOWN, request, method, FILE_ANY_ACCESS)
- 
+
 #define TAP_IOCTL_SET_MEDIA_STATUS \
   TAP_CONTROL_CODE (6, METHOD_BUFFERED)
 
@@ -88,12 +88,12 @@ unsigned GetTickCount()
 #endif
 
 #endif // defined(_WINDOWS)
- 
+
 #define NET_BUFLEN (16*1024) // バッファ1つの長さ（XXX: パケットサイズの最大値にしないと無駄。もっと言えば可変長で大きな1つのバッファに入れるべき？）
 #define NET_ARYLEN (128) // バッファの数
 
 	NP2NET	np2net;
-	
+
 static OEMCHAR np2net_tapName[MAX_PATH]; // TAPデバイス名
 
 static int		np2net_hThreadexit = 0; // スレッド終了フラグ
@@ -308,7 +308,7 @@ static unsigned int __stdcall np2net_ThreadFuncW(LPVOID vdParam) {
 			Sleep(1000);
 		}
 		np2net_updateHighSpeedMode();
-		if(!np2net_highspeedmode) 
+		if(!np2net_highspeedmode)
 			Sleep(50);
 	}
 	CloseHandle(hEvent);
@@ -337,7 +337,7 @@ static unsigned int __stdcall np2net_ThreadFuncR(LPVOID vdParam) {
 	}
 	ovl.Offset = 0;
 	ovl.OffsetHigh = 0;
- 
+
 	while (!np2net_hThreadexit) {
 		np2net_cs_EnterCriticalSection();
 		if (!ReadFile(np2net_hTap, np2net_Buf, NET_BUFLEN, &dwLen, &ovl)) {
@@ -414,7 +414,7 @@ static void* np2net_ThreadFuncW(void *thdata) {
 			sleep(1000);
 		}
 		np2net_updateHighSpeedMode();
-		if(!np2net_highspeedmode) 
+		if(!np2net_highspeedmode)
 			sleep(50);
 	}
 	return (void*) NULL;
@@ -440,7 +440,7 @@ static void* np2net_ThreadFuncR(void *thdata) {
 			}
 		}
 		np2net_updateHighSpeedMode();
-		if(!np2net_highspeedmode) 
+		if(!np2net_highspeedmode)
 			sleep(50);
 	}
 	return (void*) NULL;
@@ -469,7 +469,7 @@ static void np2net_closeTAP(){
 			np2net_hThreadR = NULL;
 			np2net_hThreadW = NULL;
 		}
-		
+
 		// TAP デバイスを非アクティブに
 		status = FALSE;
 		if (!DeviceIoControl(np2net_hTap,TAP_IOCTL_SET_MEDIA_STATUS,
@@ -477,7 +477,7 @@ static void np2net_closeTAP(){
 					&dwLen, NULL)) {
 			TRACEOUT(("LGY-98: TAP_IOCTL_SET_MEDIA_STATUS err"));
 		}
- 
+
 		CloseHandle(np2net_hTap);
 		TRACEOUT(("LGY-98: TAP is closed"));
 		np2net_hTap = INVALID_HANDLE_VALUE;
@@ -530,7 +530,7 @@ static int np2net_openTAP(const char* tapname){
 	np2net_hTap = CreateFileW(wDevicePath, GENERIC_READ | GENERIC_WRITE,
 		0, 0, OPEN_EXISTING,
 		FILE_ATTRIBUTE_SYSTEM | FILE_FLAG_OVERLAPPED, 0);
- 
+
 	if (np2net_hTap == INVALID_HANDLE_VALUE) {
 		DWORD err = GetLastError();
 		TRACEOUT(("LGY-98: Failed to open [%s] error:%d", DevicePath, err));
@@ -538,7 +538,7 @@ static int np2net_openTAP(const char* tapname){
 	}
 
 	TRACEOUT(("LGY-98: TAP is opened"));
-	
+
 	// TAP デバイスをアクティブに
 	status = TRUE;
 	if (!DeviceIoControl(np2net_hTap,TAP_IOCTL_SET_MEDIA_STATUS,
@@ -548,7 +548,7 @@ static int np2net_openTAP(const char* tapname){
 		np2net_closeTAP();
 		return 3;
 	}
- 
+
 	np2net_hThreadR = (HANDLE)_beginthreadex(NULL , 0 , np2net_ThreadFuncR  , NULL , 0 , &dwID);
 	np2net_hThreadW = (HANDLE)_beginthreadex(NULL , 0 , np2net_ThreadFuncW , NULL , 0 , &dwID);
 #else
@@ -573,7 +573,7 @@ static int np2net_openTAP(const char* tapname){
 #else
 	ifr.ifr_flags = IFF_TAP | IFF_NO_PI;
 	strcpy(ifr.ifr_name, "tap%d");
-	
+
 	if (ioctl(np2net_hTap, TUNSETIFF, (void *)&ifr) < 0) {
 		TRACEOUT(("LGY-98: TUNSETIFF err"));
 		np2net_closeTAP();
@@ -640,12 +640,12 @@ void np2net_shutdown(void)
 static char *GetNetWorkDeviceGuid(const char *pDisplayName, char *pszBuf, DWORD cbBuf)
 {
   const wchar_t *SUBKEY = L"SYSTEM\\CurrentControlSet\\Control\\Network";
- 
+
 #define BUFSZ 256
   // HKLM\SYSTEM\\CurrentControlSet\\Control\\Network\{id1]\{id2}\Connection\Name が
   // ネットワークデバイス名（ユニーク）の格納されたエントリであり、
   // {id2} がこのデバイスの GUID である
- 
+
   HKEY hKey1, hKey2, hKey3;
   LONG nResult;
   DWORD dwIdx1, dwIdx2;
@@ -658,7 +658,7 @@ static char *GetNetWorkDeviceGuid(const char *pDisplayName, char *pszBuf, DWORD 
 
   hKey1 = hKey2 = hKey3 = NULL;
   pKeyName1 = pKeyName2 = pKeyName3 = pKeyName4 = NULL;
- 
+
   // 主キーのオープン
   nResult = RegOpenKeyExW(HKEY_LOCAL_MACHINE, SUBKEY, 0, KEY_READ, &hKey1);
   if (nResult != ERROR_SUCCESS) {
@@ -668,17 +668,17 @@ static char *GetNetWorkDeviceGuid(const char *pDisplayName, char *pszBuf, DWORD 
   pKeyName2 = (wchar_t*)malloc(sizeof(wchar_t)*BUFSZ);
   pKeyName3 = (wchar_t*)malloc(sizeof(wchar_t)*BUFSZ);
   pKeyName4 = (wchar_t*)malloc(sizeof(wchar_t)*BUFSZ);
- 
+
   dwIdx1 = 0;
   while (bDone != TRUE) { // {id1} を列挙するループ
- 
+
     dwSize = BUFSZ;
     nResult = RegEnumKeyExW(hKey1, dwIdx1++, pKeyName1,
                           &dwSize, NULL, NULL, NULL, &ft);
     if (nResult == ERROR_NO_MORE_ITEMS) {
       break;
     }
- 
+
     // SUBKEY\{id1} キーをオープン
     swprintf(pKeyName2, BUFSZ, L"%ls\\%ls", SUBKEY, pKeyName1);
     nResult = RegOpenKeyExW(HKEY_LOCAL_MACHINE, pKeyName2,
@@ -694,11 +694,11 @@ static char *GetNetWorkDeviceGuid(const char *pDisplayName, char *pszBuf, DWORD 
       if (nResult == ERROR_NO_MORE_ITEMS) {
         break;
       }
- 
+
       if (nResult != ERROR_SUCCESS) {
         continue;
       }
- 
+
       // SUBKEY\{id1}\{id2]\Connection キーをオープン
       swprintf(pKeyName4, BUFSZ, L"%ls\\%ls\\%ls",
                       pKeyName2, pKeyName3, L"Connection");
@@ -707,12 +707,12 @@ static char *GetNetWorkDeviceGuid(const char *pDisplayName, char *pszBuf, DWORD 
       if (nResult != ERROR_SUCCESS) {
         continue;
       }
- 
+
       // SUBKEY\{id1}\{id2]\Connection\Name 値を取得
       dwSize = sizeof(szData);
       nResult = RegQueryValueExW(hKey3, L"Name",
                       0, &dwType, (LPBYTE)szData, &dwSize);
- 
+
       if (nResult == ERROR_SUCCESS) {
         if (stricmp(szData, pDisplayName) == 0) {
           codecnv_ucs2toutf8(pszBuf, MAX_PATH, pKeyName3, -1);
@@ -726,16 +726,16 @@ static char *GetNetWorkDeviceGuid(const char *pDisplayName, char *pszBuf, DWORD 
     RegCloseKey(hKey2);
     hKey2 = NULL;
   }
- 
+
   if (hKey1) { RegCloseKey(hKey1); }
   if (hKey2) { RegCloseKey(hKey2); }
   if (hKey3) { RegCloseKey(hKey3); }
- 
+
   if (pKeyName1) { free(pKeyName1); }
   if (pKeyName2) { free(pKeyName2); }
   if (pKeyName3) { free(pKeyName3); }
   if (pKeyName4) { free(pKeyName4); }
- 
+
   // GUID を発見できず
   if (bDone != TRUE) {
     return NULL;

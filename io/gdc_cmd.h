@@ -44,4 +44,3 @@ enum {
 	GDC_CODE		= (GDC_WRITE+1),					// 54
 	GDC_TERMDATA	= (GDC_CODE+2)
 };
-

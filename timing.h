@@ -13,4 +13,3 @@ double timing_getcount_raw(void);
 #ifdef __cplusplus
 }
 #endif
-

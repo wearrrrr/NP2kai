@@ -34,7 +34,7 @@ void vramcpy_mixcol(VRAMHDL dst, const POINT_T *pt,
 void vramcpy_zoom(VRAMHDL dst, const POINT_T *pt,
 							const VRAMHDL src, const RECT_T *rct,
 							int dot);
-void vramcpy_mosaic(VRAMHDL dst, const POINT_T *pt, 
+void vramcpy_mosaic(VRAMHDL dst, const POINT_T *pt,
 							const VRAMHDL src, const RECT_T *rct,
 							int dot);
 
@@ -92,4 +92,3 @@ void vrammix_textex(VRAMHDL dst, void *fhdl, const OEMCHAR *str,
 #ifdef __cplusplus
 }
 #endif
-

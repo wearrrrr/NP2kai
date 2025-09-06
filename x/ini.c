@@ -742,7 +742,7 @@ static INITBL iniitem[] = {
 	{"MEMCHKMX", INITYPE_UINT8,	&np2cfg.memchkmx,	0},
 	{"SBEEPLEN", INITYPE_UINT8,	&np2cfg.sbeeplen,	0},
 	{"SBEEPLEN", INITYPE_BOOL,	&np2cfg.sbeepadj,	0},
-	
+
 	{"cpu_vend", INITYPE_STR,	np2cfg.cpu_vendor_o,	15},
 	{"cpu_fami", INITYPE_UINT32,	&np2cfg.cpu_family,	0},
 	{"cpu_mode", INITYPE_UINT32,	&np2cfg.cpu_model,	0},
@@ -971,4 +971,3 @@ void initgetfile(char *lpPath, unsigned int cchPath)
 		file_catname(lpPath, s_szExt, cchPath);
 	}
 }
-

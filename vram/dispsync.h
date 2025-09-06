@@ -28,4 +28,3 @@ BOOL dispsync_renewalvertical(void);
 #ifdef __cplusplus
 }
 #endif
-

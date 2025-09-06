@@ -18,9 +18,9 @@
 
 	int calpenflag = 0; // XXX: CAL0だけ(0x04)→CAL0とPENが同時に立つ状態(0x05)に遷移した時だけ挙動を変える･･･ Win3.1+necpcm.drv用のその場しのぎ
 	int w31play = 0; // XXX: CAL0だけ(0x04)→CAL0とPENが同時に立つ状態(0x05)に遷移した時だけ挙動を変える･･･ Win3.1+necpcm.drv用のその場しのぎ
-	
+
 	static int playcountsmp_Ictl = CS4231_BUFREADSMP; // 積分制御で無理やり一定サンプルずつ読むようにする･･･
-	
+
 // 1サンプルあたりのバイト数（モノラル, ステレオの順）
 static const SINT32 cs4231_playcountshift[16] = {
 			1  ,		// 0: 8bit PCM
@@ -92,7 +92,7 @@ static const UINT8 cs4231cnt64[8] = {
 				2560/64};	//  9600/ 6620
 
 //    640:441
-				
+
 void cs4231_initialize(UINT rate) {
 
 	cs4231cfg.rate = rate;
@@ -152,10 +152,10 @@ void cs4231_dma(NEVENTITEM item) {
 				playcountsmp_Ictl += ((CS4231_BUFREADSMP - (int)r) / cs4231_playcountshift[cs4231.reg.datafmt >> 4])/2;
 				if(playcountsmp_Ictl < 1)
 					playcountsmp_Ictl = 1;
-				if(playcountsmp_Ictl > CS4231_MAXDMAREADBYTES) 
+				if(playcountsmp_Ictl > CS4231_MAXDMAREADBYTES)
 					playcountsmp_Ictl = CS4231_MAXDMAREADBYTES;
 				//int playcountsmp = MIN(playcountsmpmax, r / cs4231_playcountshift[cs4231.reg.datafmt >> 4])-4;
-				//if(playcountsmp < CS4231_MINDMAREADBYTES) 
+				//if(playcountsmp < CS4231_MINDMAREADBYTES)
 				//	playcountsmp = CS4231_MINDMAREADBYTES*2;
 
 				//playcountsmp = MIN(MAX(r, CS4231_MAXDMAREADBYTES/4) / cs4231_playcountshift[cs4231.reg.datafmt >> 4], playcountsmp) / 2;
@@ -211,7 +211,7 @@ REG8 DMACCALL cs4231dmafunc(REG8 func) {
 			if (cs4231cfg.rate) {
 				int playcount = (cs4231.reg.playcount[1]|(cs4231.reg.playcount[0] << 8)) * cs4231_playcountshift[cs4231.reg.datafmt >> 4]; // PI割り込みを発生させるサンプル数(Playback Base register) * サンプルあたりのバイト数
 				// DMA読み取り数カウンタを初期化
-				cs4231.totalsample = 0; 
+				cs4231.totalsample = 0;
 
 				// DMA読み取り位置を戻す
 				dmach = dmac.dmach + cs4231.dmach;
@@ -248,7 +248,7 @@ REG8 DMACCALL cs4231dmafunc(REG8 func) {
 static void setdataalign(void) {
 
 	UINT	step;
-	
+
 	// バッファ位置がズレていたら修正（4byte単位に）
 	step = (0 - cs4231.bufpos) & 3;
 	if (step) {
@@ -300,7 +300,7 @@ void cs4231_control(UINT idx, REG8 dat) {
 		dat &= 0x40;
 		dat |= 0x8a;
 		break;
-	case 0xb://ErrorStatus 
+	case 0xb://ErrorStatus
 	case 0x19://Version ID
 		return;
 	case CS4231REG_IRQSTAT:
@@ -357,9 +357,9 @@ void cs4231_control(UINT idx, REG8 dat) {
 					dmach->ready = 0;
 				}
 				dmac_check();
-			}	
+			}
 			if (!(dat & PEN)) {		// stop!
-				cs4231.pos12 = 0; 
+				cs4231.pos12 = 0;
 			}
 		}
 		// XXX: CAL0だけ(0x04)→CAL0とPENが同時に立つ状態(0x05)に遷移した時だけ挙動を変える･･･ Win3.1+necpcm.drv用のその場しのぎ
@@ -388,7 +388,7 @@ UINT dmac_getdata_(DMACH dmach, UINT8 *buf, UINT offset, UINT size) {
 #define PLAYCOUNT_ADJUST2_VALUE	16
 	static UINT32	playcount_adjustcounter = 0;
 	static UINT32	playcount_adjustcounter2 = 0;
-	
+
 	lengsum = 0;
 	while(size > 0) {
 		leng = MIN(dmach->leng.w, size);
@@ -457,10 +457,10 @@ UINT dmac_getdata_(DMACH dmach, UINT8 *buf, UINT offset, UINT size) {
 			// 読み取り数と残り数更新
 			lengsum += leng;
 			size -= leng;
-			
+
 			// 読み取り数カウント
 			cs4231.totalsample += leng;
-			
+
 			// DMA再生バイト数カウンタ(Playback DMA count register)がPI割り込みを発生させるバイト数になったらPI割り込みを発生させる
 			if(cs4231.totalsample >= playcount){
 				cs4231.totalsample -= playcount;
@@ -483,4 +483,3 @@ UINT dmac_getdata_(DMACH dmach, UINT8 *buf, UINT offset, UINT size) {
 
 	return(lengsum);
 }
-

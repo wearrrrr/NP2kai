@@ -226,5 +226,3 @@ void boardx2_unbind(void)
 	cbuscore_detachsndex(0x088);
 	cbuscore_detachsndex(0x188);
 }
-
-

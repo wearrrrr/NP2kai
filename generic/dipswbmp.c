@@ -45,7 +45,7 @@ gb_err1:
 }
 
 static UINT8 *getbmpres(const OEMCHAR* resname, DIPBMP *dipbmp) {
-	
+
 #if defined(_WIN32)
 	BMPFILE	*ret;
     HRSRC hRsrc;
@@ -393,7 +393,7 @@ UINT8 *dipswbmp_getsnd118(UINT16 snd118io, UINT8 snd118dma, UINT8 snd118irqf, UI
 		setjumperyex(&dipbmp, 18, 9, 0, 0, 15); // #12 常時OFF どこにも影響しない？
 		setjumperyex(&dipbmp, 18, 9, 1, 0, 15); // #11 YMF297の制御？
 		setjumperyex(&dipbmp, 18, 9, 2, snd118irqm==0xff ? 1 : 0, 15); // #10
-		
+
 		// PCM INT (#8,#9)=(OFF,OFF):INT5(IRQ12), (OFF,ON):INT1(IRQ5), (ON,OFF):INT41(IRQ10), (ON,ON):INT0(IRQ3)
 		switch(snd118irqp){
 		case 12:
@@ -439,7 +439,7 @@ UINT8 *dipswbmp_getsnd118(UINT16 snd118io, UINT8 snd118dma, UINT8 snd118irqf, UI
 		setjumperyex(&dipbmp, 18, 9, 7, jmpflag[0], 15); // #5
 
 		setjumperyex(&dipbmp, 18, 9, 8,  snd118rom ? 0 : 1, 15); // #4  ON:Sound BIOS Disable, OFF:Sound BIOS Enable
-		
+
 		// (#2,#3)=(OFF,OFF):Normal, (OFF,ON):CS4231&OPNA Disable, (ON,OFF):CS4231 Disable, (ON,ON):禁止
 		setjumperyex(&dipbmp, 18, 9, 9,  0, 15); // #3
 		setjumperyex(&dipbmp, 18, 9, 10, 0, 15); // #2
@@ -450,4 +450,3 @@ UINT8 *dipswbmp_getsnd118(UINT16 snd118io, UINT8 snd118dma, UINT8 snd118irqf, UI
 }
 
 #endif  // defined(USE_RESOURCE_BMP)
-

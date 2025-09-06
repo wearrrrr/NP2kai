@@ -450,4 +450,3 @@ void VRAMCALL makegrph(int page, int alldraw) {
 		}
 	}
 }
-

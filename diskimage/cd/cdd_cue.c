@@ -41,7 +41,7 @@ static UINT32 getpos(const OEMCHAR *str) {
 	UINT	m = 0;
 	UINT	s = 0;
 	UINT	f = 0;
-	
+
 	int idx = 0; // 文字位置
 	UINT sdata[3] = {0}; // 数値バッファ
 	UINT sdatapos = 0; // 数値バッファの格納位置

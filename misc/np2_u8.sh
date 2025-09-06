@@ -32,4 +32,3 @@ sed -i -e 's/¥/\\/g' "${f}"
 done
 
 set +f
-

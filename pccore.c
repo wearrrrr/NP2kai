@@ -114,9 +114,9 @@ const OEMCHAR np2version[] = OEMTEXT(NP2KAI_GIT_TAG " " NP2KAI_GIT_HASH);
 				0, 0, 0, 0,
 				{0x3e, 0xe3, 0x7b}, 0,
 				0, 0, {1, 1, 6, 1, 8, 1},
-				128, 0x00, 1, 
+				128, 0x00, 1,
 #if defined(SUPPORT_ASYNC_CPU)
-				0, 
+				0,
 #endif
 				1,
 #if defined(SUPPORT_IDEIO)
@@ -127,8 +127,8 @@ const OEMCHAR np2version[] = OEMTEXT(NP2KAI_GIT_TAG " " NP2KAI_GIT_HASH);
 				{0x48, 0x05, 0x04, 0x08, 0x01, 0x00, 0x00, 0x6e},
 				1, 13, 2, 1, 0x000000, 0xffffff,
 				44100, 150, 4, 0,
-				{0, 0, 0}, 0xd1, 0x7f, 0xd1, 0, 0, 1, 
-				
+				{0, 0, 0}, 0xd1, 0x7f, 0xd1, 0, 0, 1,
+
 				0x0188, 0x80, 3, 12, 12, 0xff, 0, // 118
 
 				0x70, 1, 3, // Mate-X PCM
@@ -154,8 +154,8 @@ const OEMCHAR np2version[] = OEMTEXT(NP2KAI_GIT_TAG " " NP2KAI_GIT_HASH);
 
 				0, {OEMTEXT(""), OEMTEXT(""), OEMTEXT(""), OEMTEXT("")},
 #if defined(SUPPORT_IDEIO)
-				{OEMTEXT(""), OEMTEXT(""), OEMTEXT(""), OEMTEXT("")}, 
-				{SXSIDEV_HDD, SXSIDEV_HDD, SXSIDEV_CDROM, SXSIDEV_HDD}, 
+				{OEMTEXT(""), OEMTEXT(""), OEMTEXT(""), OEMTEXT("")},
+				{SXSIDEV_HDD, SXSIDEV_HDD, SXSIDEV_CDROM, SXSIDEV_HDD},
 				{OEMTEXT(""), OEMTEXT(""), OEMTEXT(""), OEMTEXT("")},
 				1, 1, 0, 0, 0, 0, 0, 0, 0,
 #else
@@ -179,13 +179,13 @@ const OEMCHAR np2version[] = OEMTEXT(NP2KAI_GIT_TAG " " NP2KAI_GIT_HASH);
 #endif
 #endif
 #if defined(SUPPORT_CL_GD5430)
-				0, 0x5B, 0, CIRRUS_MELCOWAB_OFS_DEFAULT, 0, 
+				0, 0x5B, 0, CIRRUS_MELCOWAB_OFS_DEFAULT, 0,
 #endif
 #if defined(SUPPORT_VGA_MODEX)
 				0,
 #endif
 #if defined(SUPPORT_GPIB)
-				0, 12, 1, 0, 0, 
+				0, 12, 1, 0, 0,
 #endif
 #if defined(SUPPORT_PCI)
 				0, 0, 0,
@@ -194,7 +194,7 @@ const OEMCHAR np2version[] = OEMTEXT(NP2KAI_GIT_TAG " " NP2KAI_GIT_HASH);
 				0,			/* statsave */
 #endif
 				0, 0,
-				0, 0xff00, 
+				0, 0xff00,
 				0, 0, 0,
 				1,
 				CPU_VENDOR, CPU_FAMILY, CPU_MODEL, CPU_STEPPING, CPU_FEATURES, CPU_FEATURES_EX, CPU_BRAND_STRING, OEMTEXT(""), OEMTEXT(""), CPU_BRAND_ID_AUTO, CPU_FEATURES_ECX, CPU_EFLAGS_MASK, CPU_FEATURES_EX_ECX,
@@ -362,7 +362,7 @@ static void pccore_set(const NP2CFG *pConfig)
 	{
 		pccore.device |= PCCBUS_SMPU98;
 	}
-	else 
+	else
 #endif
 	if (pConfig->mpuenable)
 	{
@@ -458,19 +458,19 @@ void pccore_mem_free(void) {
 	}
 }
 #endif
-	
+
 void pccore_init(void) {
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_initialize();
 #endif
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	i386hax_check();
 	np2hax.enable = 1;
 	i386hax_initialize();
 #endif
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	pccore_mem_malloc();
 #endif
@@ -481,7 +481,7 @@ void pccore_init(void) {
 	}
 
 	CPU_INITIALIZE();
-	
+
 	pic_initialize();
 
 #if defined(SUPPORT_VIDEOFILTER)
@@ -548,7 +548,7 @@ void pccore_init(void) {
 }
 
 void pccore_term(void) {
-	
+
 #if defined(SUPPORT_GPIB)
 	gpibio_shutdown();
 #endif
@@ -566,7 +566,7 @@ void pccore_term(void) {
 	fdd_eject(1);
 	fdd_eject(2);
 	fdd_eject(3);
-	
+
 #if defined(SUPPORT_IDEIO)
 	ideio_deinitialize();
 #endif
@@ -579,7 +579,7 @@ void pccore_term(void) {
 #endif
 	mpu98ii_destruct();
 	rs232c_destruct();
-	
+
 	printif_finalize();
 
 	hook_fontrom_flush();
@@ -601,20 +601,20 @@ void pccore_term(void) {
 		VideoFilter_Deinit(hVFMng1);
 	}
 #endif
-	
+
 	pic_deinitialize();
 
 	CPU_SETEXTSIZE(0);	// メモリ解放
 	CPU_DEINITIALIZE();
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	i386hax_deinitialize();
 #endif
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	pccore_mem_free();
 #endif
-	
+
 #if defined(SUPPORT_MULTITHREAD)
 	nevent_shutdown();
 #endif
@@ -655,7 +655,7 @@ void pccore_reset(void) {
 
 	int		i;
 	BOOL	epson;
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	if(np2hax.enable){
 		i386hax_createVM();
@@ -691,7 +691,7 @@ void pccore_reset(void) {
 	{
 		mem[0xa3fe2 + i*4] = np2cfg.memsw[i];
 	}
-	
+
 #if defined(CPUCORE_IA32)
 	if(np2cfg.cpu_family == CPU_80386_FAMILY && np2cfg.cpu_model == CPU_80386_MODEL){
 		strcpy(np2cfg.cpu_vendor, CPU_VENDOR_INTEL);
@@ -818,7 +818,7 @@ void pccore_reset(void) {
 			CPU_EBX = 0;
 		}
 	}
-	
+
 	// mov cs,xx許可フラグ
 	i386cpuid.allow_movCS = np2cfg.allowMOVCS;
 
@@ -842,7 +842,7 @@ void pccore_reset(void) {
 		CPU_RAM_D000 = 0xffff;
 	}
 	font_setchargraph(epson);
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	if(np2hax.hVMDevice){
 		i386hax_vm_allocmemory();
@@ -893,7 +893,7 @@ void pccore_reset(void) {
 	pal_change(1);
 
 	bios_initialize();
-	
+
 	CS_BASE = 0xf0000;
 	CPU_CS = 0xf000;
 	CPU_IP = 0xfff0;
@@ -907,14 +907,14 @@ void pccore_reset(void) {
 
 	timing_reset();
 	soundmng_play();
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	if(np2hax.enable){
 		if(np2hax.hVMDevice){
 			i386hax_vm_setmemory();
 			i386hax_vm_setbankmemory();
 			i386hax_vm_setextmemory();
-		
+
 			i386hax_resetVMMem();
 
 			np2haxcore.clockpersec = NP2_TickCount_GetFrequency();
@@ -967,7 +967,7 @@ static void drawscreen(void) {
 	UINT8	timing;
 	void	(VRAMCALL * grphfn)(int page, int alldraw);
 	UINT8	bit;
-	
+
 
 	tramflag.timing++;
 	timing = ((LOADINTELWORD(gdc.m.para + GDC_CSRFORM + 1)) >> 5) & 0x3e;
@@ -1188,7 +1188,7 @@ void pccore_exec(BOOL draw) {
 	soundmng_sync();
 	mouseif_sync();
 	pal_eventclear();
-	
+
 #if defined(SUPPORT_IA32_HAXM)
 	// HAXMの場合、先に描画
 	if (!np2cfg.DISPSYNC) {
@@ -1201,7 +1201,7 @@ void pccore_exec(BOOL draw) {
 	MEMWAIT_TRAM = np2cfg.wait[0];
 	MEMWAIT_VRAM = np2cfg.wait[2];
 	MEMWAIT_GRCG = np2cfg.wait[4];
-	
+
 	nevent_set(NEVENT_FLAMES, gdc.dispclock, screenvsync, NEVENT_RELATIVE);
 
 //	nevent_get1stevent();
@@ -1209,7 +1209,7 @@ void pccore_exec(BOOL draw) {
 	if(np2cfg.keyrepeat_enable) {
 		keyrepeat_proc();
 	}
-	
+
 	while(pcstat.screendispflag) {
 #if defined(TRACE)
 		resetcnt++;
@@ -1331,7 +1331,7 @@ void pccore_exec(BOOL draw) {
 #if defined(CPUCORE_IA32)
 int GetCpuTypeIndex(){
 	if((CPU_FEATURES_ALL & CPU_FEATURES_80386) != CPU_FEATURES_80386) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_80386_FAMILY && 
+	if(np2cfg.cpu_family == CPU_80386_FAMILY &&
 	   np2cfg.cpu_model == CPU_80386_MODEL &&
 	   np2cfg.cpu_stepping == CPU_80386_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_80386 &&
@@ -1341,7 +1341,7 @@ int GetCpuTypeIndex(){
 		return 1;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_I486SX) != CPU_FEATURES_I486SX) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_I486SX_FAMILY && 
+	if(np2cfg.cpu_family == CPU_I486SX_FAMILY &&
 	   np2cfg.cpu_model == CPU_I486SX_MODEL &&
 	   np2cfg.cpu_stepping == CPU_I486SX_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_I486SX &&
@@ -1351,7 +1351,7 @@ int GetCpuTypeIndex(){
 		return 2;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_I486DX) != CPU_FEATURES_I486DX) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_I486DX_FAMILY && 
+	if(np2cfg.cpu_family == CPU_I486DX_FAMILY &&
 	   np2cfg.cpu_model == CPU_I486DX_MODEL &&
 	   np2cfg.cpu_stepping == CPU_I486DX_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_I486DX &&
@@ -1361,7 +1361,7 @@ int GetCpuTypeIndex(){
 		return 3;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_PENTIUM) != CPU_FEATURES_PENTIUM) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_PENTIUM_FAMILY && 
+	if(np2cfg.cpu_family == CPU_PENTIUM_FAMILY &&
 	   np2cfg.cpu_model == CPU_PENTIUM_MODEL &&
 	   np2cfg.cpu_stepping == CPU_PENTIUM_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_PENTIUM &&
@@ -1371,7 +1371,7 @@ int GetCpuTypeIndex(){
 		return 4;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_MMX_PENTIUM) != CPU_FEATURES_MMX_PENTIUM) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_MMX_PENTIUM_FAMILY && 
+	if(np2cfg.cpu_family == CPU_MMX_PENTIUM_FAMILY &&
 	   np2cfg.cpu_model == CPU_MMX_PENTIUM_MODEL &&
 	   np2cfg.cpu_stepping == CPU_MMX_PENTIUM_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_MMX_PENTIUM &&
@@ -1381,7 +1381,7 @@ int GetCpuTypeIndex(){
 		return 5;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_PENTIUM_PRO) != CPU_FEATURES_PENTIUM_PRO) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_PENTIUM_PRO_FAMILY && 
+	if(np2cfg.cpu_family == CPU_PENTIUM_PRO_FAMILY &&
 	   np2cfg.cpu_model == CPU_PENTIUM_PRO_MODEL &&
 	   np2cfg.cpu_stepping == CPU_PENTIUM_PRO_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_PENTIUM_PRO &&
@@ -1391,7 +1391,7 @@ int GetCpuTypeIndex(){
 		return 6;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_PENTIUM_II) != CPU_FEATURES_PENTIUM_II) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_PENTIUM_II_FAMILY && 
+	if(np2cfg.cpu_family == CPU_PENTIUM_II_FAMILY &&
 	   np2cfg.cpu_model == CPU_PENTIUM_II_MODEL &&
 	   np2cfg.cpu_stepping == CPU_PENTIUM_II_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_PENTIUM_II &&
@@ -1401,7 +1401,7 @@ int GetCpuTypeIndex(){
 		return 7;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_PENTIUM_III) != CPU_FEATURES_PENTIUM_III) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_PENTIUM_III_FAMILY && 
+	if(np2cfg.cpu_family == CPU_PENTIUM_III_FAMILY &&
 	   np2cfg.cpu_model == CPU_PENTIUM_III_MODEL &&
 	   np2cfg.cpu_stepping == CPU_PENTIUM_III_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_PENTIUM_III &&
@@ -1411,7 +1411,7 @@ int GetCpuTypeIndex(){
 		return 8;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_PENTIUM_M) != CPU_FEATURES_PENTIUM_M) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_PENTIUM_M_FAMILY && 
+	if(np2cfg.cpu_family == CPU_PENTIUM_M_FAMILY &&
 	   np2cfg.cpu_model == CPU_PENTIUM_M_MODEL &&
 	   np2cfg.cpu_stepping == CPU_PENTIUM_M_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_PENTIUM_M &&
@@ -1421,7 +1421,7 @@ int GetCpuTypeIndex(){
 		return 9;
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_PENTIUM_4) != CPU_FEATURES_PENTIUM_4) goto AMDCPUCheck;
-	if(np2cfg.cpu_family == CPU_PENTIUM_4_FAMILY && 
+	if(np2cfg.cpu_family == CPU_PENTIUM_4_FAMILY &&
 	   np2cfg.cpu_model == CPU_PENTIUM_4_MODEL &&
 	   np2cfg.cpu_stepping == CPU_PENTIUM_4_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_PENTIUM_4 &&
@@ -1434,7 +1434,7 @@ int GetCpuTypeIndex(){
 AMDCPUCheck:
 	if((CPU_FEATURES_ALL & CPU_FEATURES_AMD_K6_2) != CPU_FEATURES_AMD_K6_2 ||
 		(CPU_FEATURES_EX_ALL & CPU_FEATURES_EX_AMD_K6_2) != CPU_FEATURES_EX_AMD_K6_2) goto NekoCPUCheck;
-	if(np2cfg.cpu_family == CPU_AMD_K6_2_FAMILY && 
+	if(np2cfg.cpu_family == CPU_AMD_K6_2_FAMILY &&
 	   np2cfg.cpu_model == CPU_AMD_K6_2_MODEL &&
 	   np2cfg.cpu_stepping == CPU_AMD_K6_2_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_AMD_K6_2 &&
@@ -1445,7 +1445,7 @@ AMDCPUCheck:
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_AMD_K6_III) != CPU_FEATURES_AMD_K6_III ||
 		(CPU_FEATURES_EX_ALL & CPU_FEATURES_EX_AMD_K6_III) != CPU_FEATURES_EX_AMD_K6_III) goto NekoCPUCheck;
-	if(np2cfg.cpu_family == CPU_AMD_K6_III_FAMILY && 
+	if(np2cfg.cpu_family == CPU_AMD_K6_III_FAMILY &&
 	   np2cfg.cpu_model == CPU_AMD_K6_III_MODEL &&
 	   np2cfg.cpu_stepping == CPU_AMD_K6_III_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_AMD_K6_III &&
@@ -1456,7 +1456,7 @@ AMDCPUCheck:
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_AMD_K7_ATHLON) != CPU_FEATURES_AMD_K7_ATHLON ||
 		(CPU_FEATURES_EX_ALL & CPU_FEATURES_EX_AMD_K7_ATHLON) != CPU_FEATURES_EX_AMD_K7_ATHLON) goto NekoCPUCheck;
-	if(np2cfg.cpu_family == CPU_AMD_K7_ATHLON_FAMILY && 
+	if(np2cfg.cpu_family == CPU_AMD_K7_ATHLON_FAMILY &&
 	   np2cfg.cpu_model == CPU_AMD_K7_ATHLON_MODEL &&
 	   np2cfg.cpu_stepping == CPU_AMD_K7_ATHLON_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_AMD_K7_ATHLON &&
@@ -1467,7 +1467,7 @@ AMDCPUCheck:
 	}
 	if((CPU_FEATURES_ALL & CPU_FEATURES_AMD_K7_ATHLON_XP) != CPU_FEATURES_AMD_K7_ATHLON_XP ||
 		(CPU_FEATURES_EX_ALL & CPU_FEATURES_EX_AMD_K7_ATHLON_XP) != CPU_FEATURES_EX_AMD_K7_ATHLON_XP) goto NekoCPUCheck;
-	if(np2cfg.cpu_family == CPU_AMD_K7_ATHLON_XP_FAMILY && 
+	if(np2cfg.cpu_family == CPU_AMD_K7_ATHLON_XP_FAMILY &&
 	   np2cfg.cpu_model == CPU_AMD_K7_ATHLON_XP_MODEL &&
 	   np2cfg.cpu_stepping == CPU_AMD_K7_ATHLON_XP_STEPPING &&
 	   (np2cfg.cpu_feature & CPU_FEATURES_ALL) == CPU_FEATURES_AMD_K7_ATHLON_XP &&
@@ -1476,9 +1476,9 @@ AMDCPUCheck:
 	   np2cfg.cpu_eflags_mask == CPU_EFLAGS_MASK_AMD_K7_ATHLON_XP){
 		return 18;
 	}
-	
+
 NekoCPUCheck:
-	if(np2cfg.cpu_family == 0 && 
+	if(np2cfg.cpu_family == 0 &&
 	   np2cfg.cpu_model == 0 &&
 	   np2cfg.cpu_stepping == 0 &&
 	   np2cfg.cpu_feature == 0 &&
@@ -1674,4 +1674,3 @@ int SetCpuTypeIndex(UINT index){
 	}
 }
 #endif
-

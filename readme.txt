@@ -259,4 +259,3 @@ void sysmng_cpureset(void)
 
 void taskmng_exit(void)
   システムを終了する。
-

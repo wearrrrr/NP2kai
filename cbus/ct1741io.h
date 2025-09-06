@@ -54,7 +54,7 @@ typedef struct {
 	UINT32		step12;
 	UINT8		buffer[DMA_BUFSIZE];
 	UINT32		rate2;
-	
+
 	UINT8 lastautoinit;
 	UINT8 last16mode;
 	UINT32 laststartcount;
@@ -79,10 +79,10 @@ typedef struct {
 	UINT8 dmairq;
 	UINT8 dmach;
 	UINT8 cmd_o;
-	
+
 	int smpcounter2; // DMA転送開始以降に送られた有効なデータ数の合計
 	int smpcounter; // DMA転送開始以降に送られたDMAデータ数の合計（無効なデータも含む）
-	
+
 	UINT8 speaker;
 	UINT8 uartmode;
 } DSP_INFO;
@@ -109,7 +109,7 @@ typedef struct { // ステートセーブ互換性維持用（変更禁止）
 	UINT32		step12;
 	UINT8		buffer[DMA_BUFSIZE];
 	UINT32		rate2;
-	
+
 	UINT8 lastautoinit;
 	UINT8 last16mode;
 	UINT32 laststartcount;
@@ -134,10 +134,10 @@ typedef struct { // ステートセーブ互換性維持用（変更禁止）
 	UINT8 dmairq;
 	UINT8 dmach;
 	UINT8 cmd_o;
-	
+
 	int smpcounter2; // DMA転送開始以降に送られた有効なデータ数の合計
 	int smpcounter; // DMA転送開始以降に送られたDMAデータ数の合計（無効なデータも含む）
-	
+
 	UINT8 speaker;
 	UINT8 uartmode;
 } DSP_INFO_OLD;

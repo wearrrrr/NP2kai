@@ -40,4 +40,3 @@ void MEMCALL memvgaio_wr32(UINT32 address, UINT32 value);
 #endif
 
 #endif
-

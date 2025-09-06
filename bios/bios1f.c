@@ -62,7 +62,7 @@ p90_err:
 }
 
 static REG8 bios0x1f_CC(void) {
-	
+
 #if defined(SUPPORT_PCI)
 	// int 1Ah AH=B1と同じ？
 	if(pcidev.enable){
@@ -99,4 +99,3 @@ void bios0x1f(void) {
 	flag |= cflag;
 	MEMR_WRITE8(CPU_SS, CPU_SP + 4, flag);
 }
-

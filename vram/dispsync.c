@@ -148,4 +148,3 @@ BOOL dispsync_renewalvertical(void) {
 	}
 	return(TRUE);
 }
-

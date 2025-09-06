@@ -34,4 +34,3 @@ void scrndraw_updateallline(void);
 #endif
 
 #endif	/* NP2_SCRNDRAW_H */
-

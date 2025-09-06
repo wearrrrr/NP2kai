@@ -164,14 +164,14 @@ static void np2sysp_cngclkmul(const void *arg1, long arg2) {
 	UINT8 oldclockmul = pccore.maxmultiple;
 	UINT8 oldclockmult = pccore.multiple;
 	UINT8 newclockmul = (np2sysp.outval >> 24);
-	
+
 	if(newclockmul > 0) {
 		np2sysp.outval = (oldclockmul << 24) + (np2sysp.outval >> 8);
 
 		pccore.multiple = newclockmul;
 		pccore.maxmultiple = newclockmul;
 		pccore.realclock = pccore.baseclock * pccore.multiple;
-		
+
 		pcm86_changeclock(oldclockmult);
 		sound_changeclock();
 		beep_changeclock();
@@ -196,7 +196,7 @@ static void np2sysp_getconfig(const void *arg1, long arg2) {
 	UINT8 configid = (np2sysp.outval >> 24) & 0xff;
 	UINT8 configvalue = 0;
 	UINT16 configvalue16 = 0;
-	
+
 	switch(configid){
 	case NP21W_SWITCH_SOUNDBOARD:
 		configvalue = g_nSoundID;
@@ -245,7 +245,7 @@ static void np2sysp_cngconfig(const void *arg1, long arg2) {
 	UINT8 configid = (np2sysp.outval >> 24) & 0xff;
 	UINT8 configvalue = (np2sysp.outval >> 16) & 0xff;
 	UINT16 configvalue16 = 0;
-	
+
 	switch(configid){
 	case NP21W_SWITCH_SYNCCLOCK:
 #if defined(SUPPORT_HRTIMER)
@@ -567,4 +567,3 @@ void np2sysp_bind(void) {
 	iocore_attachinp(0x00e9, np2sysp_i0e9);
 #endif
 }
-

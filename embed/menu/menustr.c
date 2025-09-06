@@ -43,4 +43,3 @@ static const UINT8 np2iconmask[95] = {		// 32x32
 		0x2f,0x51,0xef,0x10};
 
 const MENURES np2icon = {32, 32, np2icondat, np2iconmask};
-

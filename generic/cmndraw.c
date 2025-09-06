@@ -469,4 +469,3 @@ void cmndraw_bmp16(CMNVRAM *vram, const void *ptr, CMNPALCNV cnv, UINT flag) {
 		dst += yalign;
 	}
 }
-

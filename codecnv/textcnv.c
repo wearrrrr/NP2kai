@@ -90,4 +90,3 @@ UINT textcnv_getinfo(TCINF *inf, const UINT8 *hdr, UINT hdrsize) {
 	}
 	return(info.caps);
 }
-

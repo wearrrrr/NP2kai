@@ -29,8 +29,8 @@
 
 #pragma once
 /*
-#define cpu_to_le16wu(p, v) STOREINTELWORD(p, v) // XXX: 
-#define cpu_to_le32wu(p, v) STOREINTELDWORD(p, v) // XXX: 
+#define cpu_to_le16wu(p, v) STOREINTELWORD(p, v) // XXX:
+#define cpu_to_le32wu(p, v) STOREINTELDWORD(p, v) // XXX:
 
 #define le16_to_cpu(a)		LOADINTELWORD(a)
 #define le32_to_cpu(a)		LOADINTELDWORD(a)
@@ -38,8 +38,8 @@
 #define cpu_to_le32w(a,b)	STOREINTELDWORD(a,b)
 */
 
-#define cpu_to_le16wu(p, v) STOREINTELWORD(p, v) // XXX: 
-#define cpu_to_le32wu(p, v) STOREINTELDWORD(p, v) // XXX: 
+#define cpu_to_le16wu(p, v) STOREINTELWORD(p, v) // XXX:
+#define cpu_to_le32wu(p, v) STOREINTELDWORD(p, v) // XXX:
 
 #define le16_to_cpu(a)		((UINT16)(a))
 #define le32_to_cpu(a)		((UINT32)(a))

@@ -16,4 +16,3 @@ void textcnv_swapendian16(void *buf, UINT leng) {
 		leng--;
 	}
 }
-

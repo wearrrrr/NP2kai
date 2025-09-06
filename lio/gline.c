@@ -360,4 +360,3 @@ REG8 lio_gline(GLIO lio) {
 gline_err:
 	return(LIO_ILLEGALFUNC);
 }
-

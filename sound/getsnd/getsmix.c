@@ -150,4 +150,3 @@ BRESULT getsnd_setmixproc(GETSND snd, UINT samprate, UINT channles) {
 gssmp_err:
 	return(FAILURE);
 }
-

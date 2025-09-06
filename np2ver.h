@@ -8,4 +8,3 @@
 #else
 #define	NP2VER_CORE			"0.86"
 #endif
-

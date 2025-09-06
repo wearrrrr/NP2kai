@@ -21,4 +21,3 @@ void vram_initialize(void) {
 	ZeroMemory(&vramop, sizeof(vramop));
 	MEMM_VRAM(0);
 }
-

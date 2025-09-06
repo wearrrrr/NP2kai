@@ -79,4 +79,3 @@ void menubase_modalproc(void);
 #ifdef __cplusplus
 }
 #endif
-

@@ -80,4 +80,3 @@ void SOUNDCALL beep_getpcm(BEEP bp, SINT32 *pcm, UINT count);
 #define beep_oneventset()
 
 #endif
-

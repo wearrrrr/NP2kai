@@ -497,7 +497,7 @@ BRESULT sxsi_state_save(const OEMCHAR *ext) {
 			BRESULT r;
 
 			timemng_gettime(&st);
-			OEMSNPRINTF(dt, sizeof(dt), 
+			OEMSNPRINTF(dt, sizeof(dt),
 				OEMTEXT("%04d%02d%02d%02d%02d%02d%03d"),
 				st.year, st.month, st.day,
 				st.hour, st.minute, st.second,
@@ -611,4 +611,3 @@ BRESULT sxsi_state_load(const OEMCHAR *ext)
 		sxsi++;
 	}
 }
-

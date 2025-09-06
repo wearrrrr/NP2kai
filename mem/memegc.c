@@ -1168,7 +1168,7 @@ const EGCQUAD	*data;
 }
 
 REG16 MEMCALL egc_readword(UINT32 addr) {
-/*	
+/*
 	UINT32	ad;
 	int pl;
 
@@ -1198,7 +1198,7 @@ REG16 MEMCALL egc_readword(UINT32 addr) {
 			egc.inptr[ 9] = egc.lastvram._b[2][EGCADDR_H];
 			egc.inptr[12] = egc.lastvram._b[3][EGCADDR_L];
 			egc.inptr[13] = egc.lastvram._b[3][EGCADDR_H];
-			
+
 			shiftinput_incw();
 			}
 		}else {
@@ -1251,10 +1251,10 @@ REG16 MEMCALL egc_readword(UINT32 addr) {
 	{
 		int fg1,fg2,fg4,fg8;
 		UINT16 temp3;
-		if(!(egc.access & 1))fg1 = (egc.fg&1)|(egc.fg&1)<<1|(egc.fg&1)<<2|(egc.fg&1)<<3|(egc.fg&1)<<4|(egc.fg&1)<<5|(egc.fg&1)<<6|(egc.fg&1)<<7; 
-		if(!(egc.access & 1))fg2 = (egc.fg&2)|(egc.fg&2)<<1|(egc.fg&2)<<2|(egc.fg&2)<<3|(egc.fg&2)<<4|(egc.fg&2)<<5|(egc.fg&2)<<6|(egc.fg&2)<<7; 
-		if(!(egc.access & 1))fg4 = (egc.fg&4)|(egc.fg&4)<<1|(egc.fg&4)<<2|(egc.fg&4)<<3|(egc.fg&4)<<4|(egc.fg&4)<<5|(egc.fg&4)<<6|(egc.fg&4)<<7; 
-		if(!(egc.access & 1))fg8 = (egc.fg&8)|(egc.fg&8)<<1|(egc.fg&8)<<2|(egc.fg&8)<<3|(egc.fg&8)<<4|(egc.fg&8)<<5|(egc.fg&8)<<6|(egc.fg&8)<<7; 
+		if(!(egc.access & 1))fg1 = (egc.fg&1)|(egc.fg&1)<<1|(egc.fg&1)<<2|(egc.fg&1)<<3|(egc.fg&1)<<4|(egc.fg&1)<<5|(egc.fg&1)<<6|(egc.fg&1)<<7;
+		if(!(egc.access & 1))fg2 = (egc.fg&2)|(egc.fg&2)<<1|(egc.fg&2)<<2|(egc.fg&2)<<3|(egc.fg&2)<<4|(egc.fg&2)<<5|(egc.fg&2)<<6|(egc.fg&2)<<7;
+		if(!(egc.access & 1))fg4 = (egc.fg&4)|(egc.fg&4)<<1|(egc.fg&4)<<2|(egc.fg&4)<<3|(egc.fg&4)<<4|(egc.fg&4)<<5|(egc.fg&4)<<6|(egc.fg&4)<<7;
+		if(!(egc.access & 1))fg8 = (egc.fg&8)|(egc.fg&8)<<1|(egc.fg&8)<<2|(egc.fg&8)<<3|(egc.fg&8)<<4|(egc.fg&8)<<5|(egc.fg&8)<<6|(egc.fg&8)<<7;
             temp3  = *(UINT16 *)(&mem[ad + VRAM_B]) ^ fg1;
             temp3 |= *(UINT16 *)(&mem[ad + VRAM_R]) ^ fg2;
             temp3 |= *(UINT16 *)(&mem[ad + VRAM_G]) ^ fg4;
@@ -1263,7 +1263,7 @@ REG16 MEMCALL egc_readword(UINT32 addr) {
 	}
 //	return(LOADINTELWORD(mem + addr));*/
 
-	
+
 	UINT32	ad;
 
 	__ASSERT(!(addr & 1));
@@ -1316,7 +1316,7 @@ REG16 MEMCALL egc_readword(UINT32 addr) {
 		}
 	}
 	return(LOADINTELWORD(mem + addr));
-	
+
 }
 
 void MEMCALL egc_writeword(UINT32 addr, REG16 value) {

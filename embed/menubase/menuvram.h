@@ -59,4 +59,3 @@ void menuvram_closebtn(VRAMHDL vram, const RECT_T *rect, BOOL focus);
 #ifdef __cplusplus
 }
 #endif
-

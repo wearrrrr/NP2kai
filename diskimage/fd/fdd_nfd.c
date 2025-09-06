@@ -61,7 +61,7 @@ BRESULT fdd_set_nfd(FDDFILE fdd, FDDFUNC fdd_fn, const OEMCHAR *fname, int ro) {
 		// fdd->inf.xdf.tracks		= NFD_TRKMAX;
 		// fdd->inf.xdf.sectors	= NFD_SECMAX;
 		/* 170101 ST modified to work on Windows 9x/2000 ... to */
-			
+
 		//	期待した値が入ってないことが…orz
 		ptr = LOADINTELDWORD(&fdd->inf.nfd.head.r0.dwHeadSize);
 //		ptr = NFD_HEADERSIZE;

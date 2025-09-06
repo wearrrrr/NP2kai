@@ -18,7 +18,7 @@ static const UINT8 mds_sig[16] =
 #define	MDS_MEDIUM_CD_RW		0x02	//	CD-RW
 #define	MDS_MEDIUM_DVD			0x10	//	DVD-ROM
 #define	MDS_MEDIUM_DVD_MINUS_R	0x12	//	DVD-R
- 
+
 #define	MDS_TRACKMODE_UNKNOWN		0x00
 #define	MDS_TRACKMODE_AUDIO			0xA9	//	sector size = 2352
 #define	MDS_TRACKMODE_MODE1			0xAA	//	sector size = 2048

@@ -225,7 +225,7 @@ BRESULT fdd_set_fdi(FDDFILE fdd, FDDFUNC fdd_fn, const OEMCHAR *fname, int ro) {
 			break;
 
 		case 0x50:				// 320KB - 2D
-		case 0xd0:				// 
+		case 0xd0:				//
 			disktype = DISKTYPE_2D;
 			break;
 
@@ -413,7 +413,7 @@ BRESULT fdd_write_xdf(FDDFILE fdd) {
 
 /* 170107 modified to work on Windows 9x/2000 form ... */
 /* 実装補足 先頭からのオフセット値は単純にトラック数ｘ1トラック当たりのセクタ数ｘセクタサイズ
-   で行っているため、トラックごとに異なるセクタ構造を持つフォーマットには対応できません 
+   で行っているため、トラックごとに異なるセクタ構造を持つフォーマットには対応できません
    元々ファイルのデータ構造的にサポートできません */
 BRESULT fdd_formatinit_xdf(FDDFILE fdd) {
 	FILEH	hdl;
@@ -448,7 +448,7 @@ BRESULT fdd_formatinit_xdf(FDDFILE fdd) {
 	}
 
 	if (seekp == fdd->inf.xdf.headersize) {
-		
+
 		fdd->inf.xdf.disktype = DISKTYPE_2HD;
 		cylinders = 77;
 		switch(fdc.N) {
@@ -676,7 +676,7 @@ BRESULT fddxdf_setfdi(FDDFILE fdd, const OEMCHAR *fname, int ro) {
 			break;
 
 		case 0x50:				// 320KB - 2D
-		case 0xd0:				// 
+		case 0xd0:				//
 			disktype = DISKTYPE_2D;
 			break;
 

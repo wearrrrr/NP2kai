@@ -22,4 +22,3 @@ extern int64_t NP2_TickCount_GetCountFromInit(void);
 #endif  // SUPPORT_NP2_TICKCOUNT
 
 #endif  // NP2_TICKCOUNT_H
-

@@ -412,7 +412,7 @@ UINT hostdrvs_getrealdir(HDRVPATH *phdp, char *lpFcbname, const char *lpDosPath)
 	}else{
 		file_cpyname(phdp->szPath, np2cfg.hdrvroot, NELEMENTS(phdp->szPath));
 	}
-	
+
 	if (lpDosPath[0] == '\\')
 	{
 		lpDosPath++;
@@ -500,7 +500,7 @@ UINT hostdrvs_getrealpath(HDRVPATH *phdp, const char *lpDosPath)
 {
 	char fcbname[11];
 	UINT nResult;
-	
+
 	if (lpDosPath[0] == '\0') // root check
 	{
 		return ERR_NOERROR;

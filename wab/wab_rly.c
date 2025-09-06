@@ -147,4 +147,3 @@ void wabrly_switch(void) {
 	nevent_setbyms(NEVENT_FDBIOSBUSY,
 									30, wabrlyout, NEVENT_ABSOLUTE);
 }
-

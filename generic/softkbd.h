@@ -33,4 +33,3 @@ void softkbd_led(REG8 led);
 #endif
 
 #endif
-
