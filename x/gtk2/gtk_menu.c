@@ -796,7 +796,7 @@ xmenu_toggle_item(MENU_HDL hdl, const char *name, BOOL onoff)
 	}
 }
 
-xmenu_visible_item(MENU_HDL hdl, const char *name, BOOL onoff)
+int xmenu_visible_item(MENU_HDL hdl, const char *name, BOOL onoff)
 {
 	GtkAction *action;
 	gboolean b, f;
@@ -891,7 +891,7 @@ cb_bmpsave(GtkAction *action, gpointer user_data)
 		goto end;
 
 	dialog = gtk_file_chooser_dialog_new("Save as bitmap file",
-	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_SAVE, 
+	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_SAVE,
 	    GTK_STOCK_SAVE, GTK_RESPONSE_OK,
 	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	    NULL);
@@ -974,7 +974,7 @@ cb_change_font(GtkAction *action, gpointer user_data)
 	uninstall_idle_process();
 
 	dialog = gtk_file_chooser_dialog_new("Open a font file",
-	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN, 
+	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN,
 	    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
 	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	    NULL);
@@ -1060,7 +1060,7 @@ cb_diskopen(GtkAction *action, gpointer user_data)
 	uninstall_idle_process();
 
 	dialog = gtk_file_chooser_dialog_new("Open a floppy disk image",
-	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN, 
+	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN,
 	    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
 	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	    NULL);
@@ -1202,7 +1202,7 @@ cb_ataopen(GtkAction *action, gpointer user_data)
 	uninstall_idle_process();
 
 	dialog = gtk_file_chooser_dialog_new("Open a IDE disk image",
-	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN, 
+	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN,
 	    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
 	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	    NULL);
@@ -1301,7 +1301,7 @@ cb_atapiopen(GtkAction *action, gpointer user_data)
 	uninstall_idle_process();
 
 	dialog = gtk_file_chooser_dialog_new("Open a ATAPI CD-ROM image",
-	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN, 
+	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN,
 	    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
 	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	    NULL);
@@ -1695,7 +1695,7 @@ cb_sasiopen(GtkAction *action, gpointer user_data)
 	uninstall_idle_process();
 
 	dialog = gtk_file_chooser_dialog_new("Open a SASI disk image",
-	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN, 
+	    GTK_WINDOW(main_window), GTK_FILE_CHOOSER_ACTION_OPEN,
 	    GTK_STOCK_OPEN, GTK_RESPONSE_OK,
 	    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	    NULL);
