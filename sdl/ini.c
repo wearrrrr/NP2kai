@@ -377,7 +377,7 @@ iniwrsetstr(OEMCHAR *work, int size, const OEMCHAR *ptr)
 
 	if (ptr[0] == ' ') {
 		goto iwss_extend;
-		
+
 	}
 	i = (UINT)strlen(ptr);
 	if ((i) && (ptr[i-1] == ' ')) {
@@ -754,7 +754,7 @@ static const INITBL iniitem[] = {
 	{OEMTEXT("MEMCHKMX"), INITYPE_UINT8,	&np2cfg.memchkmx,	0},
 	{OEMTEXT("SBEEPLEN"), INITYPE_UINT8,	&np2cfg.sbeeplen,	0},
 	{OEMTEXT("SBEEPLEN"), INITYPE_BOOL,	&np2cfg.sbeepadj,	0},
-	
+
 	{OEMTEXT("cpu_vend"), INITYPE_STR,	np2cfg.cpu_vendor_o,	15},
 	{OEMTEXT("cpu_fami"), INITYPE_UINT32,	&np2cfg.cpu_family,	0},
 	{OEMTEXT("cpu_mode"), INITYPE_UINT32,	&np2cfg.cpu_model,	0},
@@ -944,7 +944,7 @@ void initload(void) {
 	OEMCHAR	path[MAX_PATH];
 
 	milstr_ncpy(path, file_getcd(inifile), sizeof(path));
-	fprintf(stderr, OEMTEXT("Loading %s from %s"), inifile, path);
+	fprintf(stderr, OEMTEXT("Loading %s from %s\n"), inifile, path);
 //	TRACEOUT(OEMTEXT("Loading %s from %s", inifile, path));
 	ini_read(path, ini_title, iniitem, INIITEMS);
 }
@@ -979,4 +979,3 @@ void initgetfile(OEMCHAR *lpPath, unsigned int cchPath)
 		file_catname(lpPath, s_szExt, cchPath);
 	}
 }
-
