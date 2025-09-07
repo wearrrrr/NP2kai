@@ -31,17 +31,14 @@
 #define strncasecmp _strnicmp
 #endif
 
-UINT8
-snddrv_drv2num(const char* cfgstr)
+UINT8 snddrv_drv2num(const char* cfgstr)
 {
-
 	if (strcasecmp(cfgstr, "SDL") == 0)
 		return SNDDRV_SDL;
 	return SNDDRV_NODRV;
 }
 
-const char *
-snddrv_num2drv(UINT8 num)
+const char * snddrv_num2drv(UINT8 num)
 {
 
 	switch (num) {
@@ -50,8 +47,6 @@ snddrv_num2drv(UINT8 num)
 	}
 	return "nosound";
 }
-
-#if !defined(NOSOUND)
 
 #include <np2.h>
 #include <pccore.h>
@@ -265,9 +260,9 @@ soundmng_create(UINT rate, UINT bufmsec)
 	samples = SNDSZ;
 
 	opened = TRUE;
-   
+
    printf("Samples:%d\n", samples);
-   
+
 #if defined(VERMOUTH_LIB)
    cmvermouth_load(rate);
 #endif
@@ -1311,5 +1306,3 @@ sdlaudio_callback(void *userdata, unsigned char *stream, int len)
 }
 
 //#endif	/* SUPPORT_SDL_AUDIO || SUPPORT_SDL_MIXER */
-
-#endif	/* !NOSOUND */
