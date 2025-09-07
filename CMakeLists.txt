@@ -583,14 +583,8 @@ endif()
 
 if(CMAKE_CROSSCOMPILING)
 
-	# Enscripten
-	if(EMSCRIPTEN)
-		if((USE_SDL_VERSION EQUAL 1) AND (USE_SDL_MIXER OR USE_SDL_TTL))
-			message(FATAL_ERROR "-- Emscripten SDL1 NP2kai cannot be with SDL_mixer and SDL_ttf (-D USE_SDL_MIXER=OFF -D USE_SDL_TTF=OFF)")
-		endif()
-
 	# OpenDigux
-	elseif(BUILD_OPENDINGUX_GCW0)
+	if(BUILD_OPENDINGUX_GCW0)
 		if((USE_SDL_VERSION EQUAL 1) AND USE_SDL_TTF)
 			message(FATAL_ERROR "-- OpenDingux GCW0 NP2kai cannot be with SDL and SDL_ttf (use -D USE_SDL2=OFF -D USE_SDL_TTF=OFF)")
 		endif()
@@ -658,14 +652,6 @@ if(CMAKE_CROSSCOMPILING)
 		set(NP2kai_Emscripten_MinMemorySize 67108864)
 		set(NP2kai_Emscripten_MaxMemorySize 1073741824)
 
-		add_library(NP2kai_Emscripten_SDL1_base INTERFACE)
-		target_compile_definitions(NP2kai_Emscripten_SDL1_base INTERFACE ${NP2kai_SDL_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" "SUPPORT_NP2_TICKCOUNT")
-		target_include_directories(NP2kai_Emscripten_SDL1_base INTERFACE ${NP2kai_Emscripten_include_dirs})
-		target_compile_options(NP2kai_Emscripten_SDL1_base INTERFACE "SHELL:-s USE_SDL=1" "SHELL:-s USE_SDL_MIXER=1" "SHELL:-s USE_SDL_TTF=1")
-		target_link_options(NP2kai_Emscripten_SDL1_base INTERFACE "SHELL:-s INITIAL_MEMORY=${NP2kai_Emscripten_MinMemorySize}" "SHELL:-s MAXIMUM_MEMORY=${NP2kai_Emscripten_MaxMemorySize}" "SHELL:-s USE_SDL=1" "SHELL:-s USE_SDL_MIXER=1" "SHELL:-s USE_SDL_TTF=1" "SHELL:-s ASSERTIONS=1")
-		target_link_libraries(NP2kai_Emscripten_SDL1_base INTERFACE m ssl crypto)
-		target_sources(NP2kai_Emscripten_SDL1_base INTERFACE ${NP2kai_SDL_sources} "sdl/em/main.c" "sdl/em/SDL_mixer.c")
-
 		add_library(NP2kai_Emscripten_SDL2_base INTERFACE)
 		target_compile_definitions(NP2kai_Emscripten_SDL2_base INTERFACE ${NP2kai_SDL_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} ${lib_SDL_ttf_definitions} "SUPPORT_NP2_TICKCOUNT")
 		target_include_directories(NP2kai_Emscripten_SDL2_base INTERFACE ${NP2kai_Emscripten_include_dirs})
@@ -676,13 +662,6 @@ if(CMAKE_CROSSCOMPILING)
 	endif()
 
 	if(BUILD_OPENDINGUX_GCW0)
-		add_library(NP2kai_gcw0_SDL1_base INTERFACE)
-		target_compile_definitions(NP2kai_gcw0_SDL1_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} ${lib_SDL_ttf_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
-		target_sources(NP2kai_gcw0_SDL1_base INTERFACE ${NP2kai_SDL_sources} ${NP2kai_OpenDingux_sources} "np2_thread.c" ${NP2kai_TickCount_sources} ${NP2kai_Network_sources})
-		target_link_directories(NP2kai_gcw0_SDL1_base INTERFACE "/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/lib")
-		target_include_directories(NP2kai_gcw0_SDL1_base INTERFACE ${NP2kai_OpenDingux_include_dirs} "/opt/gcw0-toolchain/mipsel-gcw0-linux-uclibc/sysroot/usr/include" "/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/SDL")
-		target_link_libraries(NP2kai_gcw0_SDL1_base INTERFACE m ssl crypto pthread SDL ${lib_SDL_mixer_depend_libraries} ${lib_SDL_ttf_definitions})
-
 		add_library(NP2kai_gcw0_SDL2_base INTERFACE)
 		target_compile_definitions(NP2kai_gcw0_SDL2_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} ${lib_SDL_ttf_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
 		target_sources(NP2kai_gcw0_SDL2_base INTERFACE ${NP2kai_SDL_sources} ${NP2kai_OpenDingux_sources} "np2_thread.c" ${NP2kai_TickCount_sources} ${NP2kai_Network_sources})
@@ -692,13 +671,6 @@ if(CMAKE_CROSSCOMPILING)
 	endif()
 
 	if(BUILD_OPENDINGUX_RG350)
-		add_library(NP2kai_rg350_SDL1_base INTERFACE)
-		target_compile_definitions(NP2kai_rg350_SDL1_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} ${lib_SDL_ttf_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
-		target_sources(NP2kai_rg350_SDL1_base INTERFACE ${NP2kai_SDL_sources} ${NP2kai_OpenDingux_sources} "np2_thread.c" ${NP2kai_TickCount_sources} ${NP2kai_Network_sources})
-		target_link_directories(NP2kai_rg350_SDL1_base INTERFACE "/opt/rg350-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/lib")
-		target_include_directories(NP2kai_rg350_SDL1_base INTERFACE ${NP2kai_OpenDingux_include_dirs} "/opt/rg350-toolchain/usr/mipsel-rg350-linux-uclibc/sysroot/usr/include" "/opt/rg350-toolchain/usr/mipsel-rg350-linux-uclibc/sysroot/usr/include/SDL")
-		target_link_libraries(NP2kai_rg350_SDL1_base INTERFACE m ssl crypto pthread SDL ${lib_SDL_mixer_depend_libraries} ${lib_SDL_ttf_definitions})
-
 		add_library(NP2kai_rg350_SDL2_base INTERFACE)
 		target_compile_definitions(NP2kai_rg350_SDL2_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} ${lib_SDL_ttf_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
 		target_sources(NP2kai_rg350_SDL2_base INTERFACE ${NP2kai_SDL_sources} ${NP2kai_OpenDingux_sources} "np2_thread.c" ${NP2kai_TickCount_sources} ${NP2kai_Network_sources})
@@ -708,14 +680,6 @@ if(CMAKE_CROSSCOMPILING)
 	endif()
 
 	if(BUILD_OPENDINGUX_RS90)
-		add_library(NP2kai_rs90_SDL1_base INTERFACE)
-#		target_compile_definitions(NP2kai_rs90_SDL1_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} ${lib_SDL_ttf_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
-		target_compile_definitions(NP2kai_rs90_SDL1_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
-		target_include_directories(NP2kai_rs90_SDL1_base INTERFACE ${NP2kai_OpenDingux_include_dirs} "/opt/rs90-toolchain/mipsel-rs90-linux-musl/sysroot/usr/include" "/opt/rs90-toolchain/mipsel-rs90-linux-musl/sysroot/usr/include/SDL")
-		target_sources(NP2kai_rs90_SDL1_base INTERFACE ${NP2kai_SDL_sources} ${NP2kai_OpenDingux_sources} "np2_thread.c" ${NP2kai_TickCount_sources} ${NP2kai_Network_sources})
-		target_link_directories(NP2kai_rs90_SDL1_base INTERFACE "/opt/rs90-toolchain/mipsel-rs90-linux-musl/sysroot/lib")
-		target_link_libraries(NP2kai_rs90_SDL1_base INTERFACE m ssl crypto pthread SDL ${lib_SDL_mixer_depend_libraries} ${lib_SDL_ttf_definitions})
-
 		add_library(NP2kai_rs90_base INTERFACE)
 #		target_compile_definitions(NP2kai_rs90_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} ${lib_SDL_ttf_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
 		target_compile_definitions(NP2kai_rs90_base INTERFACE ${NP2kai_SDL_definitions} "__OPENDINGUX__" ${OPENDINGUX_VGA_definitions} "OSLINEBREAK_LF" "SUPPORT_SDL_AUDIO" ${lib_SDL_mixer_definitions} "SUPPORT_NP2_TICKCOUNT" "SUPPORT_NP2_THREAD" ${NP2kai_TickCount_definitions} ${NP2kai_Network_definitions})
@@ -764,15 +728,6 @@ if(CMAKE_CROSSCOMPILING)
 
 	if(EMSCRIPTEN)
 		set(CMAKE_EXECUTABLE_SUFFIX ".html")
-
-		add_executable(emnp2kai_sdl1)
-		target_link_options(emnp2kai_sdl1 PUBLIC "SHELL:-s INITIAL_MEMORY=${NP2kai_Emscripten_MinMemorySize}" "SHELL:-s MAXIMUM_MEMORY=33554432")
-		target_link_libraries(emnp2kai_sdl1 PUBLIC NP2kai_base NP2kai_Emscripten_SDL1_base)
-
-		add_executable(emnp21kai_sdl1)
-		target_link_options(emnp21kai_sdl1 PUBLIC "SHELL:-s INITIAL_MEMORY=${NP2kai_Emscripten_MinMemorySize}" "SHELL:-s MAXIMUM_MEMORY=1073741824")
-		target_link_libraries(emnp21kai_sdl1 PUBLIC NP21kai_base NP2kai_Emscripten_SDL1_base)
-
 		add_executable(emnp2kai)
 		target_link_options(emnp2kai PUBLIC "SHELL:-s INITIAL_MEMORY=${NP2kai_Emscripten_MinMemorySize}" "SHELL:-s MAXIMUM_MEMORY=33554432")
 		target_link_libraries(emnp2kai PUBLIC NP2kai_base NP2kai_Emscripten_SDL2_base)
@@ -780,51 +735,10 @@ if(CMAKE_CROSSCOMPILING)
 		add_executable(emnp21kai)
 		target_link_options(emnp21kai PUBLIC "SHELL:-s INITIAL_MEMORY=${NP2kai_Emscripten_MinMemorySize}" "SHELL:-s MAXIMUM_MEMORY=1073741824")
 		target_link_libraries(emnp21kai PUBLIC NP21kai_base NP2kai_Emscripten_SDL2_base)
-
-		if(NOT BUILD_I286)
-			set_target_properties(emnp2kai_sdl1 emnp2kai PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
-		if(USE_SDL_VERSION EQUAL 1)
-			set_target_properties(emnp2kai emnp21kai PROPERTIES EXCLUDE_FROM_ALL true)
-		else()
-			set_target_properties(emnp2kai_sdl1 emnp21kai_sdl1 PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
 	endif()
 
 	if(BUILD_OPENDINGUX_GCW0)
 		set(CMAKE_EXECUTABLE_SUFFIX ".opk")
-
-		add_executable(np2kai_gcw0_sdl1)
-		target_link_libraries(np2kai_gcw0_sdl1 PUBLIC NP2kai_base NP2kai_gcw0_SDL1_base)
-		add_custom_command(
-			TARGET np2kai_gcw0_sdl1
-			POST_BUILD
-			COMMENT "Genarate .opk pack."
-			COMMAND cp -r ${NP2kai_SOURCE_DIR}/sdl/opendingux/opk ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk
-			COMMAND mv np2kai_gcw0_sdl1.opk ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk/
-			COMMAND rm ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND sed -i -e 's/Name=NP2kai/Name=NP2kai\(SDL1\)/g' ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND sed -i -e 's/Exec=np2kai/Exec=np2kai_gcw0_sdl1/g' ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND mv ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk/default_opendingux_np2kai_desktop ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk/default_opendingux_np2kai_gcw0_sdl1.desktop
-			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1.opk -all-root -noappend -no-exports
-			COMMAND rm -r ${NP2kai_BINARY_DIR}/np2kai_gcw0_sdl1_opk
-		)
-
-		add_executable(np21kai_gcw0_sdl1)
-		target_link_libraries(np21kai_gcw0_sdl1 PUBLIC NP21kai_base NP2kai_gcw0_SDL1_base)
-		add_custom_command(
-			TARGET np21kai_gcw0_sdl1
-			POST_BUILD
-			COMMENT "Genarate .opk pack."
-			COMMAND cp -r ${NP2kai_SOURCE_DIR}/sdl/opendingux/opk ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk
-			COMMAND mv np21kai_gcw0_sdl1.opk ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk/
-			COMMAND rm ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND sed -i -e 's/Name=NP21kai/Name=NP21kai\(SDL1\)/g' ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND sed -i -e 's/Exec=np21kai/Exec=np21kai_gcw0_sdl1/g' ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND mv ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk/default_opendingux_np21kai_desktop ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk/default_opendingux_np21kai_gcw0_sdl1.desktop
-			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1.opk -all-root -noappend -no-exports
-			COMMAND rm -r ${NP2kai_BINARY_DIR}/np21kai_gcw0_sdl1_opk
-		)
 
 		add_executable(np2kai_gcw0)
 		target_link_libraries(np2kai_gcw0 PUBLIC NP2kai_base NP2kai_gcw0_SDL2_base)
@@ -855,51 +769,10 @@ if(CMAKE_CROSSCOMPILING)
 			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np21kai_gcw0_opk ${NP2kai_BINARY_DIR}/np21kai_gcw0.opk -all-root -noappend -no-exports
 			COMMAND rm -r ${NP2kai_BINARY_DIR}/np21kai_gcw0_opk
 		)
-
-		if(NOT BUILD_I286)
-			set_target_properties(np2kai_gcw0_sdl1 np2kai_gcw0 PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
-		if(USE_SDL_VERSION EQUAL 1)
-			set_target_properties(np2kai_gcw0 np21kai_gcw0 PROPERTIES EXCLUDE_FROM_ALL true)
-		else()
-			set_target_properties(np2kai_gcw0_sdl1 np21kai_gcw0_sdl1 PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
 	endif()
 
 	if(BUILD_OPENDINGUX_RG350)
 		set(CMAKE_EXECUTABLE_SUFFIX ".opk")
-
-		add_executable(np2kai_rg350_sdl1)
-		target_link_libraries(np2kai_rg350_sdl1 PUBLIC NP2kai_base NP2kai_rg350_SDL1_base)
-		add_custom_command(
-			TARGET np2kai_rg350_sdl1
-			POST_BUILD
-			COMMENT "Genarate .opk pack."
-			COMMAND cp -r ${NP2kai_SOURCE_DIR}/sdl/opendingux/opk ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk
-			COMMAND mv np2kai_rg350_sdl1.opk ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk/
-			COMMAND rm ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND sed -i -e 's/Name=NP2kai/Name=NP2kai\(SDL1\)/g' ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND sed -i -e 's/Exec=np2kai/Exec=np2kai_rg350_sdl1/g' ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND mv ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk/default_opendingux_np2kai_desktop ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk/default_opendingux_np2kai_rg350_sdl1.desktop
-			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1.opk -all-root -noappend -no-exports
-			COMMAND rm -r ${NP2kai_BINARY_DIR}/np2kai_rg350_sdl1_opk
-		)
-
-		add_executable(np21kai_rg350_sdl1)
-		target_link_libraries(np21kai_rg350_sdl1 PUBLIC NP21kai_base NP2kai_rg350_SDL1_base)
-		add_custom_command(
-			TARGET np21kai_rg350_sdl1
-			POST_BUILD
-			COMMENT "Genarate .opk pack."
-			COMMAND cp -r ${NP2kai_SOURCE_DIR}/sdl/opendingux/opk ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk
-			COMMAND mv np21kai_rg350_sdl1.opk ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk/
-			COMMAND rm ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND sed -i -e 's/Name=NP21kai/Name=NP21kai\(SDL1\)/g' ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND sed -i -e 's/Exec=np21kai/Exec=np21kai_rg350_sdl1/g' ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND mv ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk/default_opendingux_np21kai_desktop ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk/default_opendingux_np21kai_rg350_sdl1.desktop
-			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1.opk -all-root -noappend -no-exports
-			COMMAND rm -r ${NP2kai_BINARY_DIR}/np21kai_rg350_sdl1_opk
-		)
 
 		add_executable(np2kai_rg350)
 		target_link_libraries(np2kai_rg350 PUBLIC NP2kai_base NP2kai_rg350_SDL2_base)
@@ -930,51 +803,10 @@ if(CMAKE_CROSSCOMPILING)
 			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np21kai_rg350_opk ${NP2kai_BINARY_DIR}/np21kai_rg350.opk -all-root -noappend -no-exports
 			COMMAND rm -r ${NP2kai_BINARY_DIR}/np21kai_rg350_opk
 		)
-
-		if(NOT BUILD_I286)
-			set_target_properties(np2kai_rg350_sdl1 np2kai_rg350 PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
-		if(USE_SDL_VERSION EQUAL 1)
-			set_target_properties(np2kai_rg350 np21kai_rg350 PROPERTIES EXCLUDE_FROM_ALL true)
-		else()
-			set_target_properties(np2kai_rg350_sdl1 np21kai_rg350_sdl1 PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
 	endif()
 
 	if(BUILD_OPENDINGUX_RS90)
 		set(CMAKE_EXECUTABLE_SUFFIX ".opk")
-
-		add_executable(np2kai_rs90_sdl1)
-		target_link_libraries(np2kai_rs90_sdl1 PUBLIC NP2kai_base NP2kai_rs90_SDL1_base)
-		add_custom_command(
-			TARGET np2kai_rs90_sdl1
-			POST_BUILD
-			COMMENT "Genarate .opk pack."
-			COMMAND cp -r ${NP2kai_SOURCE_DIR}/sdl/opendingux/opk ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk
-			COMMAND mv np2kai_rs90_sdl1.opk ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk/
-			COMMAND rm ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND sed -i -e 's/Name=NP2kai/Name=NP2kai\(SDL1\)/g' ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND sed -i -e 's/Exec=np2kai/Exec=np2kai_rs90_sdl1/g' ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND mv ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk/default_opendingux_np2kai_desktop ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk/default_opendingux_np2kai_rs90_sdl1.desktop
-			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1.opk -all-root -noappend -no-exports
-			COMMAND rm -r ${NP2kai_BINARY_DIR}/np2kai_rs90_sdl1_opk
-		)
-
-		add_executable(np21kai_rs90_sdl1)
-		target_link_libraries(np21kai_rs90_sdl1 PUBLIC NP21kai_base NP2kai_rs90_SDL1_base)
-		add_custom_command(
-			TARGET np21kai_rs90_sdl1
-			POST_BUILD
-			COMMENT "Genarate .opk pack."
-			COMMAND cp -r ${NP2kai_SOURCE_DIR}/sdl/opendingux/opk ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk
-			COMMAND mv np21kai_rs90_sdl1.opk ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk/
-			COMMAND rm ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk/default_opendingux_np2kai_desktop
-			COMMAND sed -i -e 's/Name=NP21kai/Name=NP21kai\(SDL1\)/g' ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND sed -i -e 's/Exec=np21kai/Exec=np21kai_rs90_sdl1/g' ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk/default_opendingux_np21kai_desktop
-			COMMAND mv ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk/default_opendingux_np21kai_desktop ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk/default_opendingux_np21kai_rs90_sdl1.desktop
-			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1.opk -all-root -noappend -no-exports
-			COMMAND rm -r ${NP2kai_BINARY_DIR}/np21kai_rs90_sdl1_opk
-		)
 
 		add_executable(np2kai_rs90)
 		target_link_libraries(np2kai_rs90 PUBLIC NP2kai_base NP2kai_rs90_base)
@@ -990,30 +822,6 @@ if(CMAKE_CROSSCOMPILING)
 			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np2kai_rs90_opk ${NP2kai_BINARY_DIR}/np2kai_rs90.opk -all-root -noappend -no-exports
 			COMMAND rm -r ${NP2kai_BINARY_DIR}/np2kai_rs90_opk
 		)
-
-		add_executable(np21kai_rs90_sdl1)
-		target_link_libraries(np21kai_rs90 PUBLIC NP21kai_base NP2kai_rs90_base)
-		add_custom_command(
-			TARGET np21kai_rs90
-			POST_BUILD
-			COMMENT "Genarate .opk pack."
-			COMMAND cp -r ${NP2kai_SOURCE_DIR}/sdl/opendingux/opk ${NP2kai_BINARY_DIR}/np21kai_rs90_opk
-			COMMAND mv np21kai_rs90.opk ${NP2kai_BINARY_DIR}/np21kai_rs90_opk/
-			COMMAND rm ${NP2kai_BINARY_DIR}/np21kai_rs90_opk/default_opendingux_np2kai_desktop
-			COMMAND sed -i -e 's/Exec=np21kai/Exec=np21kai_rs90/g' ${NP2kai_BINARY_DIR}/np21kai_rs90_opk/default_opendingux_np21kai_desktop
-			COMMAND mv ${NP2kai_BINARY_DIR}/np21kai_rs90_opk/default_opendingux_np21kai_desktop ${NP2kai_BINARY_DIR}/np21kai_rs90_opk/default_opendingux_np21kai_rs90.desktop
-			COMMAND mksquashfs ${NP2kai_BINARY_DIR}/np21kai_rs90_opk ${NP2kai_BINARY_DIR}/np21kai_rs90.opk -all-root -noappend -no-exports
-			COMMAND rm -r ${NP2kai_BINARY_DIR}/np21kai_rs90_opk
-		)
-
-		if(NOT BUILD_I286)
-			set_target_properties(np2kai_rs90_sdl1 np2kai_rs90 PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
-		if(USE_SDL_VERSION EQUAL 1)
-			set_target_properties(np2kai_rs90 np21kai_rs90 PROPERTIES EXCLUDE_FROM_ALL true)
-		else()
-			set_target_properties(np2kai_rs90_sdl1 np21kai_rs90_sdl1 PROPERTIES EXCLUDE_FROM_ALL true)
-		endif()
 	endif()
 
 else()
