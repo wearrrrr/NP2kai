@@ -160,7 +160,7 @@ BRESULT scrnmng_create(UINT8 mode) {
 		if((mode & SCRNMODE_FULLSCREEN) && !scrnmng_isfullscreen()) {
 			scrnmng.flag |= SCRNFLAG_FULLSCREEN;
 			SDL_SetWindowFullscreen(s_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
-		} else { 
+		} else {
 			if(!(mode & SCRNMODE_FULLSCREEN) && scrnmng_isfullscreen()) {
 				scrnmng.flag &= ~SCRNFLAG_FULLSCREEN;
 			}

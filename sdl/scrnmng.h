@@ -1,6 +1,11 @@
 #ifndef NP2_SDL_SCRNMNG_H
 #define NP2_SDL_SCRNMNG_H
 
+#include <stdbool.h>
+#include <stdint.h>
+
+#include <SDL2/SDL.h>
+
 #include	<embed/vramhdl.h>
 #include	<vram/scrndraw.h>
 
@@ -11,17 +16,17 @@ enum {
 };
 
 typedef struct {
-	UINT8	*ptr;
+	uint8_t	*ptr;
 	int	xalign;
 	int	yalign;
 	int	width;
 	int	height;
-	UINT	bpp;
+	uint32_t bpp;
 	int	extend;
 } SCRNSURF;
 
 typedef struct {
-	BOOL	enable;
+	bool	enable;
 	int		width;
 	int		height;
 	int		bpp;
@@ -68,8 +73,8 @@ void scrnmng_surfunlock(const SCRNSURF *surf);
 #define	scrnmng_isfullscreen()	(scrnmng.flag & SCRNFLAG_FULLSCREEN)
 #define	scrnmng_haveextend()	(0)
 #define	scrnmng_getbpp()		(16)
-#define	scrnmng_allflash()		
-#define	scrnmng_palchanged()	
+#define	scrnmng_allflash()
+#define	scrnmng_palchanged()
 
 RGB16 scrnmng_makepal16(RGB32 pal32);
 
@@ -104,4 +109,3 @@ void scrnmng_blthdc(void);
 void scrnmng_bltwab(void);
 
 #endif	/* NP2_SDL_SCRNMNG_H */
-
