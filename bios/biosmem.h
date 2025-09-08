@@ -77,29 +77,29 @@ enum {
 
 #if defined(BYTESEX_LITTLE)
 
-#define	GETBIOSMEM16(a)		(*(UINT16 *)(mem + (a)))
-#define	SETBIOSMEM16(a, b)	*(UINT16 *)(mem + (a)) = (b)
+#define	GETBIOSMEM16(a)		(*(uint16_t *)(mem + (a)))
+#define	SETBIOSMEM16(a, b)	*(uint16_t *)(mem + (a)) = (b)
 
-#define	GETBIOSMEM32(a)		(*(UINT32 *)(mem + (a)))
-#define	SETBIOSMEM32(a, b)	*(UINT32 *)(mem + (a)) = (b)
+#define	GETBIOSMEM32(a)		(*(uint32_t *)(mem + (a)))
+#define	SETBIOSMEM32(a, b)	*(uint32_t *)(mem + (a)) = (b)
 
 #elif defined(BYTESEX_BIG)
 
-#define	GETBIOSMEM16(a)		((UINT16)(mem[(a)+0] + (mem[(a)+1] << 8)))
+#define	GETBIOSMEM16(a)		((uint16_t)(mem[(a)+0] + (mem[(a)+1] << 8)))
 #define	SETBIOSMEM16(a, b)											\
 						do {										\
-							mem[(a)+0] = (UINT8)(b);				\
-							mem[(a)+1] = (UINT8)((b) >> 8);			\
+							mem[(a)+0] = (uint8_t)(b);				\
+							mem[(a)+1] = (uint8_t)((b) >> 8);			\
 						} while(0)
 
-#define	GETBIOSMEM32(a)		((UINT32)(mem[(a)+0] + (mem[(a)+1] << 8) +	\
+#define	GETBIOSMEM32(a)		((uint32_t)(mem[(a)+0] + (mem[(a)+1] << 8) +	\
 							(mem[(a)+2] << 16) + (mem[(a)+3] << 24)))
 #define	SETBIOSMEM32(a, b)											\
 						do {										\
-							mem[(a)+0] = (UINT8)(b);				\
-							mem[(a)+1] = (UINT8)((b) >> 8);			\
-							mem[(a)+2] = (UINT8)((b) >> 16);		\
-							mem[(a)+3] = (UINT8)((b) >> 24);		\
+							mem[(a)+0] = (uint8_t)(b);				\
+							mem[(a)+1] = (uint8_t)((b) >> 8);			\
+							mem[(a)+2] = (uint8_t)((b) >> 16);		\
+							mem[(a)+3] = (uint8_t)((b) >> 24);		\
 						} while(0)
 
 #endif
