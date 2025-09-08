@@ -1,5 +1,4 @@
-
-static const UINT8 keytable[8][0x60] = {
+static const uint8_t keytable[8][0x60] = {
 	{	//												normal
 		//	 ESC,  １,  ２,  ３,  ４,  ５,  ６,  ７		; 00h
 			0x1b, '1', '2', '3', '4', '5', '6', '7',
@@ -216,4 +215,3 @@ static const UINT8 keytable[8][0x60] = {
 			0x94,0x95,0x96,0x97,0x98,0x99,0x9a,0x9b
 	}
 };
-
