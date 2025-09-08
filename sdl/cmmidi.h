@@ -1,6 +1,9 @@
 #ifndef	NP2_X_CMMIDI_H__
 #define	NP2_X_CMMIDI_H__
 
+#include <stdint.h>
+#include <stdbool.h>
+
 // ---- com manager midi for unix
 
 extern COMMNG cm_mpu98;
@@ -30,6 +33,6 @@ extern const char cmmidi_midiin_device[];
 extern const char *cmmidi_mdlname[];
 
 void cmmidi_initailize(void);
-COMMNG cmmidi_create(const UINT device, const char *midiout, const char *midiin, const char *module);
+COMMNG cmmidi_create(const uint32_t device, const char *midiout, const char *midiin, const char *module);
 
 #endif	/* NP2_X_CMMIDI_H__ */

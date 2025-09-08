@@ -1,5 +1,3 @@
-#include "compiler.h"
-
 #include "np2.h"
 #include "commng.h"
 #include <common/mimpidef.h>
@@ -61,7 +59,7 @@ static int gettimeofday(struct timeval *tv, struct timezone *tz)
 		tmpres |= ft.dwLowDateTime;
 
 		/*converting file time to unix epoch*/
-		tmpres -= DELTA_EPOCH_IN_MICROSECS; 
+		tmpres -= DELTA_EPOCH_IN_MICROSECS;
 		tmpres /= 10;  /*convert into microseconds*/
 		tv->tv_sec = (long)(tmpres / 1000000UL);
 		tv->tv_usec = (long)(tmpres % 1000000UL);
@@ -317,7 +315,7 @@ struct retro_midi_interface *retro_midi_interface;
 UINT64 Midi_write_time;
 #endif	/* __LIBRETRO__ */
 
-static INLINE void 
+static INLINE void
 midi_write(CMMIDI midi, const UINT8 *cmd, UINT cnt)
 {
 	struct timeval ct;

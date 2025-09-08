@@ -1,11 +1,13 @@
 #ifndef	NP2_X_CMSERIAL_H__
 #define	NP2_X_CMSERIAL_H__
 
+#include <stdint.h>
+
 // ---- com manager serial for unix
 
-extern const UINT32 cmserial_speed[10];
+extern const uint32_t cmserial_speed[10];
 
-COMMNG cmserial_create(UINT port, UINT8 param, UINT32 speed);
+COMMNG cmserial_create(uint32_t port, uint8_t param, uint32_t speed);
 
 #if defined(SUPPORT_PC9861K)
 #define	MAX_SERIAL_PORT_NUM	3

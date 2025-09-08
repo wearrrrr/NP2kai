@@ -37,12 +37,18 @@
 #define cpu_to_le16w(a,b)	STOREINTELWORD(a,b)
 #define cpu_to_le32w(a,b)	STOREINTELDWORD(a,b)
 */
-
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+typedef uint32_t ram_addr_t;
+typedef uint32_t target_phys_addr_t;
+typedef void CPUWriteMemoryFunc(void *opaque, target_phys_addr_t addr, uint32_t value);
+typedef uint32_t CPUReadMemoryFunc(void *opaque, target_phys_addr_t addr);
 #define cpu_to_le16wu(p, v) STOREINTELWORD(p, v) // XXX:
 #define cpu_to_le32wu(p, v) STOREINTELDWORD(p, v) // XXX:
 
-#define le16_to_cpu(a)		((UINT16)(a))
-#define le32_to_cpu(a)		((UINT32)(a))
+#define le16_to_cpu(a)		((uint16_t)(a))
+#define le32_to_cpu(a)		((uint32_t)(a))
 #define cpu_to_le16w(a,b)	STOREINTELWORD(a,b)
 #define cpu_to_le32w(a,b)	STOREINTELDWORD(a,b)
 
@@ -75,7 +81,7 @@ typedef struct PixelFormat {
     uint8_t bits_per_pixel;
     uint8_t bytes_per_pixel;
     uint8_t depth; /* color depth in bits */
-    uint32_t_ rmask, gmask, bmask, amask;
+    uint32_t rmask, gmask, bmask, amask;
     uint8_t rshift, gshift, bshift, ashift;
     uint8_t rmax, gmax, bmax, amax;
     uint8_t rbits, gbits, bbits, abits;
@@ -91,27 +97,9 @@ typedef struct DisplaySurface {
     struct PixelFormat pf;
 } DisplaySurface;
 
-typedef struct DisplayChangeListener {
-    int idle;
-    UINT64 gui_timer_interval;
-
-    void (*dpy_update)(struct DisplayState *s, int x, int y, int w, int h);
-    void (*dpy_resize)(struct DisplayState *s);
-    void (*dpy_setdata)(struct DisplayState *s);
-    void (*dpy_refresh)(struct DisplayState *s);
-    void (*dpy_copy)(struct DisplayState *s, int src_x, int src_y,
-                     int dst_x, int dst_y, int w, int h);
-    void (*dpy_fill)(struct DisplayState *s, int x, int y,
-                     int w, int h, uint32_t_ c);
-    void (*dpy_text_cursor)(struct DisplayState *s, int x, int y);
-
-    struct DisplayChangeListener *next;
-} DisplayChangeListener;
-
 struct DisplayState {
     struct DisplaySurface *surface;
     void *opaque;
-    //struct QEMUTimer *gui_timer;
 
     struct DisplayChangeListener* listeners;
 
@@ -123,6 +111,23 @@ struct DisplayState {
 };
 typedef struct DisplayState DisplayState;
 
+typedef struct DisplayChangeListener {
+    int idle;
+    uint64_t gui_timer_interval;
+
+    void (*dpy_update)(struct DisplayState *s, int x, int y, int w, int h);
+    void (*dpy_resize)(struct DisplayState *s);
+    void (*dpy_setdata)(struct DisplayState *s);
+    void (*dpy_refresh)(struct DisplayState *s);
+    void (*dpy_copy)(struct DisplayState *s, int src_x, int src_y,
+                     int dst_x, int dst_y, int w, int h);
+    void (*dpy_fill)(struct DisplayState *s, int x, int y,
+                     int w, int h, uint32_t c);
+    void (*dpy_text_cursor)(struct DisplayState *s, int x, int y);
+
+    struct DisplayChangeListener *next;
+} DisplayChangeListener;
+
 DisplayState *graphic_console_init(vga_hw_update_ptr update,
                                    vga_hw_invalidate_ptr invalidate,
                                    vga_hw_screen_dump_ptr screen_dump,
@@ -131,8 +136,8 @@ DisplayState *graphic_console_init(vga_hw_update_ptr update,
 
 typedef void QEMUResetHandler(void *opaque);
 
-typedef void (IOPortWriteFunc)(void *opaque, uint32_t_ address, uint32_t_ data);
-typedef uint32_t_ (IOPortReadFunc)(void *opaque, uint32_t_ address);
+typedef void (IOPortWriteFunc)(void *opaque, uint32_t address, uint32_t data);
+typedef uint32_t (IOPortReadFunc)(void *opaque, uint32_t address);
 
 struct QEMUFile {
 	int dummy;

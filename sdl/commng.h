@@ -1,6 +1,9 @@
 #ifndef	NP2_COMMNG_H__
 #define	NP2_COMMNG_H__
 
+#include <stdint.h>
+#include <stdbool.h>
+
 // ---- com manager interface
 
 enum {
@@ -44,26 +47,26 @@ typedef struct _commng	_COMMNG;
 typedef struct _commng	*COMMNG;
 
 struct _commng {
-	UINT	connect;
-	UINT	(*read)(COMMNG self, UINT8 *data);
-	UINT	(*write)(COMMNG self, UINT8 data);
-	UINT	(*writeretry)(COMMNG self);
+	uint32_t connect;
+	uint32_t (*read)(COMMNG self, uint8_t *data);
+	uint32_t (*write)(COMMNG self, uint8_t data);
+	uint32_t (*writeretry)(COMMNG self);
 	void	(*beginblocktranster)(COMMNG self);					/*!< begin block transfer */
 	void	(*endblocktranster)(COMMNG self);					/*!< end block transfer */
-	UINT	(*lastwritesuccess)(COMMNG self);
-	UINT8	(*getstat)(COMMNG self);
-	INTPTR	(*msg)(COMMNG self, UINT msg, INTPTR param);
+	uint32_t (*lastwritesuccess)(COMMNG self);
+	uint8_t	(*getstat)(COMMNG self);
+	int* 	(*msg)(COMMNG self, uint32_t msg, int *param);
 	void	(*release)(COMMNG self);
-	UINT8 lastdata;
-	UINT8 lastdatafail;
-	UINT lastdatatime;
+	uint8_t lastdata;
+	uint8_t lastdatafail;
+	uint32_t lastdatatime;
 };
 
 typedef struct {
-	UINT32	size;
-	UINT32	sig;
-	UINT32	ver;
-	UINT32	param;
+	uint32_t size;
+	uint32_t sig;
+	uint32_t ver;
+	uint32_t param;
 } _COMFLAG, *COMFLAG;
 
 
@@ -71,7 +74,7 @@ typedef struct {
 extern "C" {
 #endif
 
-COMMNG commng_create(UINT device, BOOL onReset);
+COMMNG commng_create(uint32_t device, bool onReset);
 void commng_destroy(COMMNG hdl);
 
 #ifdef __cplusplus
