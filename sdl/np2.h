@@ -95,8 +95,6 @@ int havemmx(void);
 
 #else	/* __LIBRETRO__ */
 
-#include <signal.h>
-
 #include <joymng.h>
 
 typedef struct {
@@ -163,4 +161,3 @@ extern UINT8 changescreeninit;
 #endif	/* __LIBRETRO__ */
 
 #endif  // _NP2_H_
-

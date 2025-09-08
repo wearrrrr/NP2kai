@@ -28,6 +28,7 @@ static SDL_VideoInfo* s1_videoinfo;
 static SDL_Window* s_window;
 static SDL_Renderer* s_renderer;
 static SDL_Texture* s_texture;
+static bool showDemoWindow = true;
 #endif
 #endif	/* __LIBRETRO__ */
 
@@ -110,6 +111,12 @@ BRESULT scrnmng_create(UINT8 mode) {
 	scrnmng.dispsurf = SDL_SetVideoMode(scrnmng.width, scrnmng.height, scrnmng.bpp, SDL_HWSURFACE);
 	scrnmng.pc98surf = SDL_CreateRGBSurface(SDL_SWSURFACE, scrnmng.width, scrnmng.height, scrnmng.bpp, 0xf800, 0x07e0, 0x001f, 0);
 #else
+    const char* glsl_version = "#version 100";
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+
 	if(mode & SCRNMODE_ROTATEMASK) {
 		s_window = SDL_CreateWindow(app_name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, scrnmng.height, scrnmng.width, 0);
 	} else {

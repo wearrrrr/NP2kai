@@ -113,7 +113,6 @@ void taskmng_rol(void) {
 #if !defined(__LIBRETRO__)
 	SDL_Event	e;
 
-
 	if ((!task_avail) || (!SDL_PollEvent(&e))) {
 		return;
 	}
@@ -220,7 +219,7 @@ void taskmng_rol(void) {
 #endif
 #if defined(EMSCRIPTEN) && !defined(__LIBRETRO__) //in web browsers, F11 is commonly occupied. Use CTRL+F11
 			if ((e.key.keysym.mod == KMOD_LCTRL) || (e.key.keysym.mod == KMOD_RCTRL)) {
-#endif 
+#endif
 				if (menuvram == NULL) {
 					sysmenu_menuopen(0, 0, 0);
 				}

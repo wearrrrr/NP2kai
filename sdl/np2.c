@@ -498,7 +498,7 @@ int np2_main(int argc, char *argv[]) {
 		file_close(fcheck);
 		fontmng_setdeffontname(fullpath);
 	}
-	
+
 	setmedia = drvhddSCSI = HDCount = CDCount = 0;
 #if defined(__LIBRETRO__)
 	if(!lr_uselasthddmount) {
@@ -806,9 +806,8 @@ havemmx(void)
 #endif /* GCC_CPU_ARCH_IA32 */
 }
 
-static void np2exec()
-{
-	while(taskmng_isavail()) {
+static void np2exec() {
+	while (taskmng_isavail()) {
 #if !defined(__LIBRETRO__)
 		if(g_u8ControlState == 1) {
 			statsave_save_d();
@@ -880,5 +879,5 @@ static void np2exec()
 				waitcnt = framecnt;
 			}
 		}
-	}	
+	}
 }
